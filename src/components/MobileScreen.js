@@ -1,6 +1,6 @@
 import notifications from "../assets/notifications.png";
 
-export default function NotificationMockup() {
+export default function MobileScreen() {
   return (
     <section id="mockup" className="scroll-mt-20 bg-[#00171F] py-16  px-4 sm:px-6 text-center">
       {/* Heading */}

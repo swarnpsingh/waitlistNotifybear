@@ -3,18 +3,17 @@ import NotificationMockup from './components/NotificationMockup';
 import Navbar from './components/Navbar';
 import Features from './components/Features';
 import CallToAction from './components/CallToAction';
-
-
-
+// import MobileScreen from './components/MobileScreen';
 
 function App() {
   return (
-    <div className="bg-[#F7F3EA] min-h-screen">
+    <div className="bg-[#00171F] min-h-screen">
       <Navbar />
 
       <main className="pt-20"> {/* Adjust this to match your navbar height */}
         <HeroSection />
         <NotificationMockup />
+        {/* <MobileScreen /> */}
         <Features />
         <CallToAction />
 
