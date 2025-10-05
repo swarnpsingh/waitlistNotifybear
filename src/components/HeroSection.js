@@ -48,8 +48,8 @@ export default function HeroSection() {
 
       {/* Paragraph */}
       <p className="text-base sm:text-lg text-[#CFCFCF] max-w-xl mx-auto mt-6 px-2">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec laoreet
-        orci ut leo viverra, vitae congue orci facilisis.
+        Stay updated without the chaos.
+NotifyBear brings all your creator notifications into one simple, organized feed.
       </p>
 
       {/* CTA Button */}

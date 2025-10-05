@@ -6,10 +6,8 @@ export default function CallToAction() {
         <div className="max-w-2xl text-center md:text-left">
           <h2 className="text-4xl font-garamond font-bold mb-2 text-white">Caught up?</h2>
           <p className="text-[#CFCFCF] leading-relaxed">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-            laoreet orci ut leo viverra, vitae congue orci facilisis. Lorem
-            ipsum dolor sit amet, consectetur adipiscing elit. Donec laoreet
-            orci ut leo viverra, vitae congue orci facilisis.
+            Stay in sync with your favorite creators — all in one place.
+Join the waitlist and be among the first to experience NotifyBear.
           </p>
         </div>
 

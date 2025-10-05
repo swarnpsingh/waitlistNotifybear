@@ -1,3 +1,90 @@
 *{
   background-color: black;
 }
+
+/* Liquid glass navbar styles */
+.liquid-glass-navbar{
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  -webkit-backdrop-filter: blur(8px) saturate(120%);
+  backdrop-filter: blur(8px) saturate(120%);
+  border-top: 1px solid rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(0,0,0,0.4);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02), 0 0 18px rgba(45,148,244,0.06);
+  z-index: 50;
+}
+
+/* moving sheen for the liquid look */
+.liquid-glass-navbar::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(120deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 40%, rgba(255,255,255,0.06) 60%, rgba(255,255,255,0.00) 100%);
+  mix-blend-mode: overlay;
+  transform: translateX(-120%);
+  animation: glass-sheen 8s linear infinite;
+  opacity: 0.7;
+}
+
+/* animated thin gradient border (top) to enhance the liquid glass look */
+.liquid-glass-navbar::after{
+  content: "";
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  top: 6px;
+  height: 2px;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(45,148,244,0.95), rgba(255,255,255,0.6), rgba(45,148,244,0.8));
+  opacity: 0.85;
+  filter: blur(6px);
+  border-radius: 2px;
+  mix-blend-mode: screen;
+  transform-origin: left center;
+  background-size: 200% 100%;
+  animation: border-move 6s linear infinite;
+}
+
+@keyframes border-move{
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes glass-sheen{
+  0% { transform: translateX(-120%); }
+  50% { transform: translateX(0%); }
+  100% { transform: translateX(120%); }
+}
+
+/* Link/button styles for glass theme */
+.glass-link{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.04);
+  -webkit-backdrop-filter: blur(6px) saturate(110%);
+  backdrop-filter: blur(6px) saturate(110%);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.45);
+}
+
+.glass-link:hover{
+  transform: translateY(-1px);
+}
+
+.glass-link.active, .glass-link:active{
+  background: linear-gradient(180deg, rgba(45,148,244,0.95), rgba(45,148,244,0.9));
+  color: white !important;
+  border-color: rgba(45,148,244,0.9);
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.85);
+}
+
+.glass-cta{
+  background: linear-gradient(180deg, rgba(45,148,244,0.95), rgba(21,114,204,0.95));
+  color: white;
+  border: 1px solid rgba(45,148,244,0.9);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.85);
+}
+
+/* Small responsive tweak so the absolute mobile menu sits below header */
+.mobile-menu-offset{ top: calc(100% + 4px); }

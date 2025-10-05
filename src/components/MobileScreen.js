@@ -15,8 +15,7 @@ export default function MobileScreen() {
 
       {/* Paragraph */}
       <p className="text-base sm:text-lg text-[#CFCFCF] max-w-xl mx-auto mt-6 px-2">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec laoreet
-        orci ut leo viverra, vitae congue orci facilisis.
+        Designed to simplify your digital life — track updates from multiple platforms in one powerful, unified dashboard.
       </p>
 
       {/* Notification Image */}
