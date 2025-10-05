@@ -4,7 +4,7 @@ import c from "../assets/c.png";
 
 export default function FeaturesSection() {
   return (
-    <section id="features" className="scroll-mt-20 bg-[#00171F] px-4 sm:px-6 md:px-16 py-8">
+    <section id="features" className="scroll-mt-20 inset-0 bg-gradient-to-b from-black via-purple-900/10 to-black px-4 sm:px-6 md:px-16 py-8">
       <h2 className="text-[32px] sm:text-[40px] md:text-[48px] text-white font-garamond font-bold text-center mb-12 sm:mb-16">
         Our Features
       </h2>

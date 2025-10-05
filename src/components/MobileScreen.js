@@ -2,7 +2,7 @@ import notifications from "../assets/notifications.png";
 
 export default function MobileScreen() {
   return (
-    <section id="mockup" className="scroll-mt-20 bg-[#00171F] py-16  px-4 sm:px-6 text-center">
+  <section id="mockup" className="scroll-mt-20 py-16  px-4 sm:px-6 text-center">
       {/* Heading */}
       <div className="font-garamond text-3xl sm:text-4xl md:text-5xl leading-tight text-white font-extrabold mt-12 sm:mt-20">
         <p className="inline">Tired of having notification getting all </p>

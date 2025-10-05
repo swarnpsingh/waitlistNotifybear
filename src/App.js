@@ -1,5 +1,6 @@
 import HeroSection from './components/HeroSection';
 import NotificationMockup from './components/NotificationMockup';
+import NotificationsMerge from './components/NotificationsMerge';
 import Navbar from './components/Navbar';
 import Features from './components/Features';
 import CallToAction from './components/CallToAction';
@@ -13,6 +14,7 @@ function App() {
       <main className="pt-20"> {/* Adjust this to match your navbar height */}
         <HeroSection />
         <NotificationMockup />
+  <NotificationsMerge />
         {/* <MobileScreen /> */}
         <Features />
         <CallToAction />

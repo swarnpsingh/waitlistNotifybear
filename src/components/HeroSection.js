@@ -8,7 +8,7 @@ import spotify from "../assets/Spotify.png";
 
 export default function HeroSection() {
   return (
-    <section id="home" className="scroll-mt-20 relative text-center px-4 sm:px-6 pt-20 sm:pt-32 pb-12 overflow-hidden bg-[#00171F]">
+    <section id="home" className="scroll-mt-20 relative text-center px-4 sm:px-6 pt-20 sm:pt-32 pb-12 overflow-hidden absolute inset-0 bg-gradient-to-b from-black via-purple-900/10 to-black">
       {/* Notification icons */}
       <img
         src={notifications2}
@@ -27,7 +27,7 @@ export default function HeroSection() {
       <h1 className="font-garamond font-extrabold text-4xl sm:text-6xl lg:text-7xl leading-tight tracking-normal text-center">
         <p className="relative inline-block text-white">
           it’s{" "}
-          <span className="relative inline-block text-[#2D94f4] z-10">
+          <span className="relative inline-block bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent z-10">
             time
             <img
               src={underline}
@@ -43,7 +43,7 @@ export default function HeroSection() {
         </p>
         <br />
         <span className="font-black text-white">notification panel</span>{" "}
-        <span className="font-coral text-[#2D94f4]">organised</span>
+        <span className="font-coral bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">organised</span>
       </h1>
 
       {/* Paragraph */}

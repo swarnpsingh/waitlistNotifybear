@@ -2,12 +2,12 @@ import notifications from "../assets/notifications.png";
 
 export default function NotificationMockup() {
   return (
-    <section id="mockup" className="scroll-mt-20 bg-[#00171F] py-16  px-4 sm:px-6 text-center">
+    <section id="mockup" className="scroll-mt-20 inset-0 bg-gradient-to-b from-black via-purple-900/10 to-black py-16  px-4 sm:px-6 text-center">
       {/* Heading */}
       <div className="font-garamond text-3xl sm:text-4xl md:text-5xl leading-tight text-white font-extrabold mt-12 sm:mt-20">
         <p className="inline">Tired of having notification getting all </p>
         <br />
-        <span className="inline text-[#2D94f4] font-extrabold">
+        <span className="inline bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent font-extrabold">
           cluttered up{" "}
         </span>
         <span className="inline font-extrabold">in your panel?</span>
