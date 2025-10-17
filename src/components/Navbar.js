@@ -30,6 +30,15 @@ export default function Navbar() {
     return () => sections.forEach((section) => observer.unobserve(section));
   }, []);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (menuOpen) document.body.style.overflow = 'hidden';
+    else document.body.style.overflow = '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [menuOpen]);
+
   const navLinkClass = (id) =>
     `font-medium px-4 py-2 transition inline-block ${
       id === activeSection
@@ -38,12 +47,12 @@ export default function Navbar() {
     }`;
 
   return (
-    <header className="w-full px-6 md:px-12 py-4 fixed top-0 z-50 bg-[#000000] shadow-md">
+    <header className="w-full px-4 sm:px-6 md:px-12 py-3 fixed top-0 z-50 bg-[#000000] shadow-md">
       <div className="max-w-7xl mx-auto flex items-center justify-between relative">
         {/* Left: Logo */}
         <div className="flex items-center gap-3">
-          <img src={mascot} alt="notifybear mascot" className="w-8 h-8 object-contain" />
-          <a href="#home" className="font-garamond text-2xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-400">
+          <img src={mascot} alt="notifybear mascot" className="w-7 h-7 sm:w-8 sm:h-8 object-contain" />
+          <a href="#home" className="font-garamond text-lg sm:text-2xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-400">
             NotifyBear
           </a>
         </div>
@@ -58,47 +67,60 @@ export default function Navbar() {
 
         {/* Right: CTA */}
         <div className="flex items-center gap-4">
-          <a href="https://tally.so/r/wvB6ad" target="_blank" rel="noopener noreferrer" className="inline-flex items-center px-6 py-3 rounded-lg text-white font-semibold bg-gradient-to-r from-purple-500 to-indigo-500 shadow-lg glass-cta">
+          {/* Hide desktop CTA on small screens; mobile CTA lives in the overlay */}
+          <a href="https://tally.so/r/wvB6ad" target="_blank" rel="noopener noreferrer" className="hidden md:inline-flex items-center px-5 py-2 rounded-lg text-white font-semibold bg-gradient-to-r from-purple-500 to-indigo-500 shadow-lg glass-cta">
             Get Early Access
           </a>
 
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden text-white focus:outline-none"
+            className={`md:hidden focus:outline-none transition p-2 rounded-full ${
+              menuOpen
+                ? 'bg-[#2D94f4] text-white shadow-lg'
+                : 'bg-gradient-to-r from-purple-500 to-indigo-500 text-white shadow-md'
+            }`}
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
           >
-            {menuOpen ? <X size={28} /> : <Menu size={28} />}
+            {menuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu Overlay */}
         {menuOpen && (
-          <div className="absolute top-full left-0 w-full bg-[#00171F] shadow-md flex flex-col items-center gap-2 py-4 md:hidden z-40 border-t border-gray-700">
-            {["home", "features", "callToAction"].map((id) => (
-              <a
-                key={id}
-                href={`#${id}`}
-                onClick={() => setMenuOpen(false)}
-                className={`text-white font-semibold px-4 py-2 ${
-                  activeSection === id ? "bg-[#2D94f4] rounded shadow" : "opacity-80 hover:opacity-100"
-                }`}
-              >
-                {id === "home"
-                  ? "Home"
-                  : id === "features"
-                  ? "Features"
-                  : "Contact us"}
-              </a>
-            ))}
-            <a
-              href="https://tally.so/r/wvB6ad"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setMenuOpen(false)}
-              className="bg-[#2D94f4] text-white font-medium px-6 py-2 rounded-xl shadow-[2px_2px_0px_black] mt-2 inline-flex items-center justify-center"
-            >
-              Join As Creator
-            </a>
+          <div id="mobile-menu" role="dialog" aria-modal="true" className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+            <div className="w-full max-w-md mx-4 bg-[#00171F] rounded-xl shadow-xl p-6 space-y-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <img src={mascot} alt="notifybear mascot" className="w-7 h-7 object-contain" />
+                  <span className="font-garamond text-lg bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-400">NotifyBear</span>
+                </div>
+                <button onClick={() => setMenuOpen(false)} className="text-white p-2 rounded-full bg-gray-800">
+                  <X size={20} />
+                </button>
+              </div>
+
+              <nav className="flex flex-col divide-y divide-gray-800">
+                {['home','problem','solution','features','callToAction'].map((id) => (
+                  <a
+                    key={id}
+                    href={`#${id}`}
+                    onClick={() => setMenuOpen(false)}
+                    className={`${navLinkClass(id)} py-4 block`}
+                  >
+                    {id === 'home' ? 'Home' : id === 'problem' ? 'Problem' : id === 'solution' ? 'Solution' : id === 'features' ? 'Features' : 'Waitlist'}
+                  </a>
+                ))}
+              </nav>
+
+              <div className="pt-2">
+                <a href="https://tally.so/r/wvB6ad" target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)} className="w-full inline-flex items-center justify-center px-6 py-3 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-semibold shadow-lg">
+                  Get Early Access
+                </a>
+              </div>
+            </div>
           </div>
         )}
       </div>

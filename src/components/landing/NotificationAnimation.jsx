@@ -72,7 +72,7 @@ export default function NotificationAnimation() {
   return (
     <section className="relative py-12 px-6 overflow-hidden">
       {/* Background glow */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-purple-900/10 to-black" />
+      <div className="absolute inset-0 bg-black/0" />
 
       <div className="relative max-w-6xl mx-auto">
         {/* Section header */}
