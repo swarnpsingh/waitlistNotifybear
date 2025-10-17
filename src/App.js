@@ -16,7 +16,7 @@ function App() {
       <main className="pt-20"> {/* Adjust this to match your navbar height */}
         <HeroSection />
         <ProblemSection />
-        <SolutionSection />
+        {/* <SolutionSection /> */}
         <HowItWorksSection />
         <Features />
         <CallToAction />

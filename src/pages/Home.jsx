@@ -14,7 +14,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0a0f] via-[#12121a] to-[#0a0a0f]">
-      {/* <HeroSection /> */}
+      <HeroSection />
       <ProblemSection />
       <SolutionSection />
       <HowItWorksSection />
