@@ -59,7 +59,7 @@ export default function CTASection() {
                   Ready to reclaim your attention?
                 </h2>
                 <p className="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
-                  Join thousands of professionals using NotifyBear to stay focused and productive. 
+                  Join to stay focused and productive. 
                   Early access is limited.
                 </p>
 
