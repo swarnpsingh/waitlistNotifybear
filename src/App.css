@@ -1,3 +1,25 @@
 *{
   background-color: black;
 }
+
+/* Liquid-glass CTA sheen */
+.glass-cta{
+  position: relative;
+  overflow: hidden;
+}
+.glass-cta::before{
+  content: "";
+  position: absolute;
+  top: -60%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(120deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0.18) 100%);
+  transform: rotate(25deg) translateX(-30%);
+  opacity: 0.14;
+  transition: transform 0.9s ease;
+}
+.glass-cta:hover::before{
+  transform: rotate(25deg) translateX(30%);
+  opacity: 0.28;
+}

@@ -1,17 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Youtube, Instagram, Linkedin, Twitter, Heart, Play, UserPlus, Upload } from 'lucide-react';
+import { Youtube, Instagram, Linkedin, Twitter, Mail, Hash } from 'lucide-react';
 
 const notifications = [
   { platform: 'YouTube', icon: Youtube, color: 'from-red-500 to-red-600', message: 'MrBeast uploaded: $1 vs $1M Hotel', user: '@MrBeast' },
-  { platform: 'Instagram', icon: Instagram, color: 'from-pink-500 to-purple-600', message: 'Casey Neistat posted a new story', user: '@caseyneistat' },
+//   { platform: 'Instagram', icon: Instagram, color: 'from-pink-500 to-purple-600', message: 'Casey Neistat posted a new story', user: '@caseyneistat' },
   { platform: 'X', icon: Twitter, color: 'from-blue-400 to-blue-500', message: 'MKBHD just posted', user: '@MKBHD' },
-  { platform: 'LinkedIn', icon: Linkedin, color: 'from-blue-600 to-blue-700', message: 'Simon Sinek shared an article', user: '@simonsinek' }
+//   { platform: 'LinkedIn', icon: Linkedin, color: 'from-blue-600 to-blue-700', message: 'Simon Sinek shared an article', user: '@simonsinek' },
+  { platform: 'Gmail', icon: Mail, color: 'from-red-500 to-orange-500', message: 'New email: Project Update', user: 'team@company.com' },
+  { platform: 'Slack', icon: Hash, color: 'from-purple-600 to-pink-500', message: 'New message in #design-team', user: '@johndoe' }
 ];
 
-export default function NotificationMerge() {
+export default function NotificationAnimation() {
   const [merged, setMerged] = useState(false);
   const [positions, setPositions] = useState([]);
+
+  useEffect(() => {
+    // Debug mount so developer can confirm the component rendered
+    if (typeof window !== 'undefined') {
+      // eslint-disable-next-line no-console
+      console.log('NotificationAnimation mounted');
+    }
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -20,7 +30,7 @@ export default function NotificationMerge() {
     return () => clearInterval(interval);
   }, []);
 
-  // Compute responsive positions for the scattered notifications
+  // Responsive positions for scattered notifications
   useEffect(() => {
     const computePositions = (width) => {
       // Mobile: stack centered vertically
@@ -60,7 +70,7 @@ export default function NotificationMerge() {
   }, []);
 
   return (
-    <section className="relative py-32 px-6 overflow-hidden">
+    <section className="relative py-12 px-6 overflow-hidden">
       {/* Background glow */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-purple-900/10 to-black" />
 
@@ -72,18 +82,18 @@ export default function NotificationMerge() {
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <h2 className="font-garamond text-5xl md:text-6xl font-bold mb-6">
+          {/* <h2 className="text-5xl md:text-6xl font-bold mb-6">
             <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
               All In One Place
             </span>
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
             Watch updates from all your favorite creators come together
-          </p>
+          </p> */}
         </motion.div>
 
-        {/* Animation container */}
-        <div className="relative h-[500px] flex items-center justify-center">
+  {/* Animation container: fixed bounding area so scattered notifications are always visible */}
+  <div className="relative h-[320px] sm:h-[600px] md:h-[520px] lg:h-[450px] flex items-center justify-center py-6">
           <AnimatePresence mode="wait">
             {!merged ? (
               // Scattered notifications
@@ -95,14 +105,16 @@ export default function NotificationMerge() {
                 className="absolute inset-0"
               >
                 {notifications.map((notif, index) => {
-                  const fallbackPositions = [
-                    { top: '10%', left: '10%' },
-                    { top: '10%', right: '10%' },
-                    { bottom: '20%', left: '15%' },
-                    { bottom: '20%', right: '15%' }
+                  const fallback = [
+                    { top: '5%', left: '5%' },
+                    { top: '5%', right: '5%' },
+                    { top: '50%', left: '0%' },
+                    { top: '50%', right: '0%' },
+                    { bottom: '10%', left: '10%' },
+                    { bottom: '10%', right: '10%' }
                   ];
 
-                  const pos = positions && positions.length ? positions[index] : fallbackPositions[index];
+                  const pos = (positions && positions.length) ? positions[index] : fallback[index];
 
                   return (
                     <motion.div
@@ -118,7 +130,7 @@ export default function NotificationMerge() {
                         opacity: { delay: index * 0.1, duration: 0.5 },
                         y: { duration: 2, repeat: Infinity, delay: index * 0.3 }
                       }}
-                      className="absolute transform-gpu"
+                      className="absolute"
                       style={pos}
                     >
                       <div className={`w-64 p-4 rounded-xl bg-gradient-to-br ${notif.color} shadow-2xl`}>
@@ -149,9 +161,9 @@ export default function NotificationMerge() {
                 {/* Phone mockup */}
                 <div className="relative">
                   <div className="absolute -inset-4 bg-gradient-to-r from-purple-500 via-cyan-500 to-blue-500 rounded-3xl blur-2xl opacity-30" />
-                  <div className="relative bg-gradient-to-b from-gray-900 to-black rounded-3xl border border-gray-800 p-6 shadow-2xl">
+                  <div className="relative bg-gradient-to-b from-gray-900 to-black rounded-3xl border border-gray-800 p-6 shadow-2xl max-h-[500px] overflow-y-auto">
                     {/* Phone header */}
-                    <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center justify-between mb-6 sticky top-0 bg-gradient-to-b from-gray-900 to-black pb-4 z-10">
                       <h3 className="text-xl font-bold text-white">NotifyBear</h3>
                       <div className="px-3 py-1 rounded-full bg-cyan-500/20 border border-cyan-500/30">
                         <span className="text-xs text-cyan-400 font-medium">{notifications.length} new</span>
