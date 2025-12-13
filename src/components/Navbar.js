@@ -52,8 +52,8 @@ export default function Navbar() {
         {/* Left: Logo */}
         <div className="flex items-center gap-3">
           <img src={mascot} alt="notifybear mascot" className="w-7 h-7 sm:w-8 sm:h-8 object-contain" />
-          <a href="#home" className="font-garamond text-lg sm:text-2xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-400">
-            NotifyBear
+          <a href="#home" className="font-poppins font-bold text-lg sm:text-2xl tracking-tight bg-clip-text text-transparent bg-white">
+            notifyBear
           </a>
         </div>
 
