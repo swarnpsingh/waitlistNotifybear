@@ -128,12 +128,12 @@ export default function HowItWorksSection() {
             </div>
 
             <div className="pt-4">
-              <div className="inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-purple-500/10 border border-purple-500/20">
+              {/* <div className="inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-purple-500/10 border border-purple-500/20">
                 <Sparkles className="w-5 h-5 text-purple-400" />
                 <p className="text-purple-300">
                   <span className="font-semibold">97% accuracy</span> in priority detection
                 </p>
-              </div>
+              </div> */}
             </div>
           </motion.div>
         </div>
