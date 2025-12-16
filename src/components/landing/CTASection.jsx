@@ -20,7 +20,7 @@ export default function CTASection() {
   };
 
   return (
-    <section className="relative py-32 px-6 overflow-hidden">
+    <section id="callToAction" className="relative py-32 px-6 overflow-hidden">
       {/* Background gradients */}
       <div className="absolute inset-0">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-purple-600/20 via-indigo-600/20 to-purple-600/20 rounded-full blur-3xl" />

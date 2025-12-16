@@ -13,7 +13,7 @@ export default function SolutionSection() {
   ];
 
   return (
-    <section className="relative py-32 px-6 overflow-hidden">
+    <section id="solution" className="relative py-32 px-6 overflow-hidden">
       {/* Gradient background */}
       <div className="absolute inset-0">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-b from-purple-600/10 via-transparent to-transparent" />

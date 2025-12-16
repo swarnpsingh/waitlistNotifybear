@@ -27,7 +27,7 @@ export default function ProblemSection() {
   ];
 
   return (
-    <section className="relative py-32 px-6 overflow-hidden">
+    <section id="problem" className="relative py-32 px-6 overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-red-950/10 to-transparent" />
 

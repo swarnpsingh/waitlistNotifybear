@@ -72,7 +72,7 @@ export default function FeaturesSection() {
   ];
 
   return (
-    <section className="relative py-32 px-6 overflow-hidden">
+    <section id="features" className="relative py-32 px-6 overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0">
         <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl" />
