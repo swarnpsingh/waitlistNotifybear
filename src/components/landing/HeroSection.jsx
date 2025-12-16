@@ -72,11 +72,11 @@ export default function HeroSection() {
                   Join the Waitlist
                   <ArrowRight className="w-4 h-4 ml-2 inline-block" />
                 </a>
-                <button 
+                {/* <button 
                   className="h-12 px-6 border border-gray-700 text-white rounded-md hover:bg-white/5"
                 >
                   Watch Demo
-                </button>
+                </button> */}
             </motion.div>
 
             <motion.div

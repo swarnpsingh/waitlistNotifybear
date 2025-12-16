@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64" height="48" viewBox="0 0 64 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <defs>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="1" stdDeviation="1" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <!-- red triangular hat -->
+  <path d="M6 38 L32 6 L58 38 Z" fill="#d62828" filter="url(#shadow)" />
+  <!-- white trim -->
+  <ellipse cx="32" cy="36" rx="26" ry="8" fill="#ffffff" />
+  <!-- pompom -->
+  <circle cx="54" cy="14" r="6" fill="#ffffff" />
+</svg>
