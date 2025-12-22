@@ -65,18 +65,7 @@ export default function CTASection() {
 
                 {!isSubmitted ? (
                   <form onSubmit={handleSubmit} className="max-w-md mx-auto">
-                    <div className="flex flex-col sm:flex-row gap-3">
-                      <div className="relative flex-1">
-                        <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
-                        <input
-                          type="email"
-                          placeholder="Enter your email"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          required
-                          className="pl-12 h-14 bg-gray-950 border border-gray-800 text-white placeholder:text-gray-500 focus:border-purple-500 w-full rounded-md px-4"
-                        />
-                      </div>
+                    <div className="flex flex-col sm:flex-row gap-3 items-center justify-center">
                       <button
                         type="submit"
                         disabled={isSubmitting}
