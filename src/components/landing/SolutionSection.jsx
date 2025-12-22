@@ -13,11 +13,8 @@ export default function SolutionSection() {
   ];
 
   return (
-    <section id="solution" className="relative py-32 px-6 overflow-hidden">
-      {/* Gradient background */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-b from-purple-600/10 via-transparent to-transparent" />
-      </div>
+    <section id="solution" className="relative py-32 px-6 overflow-hidden bg-transparent scroll-mt-20">
+      {/* background removed for transparency */}
 
       <div className="relative z-10 max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
