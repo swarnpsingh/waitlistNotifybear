@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import mascot from "../assets/icon-mascot.png";
-import hat from "../assets/christmas-hat.png";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -57,15 +56,6 @@ export default function Navbar() {
               src={mascot}
               alt="notifybear mascot"
               className="w-full h-full object-contain block"
-            />
-            <img
-              src={hat}
-              alt="christmas hat"
-              className="absolute -top-3 -left-0.5 w-5 h-5 sm:w-6 sm:h-6 pointer-events-none"
-              style={{
-                transform: "rotate(-12deg)",
-                transformOrigin: "bottom right",
-              }}
             />
           </div>
           <a
@@ -137,12 +127,6 @@ export default function Navbar() {
                       src={mascot}
                       alt="notifybear mascot"
                       className="w-full h-full object-contain block"
-                    />
-                    <img
-                      src={hat}
-                      alt="christmas hat"
-                      className="absolute -top-3 -left-2 w-5 h-5 pointer-events-none transform rotate-12"
-                      style={{ transform: "rotate(18deg)" }}
                     />
                   </div>
                   <span className="font-garamond text-lg bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-400">
