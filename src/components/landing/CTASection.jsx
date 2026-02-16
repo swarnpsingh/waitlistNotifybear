@@ -7,6 +7,7 @@ import { ArrowRight, CheckCircle2, Sparkles } from 'lucide-react';
 export default function CTASection() {
   const [email] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
