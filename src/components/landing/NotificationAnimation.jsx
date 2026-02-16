@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Youtube, Instagram, Linkedin, Twitter, Mail, Hash } from 'lucide-react';
+import { Youtube, Twitter, Mail, Hash } from 'lucide-react';
 
 const notifications = [
   { platform: 'YouTube', icon: Youtube, color: 'from-red-500 to-red-600', message: 'MrBeast uploaded: $1 vs $1M Hotel', user: '@MrBeast' },

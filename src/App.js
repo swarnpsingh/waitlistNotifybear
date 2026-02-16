@@ -1,10 +1,8 @@
 import './App.css';
 import HeroSection from './components/landing/HeroSection';
 import Navbar from './components/Navbar';
-import Features from './components/landing/FeaturesSection';
 import CallToAction from './components/landing/CTASection';
 import ProblemSection from './components/landing/ProblemSection';
-import SolutionSection from './components/landing/SolutionSection';
 import HowItWorksSection from './components/landing/HowItWorksSection';
 // import TestimonialSection from './components/landing/TestimonialSection';
 // import MobileScreen from './components/MobileScreen';

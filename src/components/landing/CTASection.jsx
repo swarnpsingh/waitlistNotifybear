@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 // Replaced project-specific ui components with simple elements to avoid alias resolution issues
-import { ArrowRight, Mail, CheckCircle2, Sparkles } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Sparkles } from 'lucide-react';
 // base44 API client removed from this file to avoid unresolved import during build
 
 export default function CTASection() {
-  const [email, setEmail] = useState('');
+  const [email] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
