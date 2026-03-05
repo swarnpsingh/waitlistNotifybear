@@ -1,119 +1,182 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-// Replaced project-specific ui components with simple elements to avoid alias resolution issues
-import { ArrowRight, CheckCircle2, Sparkles } from 'lucide-react';
-// base44 API client removed from this file to avoid unresolved import during build
+import mascot from '../../assets/icon-mascot.png';
 
-export default function CTASection() {
-  const [email] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted] = useState(false);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!email) return;
-
-    // Redirect to the Tally form for signups
-    setIsSubmitting(true);
-    window.open('https://tally.so/r/wvB6ad', '_blank', 'noopener');
-    setIsSubmitting(false);
-  };
-
+export default function CTASection({ onShowPrivacy }) {
   return (
-    <section id="callToAction" className="relative py-32 px-6 overflow-hidden scroll-mt-20">
-      {/* Background gradients */}
-      <div className="absolute inset-0">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-purple-600/20 via-indigo-600/20 to-purple-600/20 rounded-full blur-3xl" />
-      </div>
+    <section
+      id="cta"
+      style={{
+        background: 'linear-gradient(180deg, #3a8fbf 0%, #5aadd4 50%, #3a8fbf 100%)',
+        padding: '120px 32px 0',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        textAlign: 'center',
+      }}
+    >
+      <motion.div
+        initial={{ opacity: 0, y: 28 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.65 }}
+        viewport={{ once: true }}
+        style={{ maxWidth: 520, width: '100%' }}
+      >
+        {/* Badge */}
+        <div style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          padding: '5px 18px',
+          borderRadius: 999,
+          border: '1px solid rgba(255,255,255,0.5)',
+          background: 'rgba(255,255,255,0.2)',
+          backdropFilter: 'blur(8px)',
+          marginBottom: 24,
+        }}>
+          <span style={{
+            fontSize: '0.7rem',
+            fontWeight: 700,
+            color: '#fff',
+            letterSpacing: '0.16em',
+            textTransform: 'uppercase',
+          }}>
+            Early Access
+          </span>
+        </div>
 
-      <div className="relative z-10 max-w-4xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
+        {/* Heading */}
+        <h2 style={{
+          fontSize: 'clamp(2.2rem, 5vw, 3.25rem)',
+          fontWeight: 800,
+          color: '#fff',
+          lineHeight: 1.08,
+          letterSpacing: '-0.025em',
+          marginBottom: 16,
+        }}>
+          Be the first to<br />experience it.
+        </h2>
+
+        {/* Sub-message */}
+        <p style={{
+          fontSize: '0.95rem',
+          color: 'rgba(255,255,255,0.75)',
+          lineHeight: 1.7,
+          marginBottom: 36,
+          maxWidth: 340,
+          margin: '0 auto 36px',
+        }}>
+          We're launching very soon. Join the waitlist now and get notified the moment NotifyBear goes live.
+        </p>
+
+        {/* Email + CTA form */}
+        <motion.form
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ delay: 0.2, duration: 0.55 }}
           viewport={{ once: true }}
-          className="relative"
+          onSubmit={(e) => {
+            e.preventDefault();
+            window.open('https://tally.so/r/wvB6ad', '_blank', 'noopener');
+          }}
+          style={{
+            display: 'flex',
+            width: '100%',
+            maxWidth: 420,
+            margin: '0 auto',
+            borderRadius: 999,
+            overflow: 'hidden',
+            background: 'rgba(255,255,255,0.85)',
+            backdropFilter: 'blur(12px)',
+            border: '1px solid rgba(255,255,255,0.6)',
+            boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
+          }}
         >
-          {/* Main CTA card */}
-          <div className="relative">
-            {/* Glow */}
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-600/30 to-indigo-600/30 rounded-3xl blur-2xl" />
-            
-            <div className="relative bg-gradient-to-br from-gray-900 via-gray-900 to-gray-950 rounded-3xl border border-gray-800 p-12 md:p-16 text-center overflow-hidden">
-              {/* Decorative elements */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-purple-600/10 rounded-full blur-3xl" />
-              <div className="absolute bottom-0 left-0 w-64 h-64 bg-indigo-600/10 rounded-full blur-3xl" />
+          <input
+            type="email"
+            placeholder="Your email address"
+            style={{
+              flex: 1,
+              padding: '14px 20px',
+              background: 'transparent',
+              border: 'none',
+              outline: 'none',
+              fontSize: '0.875rem',
+              color: '#333',
+            }}
+          />
+          <button
+            type="submit"
+            style={{
+              padding: '12px 22px',
+              margin: 4,
+              borderRadius: 999,
+              background: '#111',
+              color: '#fff',
+              border: 'none',
+              fontSize: '0.7rem',
+              fontWeight: 700,
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+              cursor: 'pointer',
+              whiteSpace: 'nowrap',
+              transition: 'background 0.2s',
+            }}
+            onMouseOver={(e) => e.currentTarget.style.background = '#333'}
+            onMouseOut={(e) => e.currentTarget.style.background = '#111'}
+          >
+            Join Waitlist
+          </button>
+        </motion.form>
 
-              <div className="relative z-10">
-                <motion.div
-                  initial={{ scale: 0 }}
-                  whileInView={{ scale: 1 }}
-                  transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-                  viewport={{ once: true }}
-                  className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-purple-600 to-indigo-600 mb-6"
-                >
-                  <Sparkles className="w-8 h-8 text-white" />
-                </motion.div>
+        {/* Fine print */}
+        <p style={{
+          marginTop: 18,
+          fontSize: '0.775rem',
+          color: 'rgba(255,255,255,0.55)',
+          letterSpacing: '0.01em',
+        }}>
+          No spam. No credit card required.
+        </p>
+      </motion.div>
 
-                <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                  Ready to reclaim your attention?
-                </h2>
-                <p className="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
-                  Join to stay focused and productive. 
-                  Early access is limited.
-                </p>
+      {/* Footer */}
+      <footer className="cta-footer">
+        {/* Logo */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <img src={mascot} alt="notifybear" style={{ width: 24, height: 24, objectFit: 'contain' }} />
+          <span style={{ fontWeight: 700, fontSize: '0.95rem', color: '#fff', letterSpacing: '-0.01em' }}>notifyBear</span>
+        </div>
 
-                {!isSubmitted ? (
-                  <form onSubmit={handleSubmit} className="max-w-md mx-auto">
-                    <div className="flex flex-col sm:flex-row gap-3 items-center justify-center">
-                      <button
-                        type="submit"
-                        disabled={isSubmitting}
-                        className="h-14 px-8 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white border-0 shadow-lg shadow-purple-500/25 rounded-md"
-                      >
-                        {isSubmitting ? 'Joining...' : 'Join Waitlist'}
-                        <ArrowRight className="w-5 h-5 ml-2 inline-block" />
-                      </button>
-                    </div>
-                    <p className="text-sm text-gray-500 mt-4">
-                      Free during beta • No credit card required
-                    </p>
-                  </form>
-                ) : (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="max-w-md mx-auto"
-                  >
-                    <div className="flex items-center justify-center gap-3 p-6 rounded-2xl bg-green-500/10 border border-green-500/20">
-                      <CheckCircle2 className="w-6 h-6 text-green-400" />
-                      <p className="text-green-300 font-medium">
-                        You're on the waitlist! Check your email for next steps.
-                      </p>
-                    </div>
-                  </motion.div>
-                )}
+        {/* Links */}
+        <nav style={{ display: 'flex', gap: 24 }}>
+          {[
+            { label: 'Privacy Policy', action: onShowPrivacy },
+            { label: 'Terms of Service', action: null },
+            { label: 'Contact', action: null },
+          ].map(({ label, action }) => (
+            <a
+              key={label}
+              href="#"
+              onClick={(e) => { e.preventDefault(); if (action) action(); }}
+              style={{
+                fontSize: '0.8rem',
+                color: 'rgba(255,255,255,0.6)',
+                textDecoration: 'none',
+                transition: 'color 0.2s',
+              }}
+              onMouseOver={(e) => e.currentTarget.style.color = '#fff'}
+              onMouseOut={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.6)'}
+            >
+              {label}
+            </a>
+          ))}
+        </nav>
 
-                {/* Social proof */}
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mt-12 pt-8 border-t border-gray-800">
-                  <div className="flex -space-x-2">
-                    {[...Array(5)].map((_, i) => (
-                      <div
-                        key={i}
-                        className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-indigo-500 border-2 border-gray-900"
-                      />
-                    ))}
-                  </div>
-                  <div className="text-left">
-                    <p className="text-white font-semibold">447 professionals</p>
-                    <p className="text-sm text-gray-500">already on the waitlist</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-      </div>
+        {/* Copyright */}
+        <p style={{ fontSize: '0.775rem', color: 'rgba(255,255,255,0.45)', margin: 0 }}>
+          © {new Date().getFullYear()} NotifyBear LLC. All rights reserved.
+        </p>
+      </footer>
     </section>
   );
 }

@@ -4,33 +4,7 @@ import mascot from "../assets/icon-mascot.png";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("home");
 
-  useEffect(() => {
-    const sections = document.querySelectorAll("section[id]");
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            // map specific section ids to nav ids
-            const idMap = { mockup: "features" };
-            const id = idMap[entry.target.id] || entry.target.id;
-            setActiveSection(id);
-          }
-        });
-      },
-      {
-        threshold: 0.6, // Adjust sensitivity
-      }
-    );
-
-    sections.forEach((section) => observer.observe(section));
-
-    return () => sections.forEach((section) => observer.unobserve(section));
-  }, []);
-
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (menuOpen) document.body.style.overflow = "hidden";
     else document.body.style.overflow = "";
@@ -39,73 +13,37 @@ export default function Navbar() {
     };
   }, [menuOpen]);
 
-  const navLinkClass = (id) =>
-    `font-medium px-4 py-2 transition inline-block ${
-      id === activeSection
-        ? `bg-[#2D94f4] text-white rounded-full shadow-[0_6px_18px_rgba(45,148,244,0.12)]`
-        : "text-gray-400 hover:text-white"
-    }`;
-
   return (
-    <header className="w-full px-4 sm:px-6 md:px-12 py-3 fixed top-0 z-50 bg-[#000000] shadow-md">
-      <div className="max-w-7xl mx-auto flex items-center justify-between relative">
+    <header className="w-full px-6 sm:px-10 py-4 fixed top-0 z-50">
+      <div className="max-w-5xl mx-auto flex items-center justify-between">
         {/* Left: Logo */}
-        <div className="flex items-center gap-3">
-          <div className="relative w-7 h-7 sm:w-8 sm:h-8">
-            <img
-              src={mascot}
-              alt="notifybear mascot"
-              className="w-full h-full object-contain block"
-            />
-          </div>
-          <a
-            href="#home"
-            className="font-poppins font-bold text-lg sm:text-2xl tracking-tight bg-clip-text text-transparent bg-white"
-          >
+        <a href="#home" className="flex items-center gap-2">
+          <img
+            src={mascot}
+            alt="notifybear mascot"
+            className="w-7 h-7 object-contain"
+          />
+          <span className="font-bold text-lg text-white tracking-tight">
             notifyBear
-          </a>
-        </div>
+          </span>
+        </a>
 
-        {/* Center: nav (absolutely centered) */}
-        <nav className="hidden md:flex items-center justify-center absolute left-1/2 transform -translate-x-1/2">
-          <a href="#problem" className={`${navLinkClass("problem")} mx-4`}>
-            Problem
-          </a>
-          <a href="#solution" className={`${navLinkClass("solution")} mx-4`}>
-            Solution
-          </a>
-          {/* <a href="#features" className={`${navLinkClass("features")} mx-4`}>Features</a> */}
-          <a
-            href="#callToAction"
-            className={`${navLinkClass("callToAction")} mx-4`}
-          >
-            Waitlist
-          </a>
-        </nav>
-
-        {/* Right: CTA */}
-        <div className="flex items-center gap-4">
-          {/* Hide desktop CTA on small screens; mobile CTA lives in the overlay */}
+        {/* Right: CTA + mobile toggle */}
+        <div className="flex items-center gap-3">
           <a
             href="https://tally.so/r/wvB6ad"
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden md:inline-flex items-center px-5 py-2 rounded-lg text-white font-semibold bg-gradient-to-r from-purple-500 to-indigo-500 shadow-lg glass-cta"
+            className="hidden sm:inline-flex items-center px-5 py-2 rounded-full border border-white/60 text-white font-semibold text-xs tracking-[0.12em] uppercase bg-white/20 backdrop-blur-sm hover:bg-white/30 transition"
           >
-            Get Early Access
+            Join Waitlist
           </a>
 
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className={`md:hidden focus:outline-none transition p-2 rounded-full ${
-              menuOpen
-                ? "bg-[#2D94f4] text-white shadow-lg"
-                : "bg-gradient-to-r from-purple-500 to-indigo-500 text-white shadow-md"
-            }`}
+            className="sm:hidden focus:outline-none p-2 rounded-full bg-white/60 border border-gray-300 text-gray-700"
             aria-label={menuOpen ? "Close menu" : "Open menu"}
-            aria-expanded={menuOpen}
-            aria-controls="mobile-menu"
           >
             {menuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
@@ -114,71 +52,30 @@ export default function Navbar() {
         {/* Mobile Menu Overlay */}
         {menuOpen && (
           <div
-            id="mobile-menu"
-            role="dialog"
-            aria-modal="true"
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm"
           >
-            <div className="w-full max-w-md mx-4 bg-[#00171F] rounded-xl shadow-xl p-6 space-y-4">
+            <div className="w-full max-w-sm mx-4 bg-white rounded-2xl shadow-xl p-6 space-y-5">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="relative w-7 h-7">
-                    <img
-                      src={mascot}
-                      alt="notifybear mascot"
-                      className="w-full h-full object-contain block"
-                    />
-                  </div>
-                  <span className="font-garamond text-lg bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-400">
-                    NotifyBear
-                  </span>
+                <div className="flex items-center gap-2">
+                  <img src={mascot} alt="notifybear" className="w-7 h-7 object-contain" />
+                  <span className="font-bold text-gray-900">notifyBear</span>
                 </div>
                 <button
                   onClick={() => setMenuOpen(false)}
-                  className="text-white p-2 rounded-full bg-gray-800"
+                  className="p-2 rounded-full bg-gray-100 text-gray-700"
                 >
-                  <X size={20} />
+                  <X size={18} />
                 </button>
               </div>
-
-              <nav className="flex flex-col divide-y divide-gray-800">
-                {[
-                  "home",
-                  "problem",
-                  "solution",
-                  "features",
-                  "callToAction",
-                ].map((id) => (
-                  <a
-                    key={id}
-                    href={`#${id}`}
-                    onClick={() => setMenuOpen(false)}
-                    className={`${navLinkClass(id)} py-4 block`}
-                  >
-                    {id === "home"
-                      ? "Home"
-                      : id === "problem"
-                      ? "Problem"
-                      : id === "solution"
-                      ? "Solution"
-                      : id === "features"
-                      ? "Features"
-                      : "Waitlist"}
-                  </a>
-                ))}
-              </nav>
-
-              <div className="pt-2">
-                <a
-                  href="https://tally.so/r/wvB6ad"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setMenuOpen(false)}
-                  className="w-full inline-flex items-center justify-center px-6 py-3 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-semibold shadow-lg"
-                >
-                  Get Early Access
-                </a>
-              </div>
+              <a
+                href="https://tally.so/r/wvB6ad"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setMenuOpen(false)}
+                className="w-full inline-flex items-center justify-center px-6 py-3 rounded-full border border-gray-400 text-gray-800 font-semibold tracking-wide text-sm"
+              >
+                Join Waitlist
+              </a>
             </div>
           </div>
         )}

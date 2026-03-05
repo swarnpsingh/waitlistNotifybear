@@ -1,25 +1,30 @@
+import { useState } from 'react';
 import './App.css';
 import HeroSection from './components/landing/HeroSection';
+import FeaturesSection from './components/landing/FeaturesSection';
+import GettingStartedSection from './components/landing/GettingStartedSection';
+import CTASection from './components/landing/CTASection';
 import Navbar from './components/Navbar';
-import CallToAction from './components/landing/CTASection';
-import ProblemSection from './components/landing/ProblemSection';
-import HowItWorksSection from './components/landing/HowItWorksSection';
+import PrivacyPolicyPage from './components/landing/PrivacyPolicyPage';
 // import TestimonialSection from './components/landing/TestimonialSection';
 // import MobileScreen from './components/MobileScreen';
 
 function App() {
+  const [page, setPage] = useState('home');
+
+  if (page === 'privacy') {
+    return <PrivacyPolicyPage onBack={() => setPage('home')} />;
+  }
+
   return (
-    <div className="bg-[#000000] min-h-screen">
+    <div className="bg-white min-h-screen">
       <Navbar />
 
-      <main className="pt-20"> {/* Adjust this to match your navbar height */}
+      <main>
         <HeroSection />
-        <ProblemSection />
-        {/* <SolutionSection /> */}
-        <HowItWorksSection />
-        {/* <Features /> */}
-        <CallToAction />
-
+        <FeaturesSection />
+        <GettingStartedSection />
+        <CTASection onShowPrivacy={() => setPage('privacy')} />
       </main>
     </div>
   );
