@@ -154,21 +154,26 @@ export default function CTASection({ onShowPrivacy }) {
             { label: 'Terms of Service', action: null },
             { label: 'Contact', action: null },
           ].map(({ label, action }) => (
-            <a
+            <button
               key={label}
-              href="#"
-              onClick={(e) => { e.preventDefault(); if (action) action(); }}
+              type="button"
+              onClick={() => { if (action) action(); }}
               style={{
                 fontSize: '0.8rem',
                 color: 'rgba(255,255,255,0.6)',
+                background: 'none',
+                border: 'none',
+                padding: 0,
+                cursor: 'pointer',
                 textDecoration: 'none',
                 transition: 'color 0.2s',
+                fontFamily: 'inherit',
               }}
               onMouseOver={(e) => e.currentTarget.style.color = '#fff'}
               onMouseOut={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.6)'}
             >
               {label}
-            </a>
+            </button>
           ))}
         </nav>
 
