@@ -24,7 +24,7 @@ function useCountdown(targetDate) {
 }
 
 export default function HeroSection() {
-  const { days, hours, minutes, seconds } = useCountdown('2026-03-10T00:00:00');
+  const { days, hours, minutes, seconds } = useCountdown('2026-03-21T00:00:00');
 
   return (
     <section
