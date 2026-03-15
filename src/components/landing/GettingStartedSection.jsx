@@ -107,7 +107,7 @@ const steps = [
   {
     number: 3,
     title: 'Tame your notifications',
-    description: 'Let NotifyBear filter, prioritise and surface what matters most.',
+    description: 'Let Notifybear filter, prioritise and surface what matters most.',
     img: null,
     mockup: null,
   },

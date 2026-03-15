@@ -24,7 +24,7 @@ export default function Navbar() {
             className="w-7 h-7 object-contain"
           />
           <span className="font-bold text-lg text-white tracking-tight">
-            notifyBear
+            notifybear
           </span>
         </a>
 
@@ -58,7 +58,7 @@ export default function Navbar() {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <img src={mascot} alt="notifybear" className="w-7 h-7 object-contain" />
-                  <span className="font-bold text-gray-900">notifyBear</span>
+                  <span className="font-bold text-gray-900">Notifybear</span>
                 </div>
                 <button
                   onClick={() => setMenuOpen(false)}

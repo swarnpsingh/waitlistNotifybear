@@ -138,23 +138,4 @@ button, input, select, textarea {
     padding-right: 16px;
   }
 
-  /* Hero form: stack on very small screens */
-  .hero-form {
-    flex-direction: column;
-    border-radius: 20px;
-    padding: 8px;
-    gap: 8px;
-  }
-
-  .hero-form input {
-    width: 100%;
-    border-radius: 12px;
-    text-align: center;
-  }
-
-  .hero-form button {
-    width: 100%;
-    border-radius: 12px;
-    margin: 0;
-  }
 }

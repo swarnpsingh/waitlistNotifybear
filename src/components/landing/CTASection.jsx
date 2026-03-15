@@ -65,10 +65,10 @@ export default function CTASection({ onShowPrivacy }) {
           maxWidth: 340,
           margin: '0 auto 36px',
         }}>
-          We're launching very soon. Join the waitlist now and get notified the moment NotifyBear goes live.
+          We're launching very soon. Join the waitlist now and get notified the moment Notifybear goes live.
         </p>
 
-        {/* Email + CTA form */}
+        {/* CTA form */}
         <motion.form
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -80,35 +80,16 @@ export default function CTASection({ onShowPrivacy }) {
           }}
           style={{
             display: 'flex',
+            justifyContent: 'center',
             width: '100%',
             maxWidth: 420,
             margin: '0 auto',
-            borderRadius: 999,
-            overflow: 'hidden',
-            background: 'rgba(255,255,255,0.85)',
-            backdropFilter: 'blur(12px)',
-            border: '1px solid rgba(255,255,255,0.6)',
-            boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
           }}
         >
-          <input
-            type="email"
-            placeholder="Your email address"
-            style={{
-              flex: 1,
-              padding: '14px 20px',
-              background: 'transparent',
-              border: 'none',
-              outline: 'none',
-              fontSize: '0.875rem',
-              color: '#333',
-            }}
-          />
           <button
             type="submit"
             style={{
-              padding: '12px 22px',
-              margin: 4,
+              padding: '12px 24px',
               borderRadius: 999,
               background: '#111',
               color: '#fff',
@@ -144,7 +125,7 @@ export default function CTASection({ onShowPrivacy }) {
         {/* Logo */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <img src={mascot} alt="notifybear" style={{ width: 24, height: 24, objectFit: 'contain' }} />
-          <span style={{ fontWeight: 700, fontSize: '0.95rem', color: '#fff', letterSpacing: '-0.01em' }}>notifyBear</span>
+          <span style={{ fontWeight: 700, fontSize: '0.95rem', color: '#fff', letterSpacing: '-0.01em' }}>Notifybear</span>
         </div>
 
         {/* Links */}
@@ -179,7 +160,7 @@ export default function CTASection({ onShowPrivacy }) {
 
         {/* Copyright */}
         <p style={{ fontSize: '0.775rem', color: 'rgba(255,255,255,0.45)', margin: 0 }}>
-          © {new Date().getFullYear()} NotifyBear LLC. All rights reserved.
+          © {new Date().getFullYear()} Notifybear LLC. All rights reserved.
         </p>
       </footer>
     </section>

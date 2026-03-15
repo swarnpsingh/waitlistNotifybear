@@ -71,22 +71,17 @@ export default function HeroSection() {
           An AI notification assistant that understands the relevance of your notifications. <br/ > We're close, get on the waitlist!
         </motion.p>
 
-        {/* Email + CTA */}
+        {/* CTA */}
         <motion.form
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.35, duration: 0.7 }}
           onSubmit={(e) => { e.preventDefault(); window.open('https://tally.so/r/wvB6ad', '_blank', 'noopener'); }}
-          className="hero-form flex w-full max-w-sm rounded-full overflow-hidden bg-white/80 backdrop-blur-md shadow-lg mb-10 border border-white/60"
+          className="flex w-full justify-center mb-10"
         >
-          <input
-            type="email"
-            placeholder="Your email address"
-            className="flex-1 px-5 py-3 bg-transparent text-gray-700 text-sm placeholder:text-gray-400 outline-none"
-          />
           <button
             type="submit"
-            className="px-5 py-3 rounded-full bg-gray-900 text-white text-xs font-bold tracking-[0.1em] uppercase hover:bg-gray-700 transition m-1"
+            className="px-6 py-3 rounded-full bg-gray-900 text-white text-xs font-bold tracking-[0.1em] uppercase hover:bg-gray-700 transition"
           >
             Join Waitlist
           </button>
