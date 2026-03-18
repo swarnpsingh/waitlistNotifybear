@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import './App.css';
 import HeroSection from './components/landing/HeroSection';
 import FeaturesSection from './components/landing/FeaturesSection';
@@ -10,23 +10,31 @@ import PrivacyPolicyPage from './components/landing/PrivacyPolicyPage';
 // import MobileScreen from './components/MobileScreen';
 
 function App() {
-  const [page, setPage] = useState('home');
-
-  if (page === 'privacy') {
-    return <PrivacyPolicyPage onBack={() => setPage('home')} />;
-  }
+  const navigate = useNavigate();
 
   return (
-    <div className="bg-white min-h-screen">
-      <Navbar />
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <div className="bg-white min-h-screen">
+            <Navbar />
 
-      <main>
-        <HeroSection />
-        <FeaturesSection />
-        <GettingStartedSection />
-        <CTASection onShowPrivacy={() => setPage('privacy')} />
-      </main>
-    </div>
+            <main>
+              <HeroSection />
+              <FeaturesSection />
+              <GettingStartedSection />
+              <CTASection onShowPrivacy={() => navigate('/privacy-policy')} />
+            </main>
+          </div>
+        }
+      />
+      <Route
+        path="/privacy-policy"
+        element={<PrivacyPolicyPage onBack={() => navigate('/')} />}
+      />
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
   );
 }
 
