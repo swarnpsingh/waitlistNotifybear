@@ -6,6 +6,7 @@ import GettingStartedSection from './components/landing/GettingStartedSection';
 import CTASection from './components/landing/CTASection';
 import Navbar from './components/Navbar';
 import PrivacyPolicyPage from './components/landing/PrivacyPolicyPage';
+import DeleteAccountPage from './components/landing/DeleteAccountPage';
 // import TestimonialSection from './components/landing/TestimonialSection';
 // import MobileScreen from './components/MobileScreen';
 
@@ -32,6 +33,10 @@ function App() {
       <Route
         path="/privacy-policy"
         element={<PrivacyPolicyPage onBack={() => navigate('/')} />}
+      />
+      <Route
+        path="/delete-account"
+        element={<DeleteAccountPage onBack={() => navigate('/')} />}
       />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
