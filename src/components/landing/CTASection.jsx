@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Instagram, Linkedin, Twitter } from 'lucide-react';
 import mascot from '../../assets/icon-mascot.png';
 
 export default function CTASection({ onShowPrivacy }) {
@@ -157,6 +158,33 @@ export default function CTASection({ onShowPrivacy }) {
             </button>
           ))}
         </nav>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+          {[
+            { label: 'Instagram', href: 'https://www.instagram.com/notifybear.com_/', Icon: Instagram },
+            { label: 'LinkedIn', href: 'https://www.linkedin.com/company/notifybear?originalSubdomain=in', Icon: Linkedin },
+            { label: 'Twitter', href: 'https://x.com/notifybear', Icon: Twitter },
+          ].map(({ label, href, Icon }) => (
+            <a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noreferrer noopener"
+              aria-label={label}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'rgba(255,255,255,0.65)',
+                transition: 'color 0.2s',
+              }}
+              onMouseOver={(e) => e.currentTarget.style.color = '#fff'}
+              onMouseOut={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.65)'}
+            >
+              <Icon size={16} />
+            </a>
+          ))}
+        </div>
 
         {/* Copyright */}
         <p style={{ fontSize: '0.775rem', color: 'rgba(255,255,255,0.45)', margin: 0 }}>
