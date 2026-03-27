@@ -85,6 +85,7 @@ const SECTIONS = [
       `To provide and maintain our Service, including notification filtering, prioritization, and personalization.`,
       `To manage Your Account: to manage Your registration as a user of the Service. The Personal Data You provide can give You access to different functionalities of the Service that are available to You as a registered user.`,
       `To perform core Service functionality: including analyzing notification metadata and improving filtering accuracy using our proprietary models.`,
+      `To train and improve our AI models: The collected notification data and user interactions are used to train our AI algorithms to make the model more efficient and accurate for You and future users. This continuous learning process helps us deliver better notification filtering and prioritization over time.`,
       `To contact You: To contact You by email, telephone calls, SMS, or other equivalent forms of electronic communication, such as a mobile application's push notifications regarding updates or informative communications regarding updates, security alerts, or important service-related information.`,
       `To improve the Service: including improving model accuracy, usability, reliability, and performance.`,
       `To manage Your requests: To attend and manage Your requests to Us.`,
@@ -124,7 +125,7 @@ const SECTIONS = [
       'Disable notification access through Android settings',
       'Contact Us to request deletion',
     ],
-    after: `We may retain certain information if required by law or for legitimate business purposes. Please note that We may need to retain certain information when we have a legal obligation or lawful basis to do so.`,
+    after: `We may retain certain information if required by law or for legitimate business purposes. Please note that We may need to retain certain information when we have a legal obligation or lawful basis to do so.\n\nWhen you delete your account or request data deletion, the reason for deletion (if provided) may be logged and retained for business purposes, including understanding user feedback, improving our Service, and analyzing usage patterns.`,
   },
   {
     heading: 'Disclosure of Your Personal Data',
