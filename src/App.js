@@ -7,6 +7,7 @@ import CTASection from './components/landing/CTASection';
 import Navbar from './components/Navbar';
 import PrivacyPolicyPage from './components/landing/PrivacyPolicyPage';
 import DeleteAccountPage from './components/landing/DeleteAccountPage';
+import ContactPage from './components/landing/ContactPage';
 // import TestimonialSection from './components/landing/TestimonialSection';
 // import MobileScreen from './components/MobileScreen';
 
@@ -25,7 +26,10 @@ function App() {
               <HeroSection />
               <FeaturesSection />
               <GettingStartedSection />
-              <CTASection onShowPrivacy={() => navigate('/privacy-policy')} />
+              <CTASection
+                onShowPrivacy={() => navigate('/privacy-policy')}
+                onShowContact={() => navigate('/contact')}
+              />
             </main>
           </div>
         }
@@ -37,6 +41,10 @@ function App() {
       <Route
         path="/delete-account"
         element={<DeleteAccountPage onBack={() => navigate('/')} />}
+      />
+      <Route
+        path="/contact"
+        element={<ContactPage onBack={() => navigate('/')} />}
       />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

@@ -170,7 +170,7 @@ const SECTIONS = [
   {
     heading: 'Contact Us',
     body: `If you have any questions about this Privacy Policy, You can contact us:`,
-    list: ['By email: swarnpratapsingh5@gmail.com'],
+    list: ['By email: support@notifybear.com'],
   },
 ];
 

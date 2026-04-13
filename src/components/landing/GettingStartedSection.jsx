@@ -93,7 +93,7 @@ const steps = [
   {
     number: 1,
     title: 'Download the app',
-    description: 'You will be notified when Notifybear is available on Google Play Store.',
+    description: 'Open Google Play, install Notifybear, and grant notification access in under a minute.',
     img: null,
     mockup: null,
   },

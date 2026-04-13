@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import mascot from "../assets/icon-mascot.png";
+import { PLAY_STORE_URL } from "../constants/links";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -31,12 +32,12 @@ export default function Navbar() {
         {/* Right: CTA + mobile toggle */}
         <div className="flex items-center gap-3">
           <a
-            href="https://tally.so/r/wvB6ad"
+            href={PLAY_STORE_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="hidden sm:inline-flex items-center px-5 py-2 rounded-full border border-white/60 text-white font-semibold text-xs tracking-[0.12em] uppercase bg-white/20 backdrop-blur-sm hover:bg-white/30 transition"
           >
-            Join Waitlist
+            Download on Play Store
           </a>
 
           {/* Mobile Menu Toggle */}
@@ -68,13 +69,13 @@ export default function Navbar() {
                 </button>
               </div>
               <a
-                href="https://tally.so/r/wvB6ad"
+                href={PLAY_STORE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setMenuOpen(false)}
                 className="w-full inline-flex items-center justify-center px-6 py-3 rounded-full border border-gray-400 text-gray-800 font-semibold tracking-wide text-sm"
               >
-                Join Waitlist
+                Download on Play Store
               </a>
             </div>
           </div>

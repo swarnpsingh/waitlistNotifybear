@@ -2,8 +2,9 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Instagram, Linkedin, Twitter } from 'lucide-react';
 import mascot from '../../assets/icon-mascot.png';
+import { PLAY_STORE_URL } from '../../constants/links';
 
-export default function CTASection({ onShowPrivacy }) {
+export default function CTASection({ onShowPrivacy, onShowContact }) {
   return (
     <section
       id="cta"
@@ -23,102 +24,127 @@ export default function CTASection({ onShowPrivacy }) {
         viewport={{ once: true }}
         style={{ maxWidth: 520, width: '100%' }}
       >
-        {/* Badge */}
-        <div style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          padding: '5px 18px',
-          borderRadius: 999,
-          border: '1px solid rgba(255,255,255,0.5)',
-          background: 'rgba(255,255,255,0.2)',
-          backdropFilter: 'blur(8px)',
-          marginBottom: 24,
-        }}>
-          <span style={{
-            fontSize: '0.7rem',
-            fontWeight: 700,
-            color: '#fff',
-            letterSpacing: '0.16em',
-            textTransform: 'uppercase',
+        <div>
+          {/* Badge */}
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            padding: '5px 18px',
+            borderRadius: 999,
+            border: '1px solid rgba(255,255,255,0.5)',
+            background: 'rgba(255,255,255,0.2)',
+            backdropFilter: 'blur(8px)',
+            marginBottom: 24,
           }}>
-            Early Access
-          </span>
-        </div>
-
-        {/* Heading */}
-        <h2 style={{
-          fontSize: 'clamp(2.2rem, 5vw, 3.25rem)',
-          fontWeight: 800,
-          color: '#fff',
-          lineHeight: 1.08,
-          letterSpacing: '-0.025em',
-          marginBottom: 16,
-        }}>
-          Be the first to<br />experience it.
-        </h2>
-
-        {/* Sub-message */}
-        <p style={{
-          fontSize: '0.95rem',
-          color: 'rgba(255,255,255,0.75)',
-          lineHeight: 1.7,
-          marginBottom: 36,
-          maxWidth: 340,
-          margin: '0 auto 36px',
-        }}>
-          We're launching very soon. Join the waitlist now and get notified the moment Notifybear goes live.
-        </p>
-
-        {/* CTA form */}
-        <motion.form
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.55 }}
-          viewport={{ once: true }}
-          onSubmit={(e) => {
-            e.preventDefault();
-            window.open('https://tally.so/r/wvB6ad', '_blank', 'noopener');
-          }}
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            width: '100%',
-            maxWidth: 420,
-            margin: '0 auto',
-          }}
-        >
-          <button
-            type="submit"
-            style={{
-              padding: '12px 24px',
-              borderRadius: 999,
-              background: '#111',
-              color: '#fff',
-              border: 'none',
+            <span style={{
               fontSize: '0.7rem',
               fontWeight: 700,
-              letterSpacing: '0.1em',
+              color: '#fff',
+              letterSpacing: '0.16em',
               textTransform: 'uppercase',
-              cursor: 'pointer',
-              whiteSpace: 'nowrap',
-              transition: 'background 0.2s',
-            }}
-            onMouseOver={(e) => e.currentTarget.style.background = '#333'}
-            onMouseOut={(e) => e.currentTarget.style.background = '#111'}
-          >
-            Join Waitlist
-          </button>
-        </motion.form>
+            }}>
+              Now Live
+            </span>
+          </div>
 
-        {/* Fine print */}
-        <p style={{
-          marginTop: 18,
-          fontSize: '0.775rem',
-          color: 'rgba(255,255,255,0.55)',
-          letterSpacing: '0.01em',
-        }}>
-          No spam. No credit card required.
-        </p>
+          {/* Heading */}
+          <h2 style={{
+            fontSize: 'clamp(2.2rem, 5vw, 3.25rem)',
+            fontWeight: 800,
+            color: '#fff',
+            lineHeight: 1.08,
+            letterSpacing: '-0.025em',
+            marginBottom: 16,
+          }}>
+            Download Notifybear<br />on Play Store.
+          </h2>
+
+          {/* Sub-message */}
+          <p style={{
+            fontSize: '0.95rem',
+            color: 'rgba(255,255,255,0.75)',
+            lineHeight: 1.7,
+            maxWidth: 340,
+            margin: '0 auto 36px',
+          }}>
+            You're one tap away from calmer notifications. Install today and start focusing on what matters.
+          </p>
+
+          {/* CTA form */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.55 }}
+            viewport={{ once: true }}
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              width: '100%',
+              maxWidth: 420,
+              margin: '0 auto',
+            }}
+          >
+            <a
+              href={PLAY_STORE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexDirection: 'column',
+                gap: 2,
+                minWidth: 220,
+                padding: '10px 22px',
+                borderRadius: 14,
+                background: '#050505',
+                color: '#fff',
+                border: '1px solid rgba(255,255,255,0.7)',
+                cursor: 'pointer',
+                whiteSpace: 'nowrap',
+                transition: 'transform 0.2s, filter 0.2s',
+                textDecoration: 'none',
+                boxShadow: '0 10px 24px rgba(0,0,0,0.28)',
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.filter = 'brightness(1.05)';
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.filter = 'none';
+              }}
+            >
+              <span style={{
+                fontSize: '0.62rem',
+                letterSpacing: '0.14em',
+                opacity: 0.85,
+                textTransform: 'uppercase',
+                lineHeight: 1,
+              }}>
+                Get it on
+              </span>
+              <span style={{
+                fontSize: '1.7rem',
+                fontWeight: 700,
+                letterSpacing: '-0.03em',
+                lineHeight: 1,
+              }}>
+                Google Play
+              </span>
+            </a>
+          </motion.div>
+
+          {/* Fine print */}
+          <p style={{
+            marginTop: 18,
+            fontSize: '0.775rem',
+            color: 'rgba(255,255,255,0.55)',
+            letterSpacing: '0.01em',
+          }}>
+            Free on Android. No signup wall.
+          </p>
+        </div>
       </motion.div>
 
       {/* Footer */}
@@ -133,8 +159,8 @@ export default function CTASection({ onShowPrivacy }) {
         <nav style={{ display: 'flex', gap: 24 }}>
           {[
             { label: 'Privacy Policy', action: onShowPrivacy },
-            { label: 'Terms of Service', action: null },
-            { label: 'Contact', action: null },
+            { label: 'Get the App', action: () => window.open(PLAY_STORE_URL, '_blank', 'noopener') },
+            { label: 'Contact', action: onShowContact },
           ].map(({ label, action }) => (
             <button
               key={label}

@@ -1,31 +1,10 @@
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import mockup from '../../assets/mockrocket-capture.png';
-
-function calculateTimeLeft(targetDate) {
-  const diff = new Date(targetDate) - new Date();
-  if (diff <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
-  return {
-    days: Math.floor(diff / (1000 * 60 * 60 * 24)),
-    hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
-    minutes: Math.floor((diff / (1000 * 60)) % 60),
-    seconds: Math.floor((diff / 1000) % 60),
-  };
-}
-
-function useCountdown(targetDate) {
-  const [timeLeft, setTimeLeft] = useState(() => calculateTimeLeft(targetDate));
-  useEffect(() => {
-    const id = setInterval(() => setTimeLeft(calculateTimeLeft(targetDate)), 1000);
-    return () => clearInterval(id);
-  }, [targetDate]);
-  return timeLeft;
-}
+import { PLAY_STORE_URL } from '../../constants/links';
 
 export default function HeroSection() {
-  const { days, hours, minutes, seconds } = useCountdown('2026-03-21T00:00:00');
-
   return (
     <section
       id="home"
@@ -40,14 +19,14 @@ export default function HeroSection() {
     >
       <div className="relative z-10 flex flex-col items-center text-center max-w-xl mx-auto px-6 pt-24 sm:pt-32 w-full">
 
-        {/* Coming Soon badge */}
+        {/* Live badge */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="inline-flex items-center px-5 py-1.5 rounded-full border border-white/60 bg-white/30 backdrop-blur-sm mb-6"
         >
-          <span className="text-xs text-white font-semibold tracking-[0.18em] uppercase">Coming Soon</span>
+          <span className="text-xs text-white font-semibold tracking-[0.18em] uppercase">Now on Android</span>
         </motion.div>
 
         {/* Heading */}
@@ -58,7 +37,7 @@ export default function HeroSection() {
           className="font-bold text-white leading-[1.05] mb-5"
           style={{ fontSize: 'clamp(3rem, 8vw, 4.5rem)' }}
         >
-          Get early<br />access
+          Cut notification<br />noise instantly
         </motion.h1>
 
         {/* Subtitle */}
@@ -68,24 +47,25 @@ export default function HeroSection() {
           transition={{ delay: 0.25, duration: 0.7 }}
           className="text-sm text-white/80 leading-relaxed mb-8 max-w-[300px]"
         >
-          An AI notification assistant that understands the relevance of your notifications. <br/ > We're close, get on the waitlist!
+          Notifybear is live on Google Play. Download now and let AI prioritize what matters.
         </motion.p>
 
         {/* CTA */}
-        <motion.form
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.35, duration: 0.7 }}
-          onSubmit={(e) => { e.preventDefault(); window.open('https://tally.so/r/wvB6ad', '_blank', 'noopener'); }}
           className="flex w-full justify-center mb-10"
         >
-          <button
-            type="submit"
+          <a
+            href={PLAY_STORE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="px-6 py-3 rounded-full bg-gray-900 text-white text-xs font-bold tracking-[0.1em] uppercase hover:bg-gray-700 transition"
           >
-            Join Waitlist
-          </button>
-        </motion.form>
+            Download on Play Store
+          </a>
+        </motion.div>
 
         {/* Mockup image — large, bottom half fades into countdown */}
         <motion.div
@@ -105,27 +85,14 @@ export default function HeroSection() {
           />
         </motion.div>
 
-        {/* Countdown */}
-        <motion.div
+        <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.7 }}
-          className="relative z-10 w-full max-w-sm grid grid-cols-4 gap-2 mb-12"
+          className="text-xs text-white/75 tracking-[0.08em] uppercase mb-12"
         >
-          {[{ label: 'DAYS', value: days }, { label: 'HOURS', value: hours }, { label: 'MINUTES', value: minutes }, { label: 'SECONDS', value: seconds }].map(({ label, value }) => (
-            <div
-              key={label}
-              className="flex flex-col items-center justify-center py-4 px-2 rounded-2xl bg-white/20 backdrop-blur-sm border border-white/30"
-            >
-              <span
-                className="text-2xl font-bold text-white leading-none mb-1"
-              >
-                {String(value).padStart(2, '0')}
-              </span>
-              <span className="text-[9px] font-semibold text-white/70 tracking-[0.15em]">{label}</span>
-            </div>
-          ))}
-        </motion.div>
+          Free install • Instant access • Start in under 60 seconds
+        </motion.p>
 
       </div>
     </section>
