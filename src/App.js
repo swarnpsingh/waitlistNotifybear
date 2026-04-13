@@ -6,6 +6,7 @@ import GettingStartedSection from './components/landing/GettingStartedSection';
 import CTASection from './components/landing/CTASection';
 import Navbar from './components/Navbar';
 import PrivacyPolicyPage from './components/landing/PrivacyPolicyPage';
+import TermsOfServicePage from './components/landing/TermsOfServicePage';
 import DeleteAccountPage from './components/landing/DeleteAccountPage';
 import ContactPage from './components/landing/ContactPage';
 // import TestimonialSection from './components/landing/TestimonialSection';
@@ -28,6 +29,7 @@ function App() {
               <GettingStartedSection />
               <CTASection
                 onShowPrivacy={() => navigate('/privacy-policy')}
+                onShowTerms={() => navigate('/terms-of-service')}
                 onShowContact={() => navigate('/contact')}
               />
             </main>
@@ -37,6 +39,10 @@ function App() {
       <Route
         path="/privacy-policy"
         element={<PrivacyPolicyPage onBack={() => navigate('/')} />}
+      />
+      <Route
+        path="/terms-of-service"
+        element={<TermsOfServicePage onBack={() => navigate('/')} />}
       />
       <Route
         path="/delete-account"

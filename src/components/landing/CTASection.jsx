@@ -4,7 +4,7 @@ import { Instagram, Linkedin, Twitter } from 'lucide-react';
 import mascot from '../../assets/icon-mascot.png';
 import { PLAY_STORE_URL } from '../../constants/links';
 
-export default function CTASection({ onShowPrivacy, onShowContact }) {
+export default function CTASection({ onShowPrivacy, onShowTerms, onShowContact }) {
   return (
     <section
       id="cta"
@@ -159,6 +159,7 @@ export default function CTASection({ onShowPrivacy, onShowContact }) {
         <nav style={{ display: 'flex', gap: 24 }}>
           {[
             { label: 'Privacy Policy', action: onShowPrivacy },
+            { label: 'Terms of Service', action: onShowTerms },
             { label: 'Get the App', action: () => window.open(PLAY_STORE_URL, '_blank', 'noopener') },
             { label: 'Contact', action: onShowContact },
           ].map(({ label, action }) => (
