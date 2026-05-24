@@ -24,7 +24,7 @@ This means the core feature works perfectly in **airplane mode** — on a flight
 
 ## What does reach our servers
 
-When you open the NotifyBear app with an active internet connection, an anonymized **feature dataset** linked to your account is sent to our servers. This is used exclusively to train *your personal AI model* — one model per user, not a shared one.
+When you open the NotifyBear app with an active internet connection, an account-linked **feature dataset** specific to your user profile is sent to our servers. This is used exclusively to train *your personal AI model* — one model per user, not a shared one.
 
 That dataset contains behavioral signals: how you interact with notifications, what you engage with, timing patterns. It does **not** contain notification content — no message text, no sender names, nothing that identifies what your notifications said.
 
