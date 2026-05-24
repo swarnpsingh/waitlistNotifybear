@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import mascot from "../assets/icon-mascot.png";
 import { PLAY_STORE_URL } from "../constants/links";
@@ -18,7 +19,7 @@ export default function Navbar() {
     <header className="w-full px-6 sm:px-10 py-4 fixed top-0 z-50">
       <div className="max-w-5xl mx-auto flex items-center justify-between">
         {/* Left: Logo */}
-        <a href="#home" className="flex items-center gap-2">
+        <Link to="/" className="flex items-center gap-2">
           <img
             src={mascot}
             alt="notifybear mascot"
@@ -27,10 +28,17 @@ export default function Navbar() {
           <span className="font-bold text-lg text-white tracking-tight">
             notifybear
           </span>
-        </a>
+        </Link>
 
-        {/* Right: CTA + mobile toggle */}
+        {/* Right: Nav + CTA + mobile toggle */}
         <div className="flex items-center gap-3">
+          <Link
+            to="/blog"
+            className="hidden sm:inline-flex items-center px-4 py-2 rounded-full border border-white/25 text-white/80 font-semibold text-xs tracking-[0.12em] uppercase bg-white/10 backdrop-blur-sm hover:bg-white/15 hover:text-white transition"
+          >
+            Blog
+          </Link>
+
           <a
             href={PLAY_STORE_URL}
             target="_blank"
@@ -68,6 +76,13 @@ export default function Navbar() {
                   <X size={18} />
                 </button>
               </div>
+              <Link
+                to="/blog"
+                onClick={() => setMenuOpen(false)}
+                className="w-full inline-flex items-center justify-center px-6 py-3 rounded-full border border-gray-200 text-gray-800 font-semibold tracking-wide text-sm bg-gray-50 hover:bg-gray-100 transition"
+              >
+                Blog
+              </Link>
               <a
                 href={PLAY_STORE_URL}
                 target="_blank"

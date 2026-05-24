@@ -17,14 +17,14 @@ export default function HeroSection() {
         minHeight: '100vh',
       }}
     >
-      <div className="relative z-10 flex flex-col items-center text-center max-w-xl mx-auto px-6 pt-24 sm:pt-32 w-full">
+      <div className="relative z-10 flex flex-col items-center text-center max-w-2xl mx-auto px-6 pt-24 sm:pt-32 w-full">
 
         {/* Live badge */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center px-5 py-1.5 rounded-full border border-white/60 bg-white/30 backdrop-blur-sm mb-6"
+          className="inline-flex items-center px-5 py-1.5 rounded-full border border-white/40 bg-white/10 backdrop-blur-sm mb-6"
         >
           <span className="text-xs text-white font-semibold tracking-[0.18em] uppercase">Now on Android</span>
         </motion.div>
@@ -34,20 +34,20 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15, duration: 0.7 }}
-          className="font-bold text-white leading-[1.05] mb-5"
-          style={{ fontSize: 'clamp(3rem, 8vw, 4.5rem)' }}
+          className="font-extrabold text-white leading-[1.02] mb-4"
+          style={{ fontSize: 'clamp(2.25rem, 6.5vw, 4.25rem)' }}
         >
           Cut notification<br />noise instantly
         </motion.h1>
-
         {/* Subtitle */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.25, duration: 0.7 }}
-          className="text-sm text-white/80 leading-relaxed mb-8 max-w-[300px]"
+          className="text-base sm:text-lg text-white/90 leading-relaxed mb-8 max-w-[640px]"
+          style={{ marginInline: 'auto' }}
         >
-          Notifybear is live on Google Play. Download now and let AI prioritize what matters.
+          NotifyBear is live on Google Play — download and let on-device AI prioritize what matters so you only get the notifications you care about.
         </motion.p>
 
         {/* CTA */}
@@ -55,15 +55,25 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.35, duration: 0.7 }}
-          className="flex w-full justify-center mb-10"
+          className="flex flex-col sm:flex-row items-center gap-3 justify-center mb-10 w-full"
         >
           <a
             href={PLAY_STORE_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-6 py-3 rounded-full bg-gray-900 text-white text-xs font-bold tracking-[0.1em] uppercase hover:bg-gray-700 transition"
+            aria-label="Download NotifyBear on Google Play"
+            className="px-6 py-3 rounded-full bg-white text-blue-700 text-sm font-semibold tracking-[0.04em] uppercase hover:opacity-95 transition shadow-lg"
+            style={{ minWidth: 200, textAlign: 'center' }}
           >
             Download on Play Store
+          </a>
+
+          <a
+            href="#features"
+            className="px-5 py-3 rounded-full border border-white/25 text-white text-sm font-medium hover:bg-white/10 transition"
+            style={{ minWidth: 160, textAlign: 'center' }}
+          >
+            Learn more
           </a>
         </motion.div>
 
@@ -72,10 +82,10 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.45, duration: 0.9, ease: 'easeOut' }}
-          className="relative w-full max-w-[340px] mx-auto mb-[-56px]"
+          className="relative w-full max-w-[460px] sm:max-w-[560px] mx-auto mb-[-56px]"
           style={{
-            WebkitMaskImage: 'linear-gradient(to bottom, black 40%, transparent 90%)',
-            maskImage: 'linear-gradient(to bottom, black 40%, transparent 90%)',
+            WebkitMaskImage: 'linear-gradient(to bottom, black 35%, transparent 95%)',
+            maskImage: 'linear-gradient(to bottom, black 35%, transparent 95%)',
           }}
         >
           <img
@@ -89,7 +99,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.7 }}
-          className="text-xs text-white/75 tracking-[0.08em] uppercase mb-12"
+          className="text-sm text-white/80 tracking-[0.02em] mb-12"
         >
           Free install • Instant access • Start in under 60 seconds
         </motion.p>
