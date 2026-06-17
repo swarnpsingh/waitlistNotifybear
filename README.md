@@ -2,6 +2,19 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## CSS / Styling
+
+This project uses **Tailwind CSS** for utility-class-based styling, supplemented by two custom CSS files:
+
+| File | Purpose |
+|------|---------|
+| [`src/index.css`](src/index.css) | Global base styles, custom component classes (features bento-grid, getting-started layout, CTA footer) and responsive breakpoints |
+| [`src/App.css`](src/App.css) | App-level styles: page background color and the liquid-glass CTA hover effect |
+
+The Tailwind configuration lives in [`tailwind.config.js`](tailwind.config.js) and PostCSS settings are in [`postcss.config.js`](postcss.config.js).
+
+> **Copying the design?** The two files above (`src/index.css` and `src/App.css`) contain all the hand-written CSS. Inline Tailwind utility classes are used directly inside each React component under `src/components/`.
+
 ## Available Scripts
 
 In the project directory, you can run:
