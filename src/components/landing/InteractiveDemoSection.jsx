@@ -12,6 +12,9 @@ import {
   Sparkles,
   EyeOff,
   RotateCcw,
+  Signal,
+  Wifi,
+  BatteryFull,
 } from 'lucide-react';
 
 const NOTIFICATIONS = [
@@ -116,15 +119,20 @@ function NotificationRow({ notification, phase }) {
     <motion.div
       layout
       initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: isMedium ? 0.5 : 1, y: 0 }}
+      animate={{
+        opacity: isMedium ? 0.5 : 1,
+        y: 0,
+        boxShadow: isHigh
+          ? '0 1px 2px rgba(0,0,0,0.08), 0 8px 20px rgba(0,0,0,0.16)'
+          : '0 1px 2px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.06)',
+      }}
       exit={{ opacity: 0, height: 0, marginBottom: 0 }}
       transition={{ duration: 0.55, ease: [0.4, 0, 0.2, 1] }}
       style={{
         background: '#fff',
-        borderRadius: 16,
+        borderRadius: 18,
         padding: '12px 14px',
         marginBottom: 10,
-        boxShadow: '0 1px 2px rgba(0,0,0,0.06)',
         position: 'relative',
       }}
     >
@@ -281,15 +289,53 @@ export default function InteractiveDemoSection() {
           {/* Phone mockup */}
           <div
             style={{
+              position: 'relative',
               width: 'min(320px, 86vw)',
               borderRadius: 44,
-              background: '#0b0b0d',
+              background: 'linear-gradient(155deg, #1c1c1f 0%, #0b0b0d 40%, #0b0b0d 60%, #1c1c1f 100%)',
               padding: 10,
-              boxShadow: '0 30px 60px rgba(0,0,0,0.25)',
+              boxShadow: '0 30px 60px rgba(0,0,0,0.25), inset 0 0 0 1px rgba(255,255,255,0.06)',
             }}
           >
+            {/* Volume rocker (left edge) */}
             <div
               style={{
+                position: 'absolute',
+                left: -2,
+                top: 108,
+                width: 3,
+                height: 38,
+                borderRadius: '0 3px 3px 0',
+                background: 'linear-gradient(90deg, #060607 0%, #232326 100%)',
+              }}
+            />
+            <div
+              style={{
+                position: 'absolute',
+                left: -2,
+                top: 156,
+                width: 3,
+                height: 38,
+                borderRadius: '0 3px 3px 0',
+                background: 'linear-gradient(90deg, #060607 0%, #232326 100%)',
+              }}
+            />
+            {/* Power button (right edge) */}
+            <div
+              style={{
+                position: 'absolute',
+                right: -2,
+                top: 132,
+                width: 3,
+                height: 60,
+                borderRadius: '3px 0 0 3px',
+                background: 'linear-gradient(270deg, #060607 0%, #232326 100%)',
+              }}
+            />
+
+            <div
+              style={{
+                position: 'relative',
                 borderRadius: 34,
                 overflow: 'hidden',
                 height: 560,
@@ -309,18 +355,27 @@ export default function InteractiveDemoSection() {
                 }}
               >
                 <span style={{ fontSize: '0.72rem', fontWeight: 700, color: '#fff' }}>9:41</span>
-                <div
-                  style={{
-                    width: 64,
-                    height: 18,
-                    borderRadius: 999,
-                    background: 'rgba(0,0,0,0.25)',
-                  }}
-                />
-                <span style={{ fontSize: '0.68rem', fontWeight: 600, color: 'rgba(255,255,255,0.85)' }}>
-                  100%
-                </span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                  <Signal size={13} color="#fff" strokeWidth={2.5} />
+                  <Wifi size={13} color="#fff" strokeWidth={2.5} />
+                  <BatteryFull size={16} color="#fff" strokeWidth={2} />
+                </div>
               </div>
+
+              {/* Punch-hole camera */}
+              <div
+                style={{
+                  position: 'absolute',
+                  top: 12,
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  width: 10,
+                  height: 10,
+                  borderRadius: '50%',
+                  background: '#04070a',
+                  boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.08), inset 0 0 2px rgba(120,180,220,0.6)',
+                }}
+              />
 
               {/* Feed */}
               <div
@@ -363,6 +418,26 @@ export default function InteractiveDemoSection() {
                     </motion.div>
                   )}
                 </AnimatePresence>
+              </div>
+
+              {/* Gesture navigation bar */}
+              <div
+                style={{
+                  flexShrink: 0,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  padding: '8px 0 10px',
+                }}
+              >
+                <div
+                  style={{
+                    width: 108,
+                    height: 4,
+                    borderRadius: 999,
+                    background: 'rgba(255,255,255,0.55)',
+                  }}
+                />
               </div>
             </div>
           </div>
