@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Sparkles, ShieldCheck, Smartphone, Tag, Users } from 'lucide-react';
 
 const FAQ_CATEGORIES = [
   {
     category: 'About the Product',
+    icon: Sparkles,
+    color: '#3a8fbf',
     items: [
       {
         q: 'What is Notifybear?',
@@ -26,6 +28,8 @@ const FAQ_CATEGORIES = [
   },
   {
     category: 'Privacy and Data',
+    icon: ShieldCheck,
+    color: '#1f7a4d',
     items: [
       {
         q: 'Does Notifybear read my messages?',
@@ -47,6 +51,8 @@ const FAQ_CATEGORIES = [
   },
   {
     category: 'Using the App',
+    icon: Smartphone,
+    color: '#6366f1',
     items: [
       {
         q: 'How long does it take for Notifybear to learn my preferences?',
@@ -64,6 +70,8 @@ const FAQ_CATEGORIES = [
   },
   {
     category: 'Pricing',
+    icon: Tag,
+    color: '#d97706',
     items: [
       {
         q: 'Is Notifybear free?',
@@ -77,6 +85,8 @@ const FAQ_CATEGORIES = [
   },
   {
     category: 'Company',
+    icon: Users,
+    color: '#db2777',
     items: [
       {
         q: 'Who built Notifybear?',
@@ -94,11 +104,11 @@ const FAQ_CATEGORIES = [
   },
 ];
 
-function FAQItem({ item, isOpen, onToggle, isLast }) {
+function FAQItem({ item, isOpen, onToggle, isLast, accentColor }) {
   const isMailto = item.a.startsWith('mailto:');
 
   return (
-    <div style={{ borderBottom: isLast ? 'none' : '1px solid #ececec' }}>
+    <div style={{ borderTop: '1px solid #f0f0f0' }}>
       <button
         type="button"
         onClick={onToggle}
@@ -109,22 +119,25 @@ function FAQItem({ item, isOpen, onToggle, isLast }) {
           alignItems: 'center',
           justifyContent: 'space-between',
           gap: 16,
-          padding: '20px 24px',
-          background: 'none',
+          padding: '16px 24px',
+          background: isOpen ? `${accentColor}0d` : 'none',
+          borderLeft: isOpen ? `3px solid ${accentColor}` : '3px solid transparent',
           border: 'none',
+          borderTop: 'none',
           cursor: 'pointer',
           textAlign: 'left',
+          transition: 'background 0.25s',
         }}
       >
-        <span style={{ fontSize: '0.95rem', fontWeight: 600, color: '#111', letterSpacing: '-0.01em' }}>
+        <span style={{ fontSize: '0.875rem', fontWeight: 600, color: '#111', letterSpacing: '-0.01em', paddingLeft: isOpen ? 9 : 12 }}>
           {item.q}
         </span>
         <motion.span
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ duration: 0.3 }}
-          style={{ flexShrink: 0, display: 'flex', color: '#888' }}
+          style={{ flexShrink: 0, display: 'flex', color: isOpen ? accentColor : '#aaa' }}
         >
-          <ChevronDown size={18} />
+          <ChevronDown size={16} />
         </motion.span>
       </button>
       <AnimatePresence initial={false}>
@@ -134,11 +147,11 @@ function FAQItem({ item, isOpen, onToggle, isLast }) {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
-            style={{ overflow: 'hidden' }}
+            style={{ overflow: 'hidden', background: `${accentColor}0d` }}
           >
-            <p style={{ margin: '0 24px 20px', fontSize: '0.875rem', color: '#888', lineHeight: 1.7 }}>
+            <p style={{ margin: 0, padding: '0 24px 18px 36px', fontSize: '0.825rem', color: '#777', lineHeight: 1.7 }}>
               {isMailto ? (
-                <a href={item.a} style={{ color: '#3a8fbf', fontWeight: 600, textDecoration: 'none' }}>
+                <a href={item.a} style={{ color: accentColor, fontWeight: 600, textDecoration: 'none' }}>
                   {item.a.replace('mailto:', '')}
                 </a>
               ) : (
@@ -159,7 +172,7 @@ export default function FAQSection() {
 
   return (
     <section id="faq" style={{ background: '#fff', padding: '96px 32px' }}>
-      <div style={{ maxWidth: 760, margin: '0 auto' }}>
+      <div style={{ maxWidth: 1100, margin: '0 auto' }}>
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -184,51 +197,63 @@ export default function FAQSection() {
           </p>
         </motion.div>
 
-        {FAQ_CATEGORIES.map((cat, catIdx) => (
-          <motion.div
-            key={cat.category}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: catIdx * 0.05 }}
-            viewport={{ once: true, margin: '-60px' }}
-            style={{ marginBottom: 36 }}
-          >
-            <p
-              style={{
-                fontSize: '0.7rem',
-                fontWeight: 700,
-                color: '#aaa',
-                letterSpacing: '0.14em',
-                textTransform: 'uppercase',
-                marginBottom: 12,
-                paddingLeft: 4,
-              }}
-            >
-              {cat.category}
-            </p>
-            <div
-              style={{
-                background: '#fff',
-                border: '1px solid #ececec',
-                borderRadius: 20,
-                overflow: 'hidden',
-              }}
-            >
-              {cat.items.map((item, itemIdx) => {
-                const id = `${catIdx}-${itemIdx}`;
-                return (
-                  <FAQItem
-                    key={id}
-                    item={item}
-                    isOpen={openId === id}
-                    onToggle={() => toggle(id)}
-                    isLast={itemIdx === cat.items.length - 1}
-                  />
-                );
-              })}
-            </div>
-          </motion.div>
-        ))}
+        <div className="faq-bento-grid">
+          {FAQ_CATEGORIES.map((cat, catIdx) => {
+            const Icon = cat.icon;
+            const isLastOdd = catIdx === FAQ_CATEGORIES.length - 1 && FAQ_CATEGORIES.length % 2 === 1;
+            return (
+              <motion.div
+                key={cat.category}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: (catIdx % 2) * 0.08 }}
+                viewport={{ once: true, margin: '-60px' }}
+                style={{
+                  background: '#fff',
+                  borderRadius: 24,
+                  overflow: 'hidden',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.04), 0 12px 32px rgba(0,0,0,0.06)',
+                  gridColumn: isLastOdd ? '1 / -1' : undefined,
+                }}
+              >
+                {/* Category header */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '22px 24px 18px' }}>
+                  <div
+                    style={{
+                      width: 40,
+                      height: 40,
+                      borderRadius: 12,
+                      background: cat.color,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      flexShrink: 0,
+                    }}
+                  >
+                    <Icon size={19} color="#fff" strokeWidth={2.25} />
+                  </div>
+                  <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: '#111', letterSpacing: '-0.01em', margin: 0 }}>
+                    {cat.category}
+                  </h3>
+                </div>
+
+                {cat.items.map((item, itemIdx) => {
+                  const id = `${catIdx}-${itemIdx}`;
+                  return (
+                    <FAQItem
+                      key={id}
+                      item={item}
+                      isOpen={openId === id}
+                      onToggle={() => toggle(id)}
+                      isLast={itemIdx === cat.items.length - 1}
+                      accentColor={cat.color}
+                    />
+                  );
+                })}
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

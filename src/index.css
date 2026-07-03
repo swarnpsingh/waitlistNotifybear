@@ -71,6 +71,16 @@ button, input, select, textarea {
   top: 120px;
 }
 
+/* ─── FAQ Section ───────────────────────────────────── */
+.faq-bento-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
 /* ─── CTA Footer ───────────────────────────────────── */
 .cta-footer {
   width: 100%;
@@ -112,6 +122,10 @@ button, input, select, textarea {
 
   .getting-started-sticky {
     position: static;
+  }
+
+  .faq-bento-grid {
+    grid-template-columns: 1fr;
   }
 }
 
