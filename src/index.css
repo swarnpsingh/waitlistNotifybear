@@ -132,10 +132,20 @@ button, input, select, textarea {
 
   /* Section padding on mobile */
   #features,
+  #demo,
   #getting-started,
   #cta {
     padding-left: 16px;
     padding-right: 16px;
   }
 
+}
+
+/* ─── Interactive Demo Section ─────────────────────── */
+.demo-feed::-webkit-scrollbar {
+  display: none;
+}
+
+.demo-feed {
+  scrollbar-width: none;
 }

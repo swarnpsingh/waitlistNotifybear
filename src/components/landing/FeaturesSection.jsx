@@ -16,7 +16,7 @@ export default function FeaturesSection() {
     <section
       id="features"
       style={{
-        background: '#ebebeb',
+        background: '#fff',
         padding: '96px 32px',
       }}
     >

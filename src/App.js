@@ -2,6 +2,7 @@ import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import './App.css';
 import HeroSection from './components/landing/HeroSection';
 import FeaturesSection from './components/landing/FeaturesSection';
+import InteractiveDemoSection from './components/landing/InteractiveDemoSection';
 import GettingStartedSection from './components/landing/GettingStartedSection';
 import CTASection from './components/landing/CTASection';
 import Navbar from './components/Navbar';
@@ -27,6 +28,7 @@ function App() {
 
             <main>
               <HeroSection />
+              <InteractiveDemoSection />
               <FeaturesSection />
               <GettingStartedSection />
               <CTASection
