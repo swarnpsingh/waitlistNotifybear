@@ -4,6 +4,7 @@ import HeroSection from './components/landing/HeroSection';
 import FeaturesSection from './components/landing/FeaturesSection';
 import InteractiveDemoSection from './components/landing/InteractiveDemoSection';
 import GettingStartedSection from './components/landing/GettingStartedSection';
+import FAQSection from './components/landing/FAQSection';
 import CTASection from './components/landing/CTASection';
 import Navbar from './components/Navbar';
 import PrivacyPolicyPage from './components/landing/PrivacyPolicyPage';
@@ -31,6 +32,7 @@ function App() {
               <InteractiveDemoSection />
               <FeaturesSection />
               <GettingStartedSection />
+              <FAQSection />
               <CTASection
                 onShowPrivacy={() => navigate('/privacy-policy')}
                 onShowTerms={() => navigate('/terms-of-service')}
