@@ -62,7 +62,7 @@ const NOTIFICATIONS = [
     id: 'calendar',
     app: 'Calendar',
     icon: Calendar,
-    iconBg: '#3a8fbf',
+    iconBg: '#2F5FD6',
     title: 'Standup',
     preview: 'Starts in 15 min · You are the host',
     time: '12m',
@@ -108,7 +108,7 @@ const AFTER_ORDER = [
 ];
 const TOP_HIGH_ID = NOTIFICATIONS.find((n) => n.priority === 'high')?.id;
 
-function NotificationRow({ notification, phase }) {
+function NotificationRow({ notification, phase, index, entered }) {
   const { icon: Icon, iconBg, app, title, preview, time, priority } = notification;
   const isAfter = phase === 'after';
   const isHigh = isAfter && priority === 'high';
@@ -118,16 +118,20 @@ function NotificationRow({ notification, phase }) {
   return (
     <motion.div
       layout
-      initial={{ opacity: 0, y: 8 }}
+      initial={{ opacity: 0, y: 10 }}
       animate={{
-        opacity: isMedium ? 0.5 : 1,
-        y: 0,
+        opacity: entered ? (isMedium ? 0.5 : 1) : 0,
+        y: entered ? 0 : 10,
         boxShadow: isHigh
           ? '0 1px 2px rgba(0,0,0,0.08), 0 8px 20px rgba(0,0,0,0.16)'
           : '0 1px 2px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.06)',
       }}
       exit={{ opacity: 0, height: 0, marginBottom: 0 }}
-      transition={{ duration: 0.55, ease: [0.4, 0, 0.2, 1] }}
+      transition={{
+        duration: 0.5,
+        delay: entered ? (phase === 'before' ? index * 0.09 : index * 0.04) : 0,
+        ease: [0.4, 0, 0.2, 1],
+      }}
       style={{
         background: '#fff',
         borderRadius: 18,
@@ -166,8 +170,8 @@ function NotificationRow({ notification, phase }) {
                     fontSize: '0.6rem',
                     fontWeight: 700,
                     letterSpacing: '0.06em',
-                    color: '#fff',
-                    background: '#3a8fbf',
+                    color: '#16294F',
+                    background: '#F5C518',
                     borderRadius: 999,
                     padding: '2px 7px',
                   }}
@@ -218,13 +222,13 @@ function NotificationRow({ notification, phase }) {
               display: 'flex',
               alignItems: 'center',
               gap: 6,
-              background: 'rgba(58,143,191,0.10)',
+              background: 'rgba(47,95,214,0.10)',
               borderRadius: 10,
               padding: '6px 9px',
             }}
           >
-            <Sparkles size={12} color="#3a8fbf" strokeWidth={2.5} />
-            <span style={{ fontSize: '0.68rem', color: '#3a8fbf', fontWeight: 600, lineHeight: 1.3 }}>
+            <Sparkles size={12} color="#2F5FD6" strokeWidth={2.5} />
+            <span style={{ fontSize: '0.68rem', color: '#2F5FD6', fontWeight: 600, lineHeight: 1.3 }}>
               {notification.whyThisMatters}
             </span>
           </motion.div>
@@ -237,6 +241,7 @@ function NotificationRow({ notification, phase }) {
 export default function InteractiveDemoSection() {
   const [phase, setPhase] = useState('before');
   const [showReplay, setShowReplay] = useState(false);
+  const [entered, setEntered] = useState(false);
 
   useEffect(() => {
     if (phase !== 'after') return undefined;
@@ -253,8 +258,9 @@ export default function InteractiveDemoSection() {
   };
 
   return (
-    <section id="demo" style={{ background: '#ebebeb', padding: '96px 32px' }}>
-      <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+    <section id="demo" className="relative overflow-hidden bg-cream" style={{ padding: '104px 32px' }}>
+      <div className="hex-watermark-ink" />
+      <div style={{ maxWidth: 1100, margin: '0 auto', position: 'relative' }}>
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -262,19 +268,10 @@ export default function InteractiveDemoSection() {
           viewport={{ once: true }}
           style={{ textAlign: 'center', marginBottom: 56 }}
         >
-          <h2
-            style={{
-              fontSize: 'clamp(2.2rem, 4vw, 3.25rem)',
-              fontWeight: 600,
-              color: '#111',
-              lineHeight: 1.1,
-              marginBottom: 16,
-              letterSpacing: '-0.02em',
-            }}
-          >
+          <h2 className="font-display font-medium text-ink" style={{ fontSize: 'clamp(2.2rem, 4vw, 3.25rem)', lineHeight: 1.1, marginBottom: 16, letterSpacing: '-0.02em' }}>
             See Notifybear decide.
           </h2>
-          <p style={{ fontSize: '0.95rem', color: '#888', maxWidth: 360, margin: '0 auto', lineHeight: 1.6 }}>
+          <p style={{ fontSize: '0.95rem', color: 'rgba(22,41,79,0.55)', maxWidth: 360, margin: '0 auto', lineHeight: 1.6 }}>
             Eight notifications. One tap. Only what matters rises to the top.
           </p>
         </motion.div>
@@ -282,21 +279,38 @@ export default function InteractiveDemoSection() {
         <motion.div
           initial={{ opacity: 0, y: 32 }}
           whileInView={{ opacity: 1, y: 0 }}
+          onViewportEnter={() => setEntered(true)}
           transition={{ duration: 0.55 }}
           viewport={{ once: true }}
           style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 32 }}
         >
           {/* Phone mockup */}
-          <div
-            style={{
-              position: 'relative',
-              width: 'min(320px, 86vw)',
-              borderRadius: 44,
-              background: 'linear-gradient(155deg, #1c1c1f 0%, #0b0b0d 40%, #0b0b0d 60%, #1c1c1f 100%)',
-              padding: 10,
-              boxShadow: '0 30px 60px rgba(0,0,0,0.25), inset 0 0 0 1px rgba(255,255,255,0.06)',
-            }}
-          >
+          <div style={{ position: 'relative' }}>
+            <div
+              aria-hidden
+              style={{
+                position: 'absolute',
+                left: '50%',
+                bottom: -20,
+                transform: 'translateX(-50%)',
+                width: '80%',
+                height: 120,
+                background: 'radial-gradient(ellipse at center, rgba(245,197,24,0.42) 0%, rgba(245,197,24,0) 72%)',
+                filter: 'blur(20px)',
+                zIndex: 0,
+              }}
+            />
+            <div
+              style={{
+                position: 'relative',
+                zIndex: 1,
+                width: 'min(320px, 86vw)',
+                borderRadius: 44,
+                background: 'linear-gradient(155deg, #1c1c1f 0%, #0b0b0d 40%, #0b0b0d 60%, #1c1c1f 100%)',
+                padding: 10,
+                boxShadow: '0 30px 60px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(255,255,255,0.06)',
+              }}
+            >
             {/* Volume rocker (left edge) */}
             <div
               style={{
@@ -339,7 +353,7 @@ export default function InteractiveDemoSection() {
                 borderRadius: 34,
                 overflow: 'hidden',
                 height: 560,
-                background: 'linear-gradient(180deg, #3a8fbf 0%, #5aadd4 100%)',
+                background: 'linear-gradient(180deg, #2F5FD6 0%, #16294F 100%)',
                 display: 'flex',
                 flexDirection: 'column',
               }}
@@ -387,8 +401,8 @@ export default function InteractiveDemoSection() {
                 }}
               >
                 <AnimatePresence initial={false}>
-                  {list.map((notification) => (
-                    <NotificationRow key={notification.id} notification={notification} phase={phase} />
+                  {list.map((notification, i) => (
+                    <NotificationRow key={notification.id} notification={notification} phase={phase} index={i} entered={entered} />
                   ))}
                   {phase === 'after' && (
                     <motion.div
@@ -440,6 +454,7 @@ export default function InteractiveDemoSection() {
                 />
               </div>
             </div>
+            </div>
           </div>
 
           {/* Controls */}
@@ -453,16 +468,8 @@ export default function InteractiveDemoSection() {
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
                   onClick={handleDecide}
-                  style={{
-                    background: '#3a8fbf',
-                    color: '#fff',
-                    border: 'none',
-                    borderRadius: 999,
-                    padding: '14px 28px',
-                    fontSize: '0.9rem',
-                    fontWeight: 600,
-                    cursor: 'pointer',
-                  }}
+                  className="btn-primary-light"
+                  style={{ border: 'none', cursor: 'pointer' }}
                 >
                   Let Notifybear decide
                 </motion.button>
@@ -475,21 +482,10 @@ export default function InteractiveDemoSection() {
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.3 }}
                     onClick={handleReplay}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 8,
-                      background: '#fff',
-                      color: '#333',
-                      border: '1px solid #ccc',
-                      borderRadius: 999,
-                      padding: '14px 28px',
-                      fontSize: '0.9rem',
-                      fontWeight: 600,
-                      cursor: 'pointer',
-                    }}
+                    className="btn-outline hover:bg-ink/5"
+                    style={{ background: 'transparent', color: '#16294F', cursor: 'pointer' }}
                   >
-                    <RotateCcw size={15} strokeWidth={2.25} />
+                    <RotateCcw size={15} strokeWidth={2.25} style={{ marginRight: 8 }} />
                     Replay
                   </motion.button>
                 )

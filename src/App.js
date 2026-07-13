@@ -3,10 +3,13 @@ import './App.css';
 import HeroSection from './components/landing/HeroSection';
 import FeaturesSection from './components/landing/FeaturesSection';
 import InteractiveDemoSection from './components/landing/InteractiveDemoSection';
+import FilteringSection from './components/landing/FilteringSection';
+import ProofSection from './components/landing/ProofSection';
 import GettingStartedSection from './components/landing/GettingStartedSection';
 import FAQSection from './components/landing/FAQSection';
 import CTASection from './components/landing/CTASection';
 import Navbar from './components/Navbar';
+import FloatingCTA from './components/FloatingCTA';
 import PrivacyPolicyPage from './components/landing/PrivacyPolicyPage';
 import TermsOfServicePage from './components/landing/TermsOfServicePage';
 import DeleteAccountPage from './components/landing/DeleteAccountPage';
@@ -24,13 +27,15 @@ function App() {
       <Route
         path="/"
         element={
-          <div className="bg-white min-h-screen">
+          <div className="bg-cream min-h-screen">
             <Navbar />
 
             <main>
               <HeroSection />
               <InteractiveDemoSection />
-              <FeaturesSection />
+              <ProofSection />
+              <FilteringSection />
+              {/* <FeaturesSection /> */}
               <GettingStartedSection />
               <FAQSection />
               <CTASection
@@ -39,6 +44,8 @@ function App() {
                 onShowContact={() => navigate('/contact')}
               />
             </main>
+
+            <FloatingCTA />
           </div>
         }
       />

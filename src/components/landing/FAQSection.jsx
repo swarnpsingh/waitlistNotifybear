@@ -6,7 +6,6 @@ const FAQ_CATEGORIES = [
   {
     category: 'About the Product',
     icon: Sparkles,
-    color: '#3a8fbf',
     items: [
       {
         q: 'What is Notifybear?',
@@ -29,7 +28,6 @@ const FAQ_CATEGORIES = [
   {
     category: 'Privacy and Data',
     icon: ShieldCheck,
-    color: '#1f7a4d',
     items: [
       {
         q: 'Does Notifybear read my messages?',
@@ -52,7 +50,6 @@ const FAQ_CATEGORIES = [
   {
     category: 'Using the App',
     icon: Smartphone,
-    color: '#6366f1',
     items: [
       {
         q: 'How long does it take for Notifybear to learn my preferences?',
@@ -71,7 +68,6 @@ const FAQ_CATEGORIES = [
   {
     category: 'Pricing',
     icon: Tag,
-    color: '#d97706',
     items: [
       {
         q: 'Is Notifybear free?',
@@ -86,7 +82,6 @@ const FAQ_CATEGORIES = [
   {
     category: 'Company',
     icon: Users,
-    color: '#db2777',
     items: [
       {
         q: 'Who built Notifybear?',
@@ -104,11 +99,11 @@ const FAQ_CATEGORIES = [
   },
 ];
 
-function FAQItem({ item, isOpen, onToggle, isLast, accentColor }) {
+function FAQItem({ item, isOpen, onToggle }) {
   const isMailto = item.a.startsWith('mailto:');
 
   return (
-    <div style={{ borderTop: '1px solid #f0f0f0' }}>
+    <div style={{ borderTop: '1px solid rgba(22,41,79,0.08)' }}>
       <button
         type="button"
         onClick={onToggle}
@@ -120,8 +115,8 @@ function FAQItem({ item, isOpen, onToggle, isLast, accentColor }) {
           justifyContent: 'space-between',
           gap: 16,
           padding: '16px 24px',
-          background: isOpen ? `${accentColor}0d` : 'none',
-          borderLeft: isOpen ? `3px solid ${accentColor}` : '3px solid transparent',
+          background: isOpen ? 'rgba(47,95,214,0.06)' : 'none',
+          borderLeft: isOpen ? '3px solid #2F5FD6' : '3px solid transparent',
           border: 'none',
           borderTop: 'none',
           cursor: 'pointer',
@@ -129,13 +124,13 @@ function FAQItem({ item, isOpen, onToggle, isLast, accentColor }) {
           transition: 'background 0.25s',
         }}
       >
-        <span style={{ fontSize: '0.875rem', fontWeight: 600, color: '#111', letterSpacing: '-0.01em', paddingLeft: isOpen ? 9 : 12 }}>
+        <span style={{ fontSize: '0.875rem', fontWeight: 600, color: '#16294F', letterSpacing: '-0.01em', paddingLeft: isOpen ? 9 : 12 }}>
           {item.q}
         </span>
         <motion.span
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ duration: 0.3 }}
-          style={{ flexShrink: 0, display: 'flex', color: isOpen ? accentColor : '#aaa' }}
+          style={{ flexShrink: 0, display: 'flex', color: isOpen ? '#D9A80C' : 'rgba(22,41,79,0.35)' }}
         >
           <ChevronDown size={16} />
         </motion.span>
@@ -147,11 +142,11 @@ function FAQItem({ item, isOpen, onToggle, isLast, accentColor }) {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
-            style={{ overflow: 'hidden', background: `${accentColor}0d` }}
+            style={{ overflow: 'hidden', background: 'rgba(47,95,214,0.06)' }}
           >
-            <p style={{ margin: 0, padding: '0 24px 18px 36px', fontSize: '0.825rem', color: '#777', lineHeight: 1.7 }}>
+            <p style={{ margin: 0, padding: '0 24px 18px 36px', fontSize: '0.825rem', color: 'rgba(22,41,79,0.6)', lineHeight: 1.7 }}>
               {isMailto ? (
-                <a href={item.a} style={{ color: accentColor, fontWeight: 600, textDecoration: 'none' }}>
+                <a href={item.a} style={{ color: '#2F5FD6', fontWeight: 600, textDecoration: 'none' }}>
                   {item.a.replace('mailto:', '')}
                 </a>
               ) : (
@@ -171,7 +166,7 @@ export default function FAQSection() {
   const toggle = (id) => setOpenId((current) => (current === id ? null : id));
 
   return (
-    <section id="faq" style={{ background: '#fff', padding: '96px 32px' }}>
+    <section id="faq" className="bg-cream" style={{ padding: '96px 32px' }}>
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -180,19 +175,10 @@ export default function FAQSection() {
           viewport={{ once: true }}
           style={{ textAlign: 'center', marginBottom: 56 }}
         >
-          <h2
-            style={{
-              fontSize: 'clamp(2.2rem, 4vw, 3.25rem)',
-              fontWeight: 600,
-              color: '#111',
-              lineHeight: 1.1,
-              marginBottom: 16,
-              letterSpacing: '-0.02em',
-            }}
-          >
+          <h2 className="font-display font-medium text-ink" style={{ fontSize: 'clamp(2.2rem, 4vw, 3.25rem)', lineHeight: 1.1, marginBottom: 16, letterSpacing: '-0.02em' }}>
             Questions, answered.
           </h2>
-          <p style={{ fontSize: '0.95rem', color: '#888', maxWidth: 420, margin: '0 auto', lineHeight: 1.6 }}>
+          <p style={{ fontSize: '0.95rem', color: 'rgba(22,41,79,0.55)', maxWidth: 420, margin: '0 auto', lineHeight: 1.6 }}>
             Everything you need to know about how Notifybear works and handles your data.
           </p>
         </motion.div>
@@ -212,18 +198,18 @@ export default function FAQSection() {
                   background: '#fff',
                   borderRadius: 24,
                   overflow: 'hidden',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.04), 0 12px 32px rgba(0,0,0,0.06)',
+                  boxShadow: '0 2px 8px rgba(22,41,79,0.04), 0 12px 32px rgba(22,41,79,0.06)',
                   gridColumn: isLastOdd ? '1 / -1' : undefined,
                 }}
               >
                 {/* Category header */}
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '22px 24px 18px' }}>
                   <div
+                    className="bg-focus"
                     style={{
                       width: 40,
                       height: 40,
                       borderRadius: 12,
-                      background: cat.color,
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -232,7 +218,7 @@ export default function FAQSection() {
                   >
                     <Icon size={19} color="#fff" strokeWidth={2.25} />
                   </div>
-                  <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: '#111', letterSpacing: '-0.01em', margin: 0 }}>
+                  <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: '#16294F', letterSpacing: '-0.01em', margin: 0 }}>
                     {cat.category}
                   </h3>
                 </div>
@@ -245,8 +231,6 @@ export default function FAQSection() {
                       item={item}
                       isOpen={openId === id}
                       onToggle={() => toggle(id)}
-                      isLast={itemIdx === cat.items.length - 1}
-                      accentColor={cat.color}
                     />
                   );
                 })}

@@ -9,12 +9,14 @@ export default function CTASection({ onShowPrivacy, onShowTerms, onShowContact }
     <section
       id="cta"
       style={{
-        background: 'linear-gradient(180deg, #3a8fbf 0%, #5aadd4 50%, #3a8fbf 100%)',
+        background: 'linear-gradient(180deg, #2F5FD6 0%, #16294F 62%, #16294F 100%)',
         padding: '120px 32px 0',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         textAlign: 'center',
+        position: 'relative',
+        overflow: 'hidden',
       }}
     >
       <motion.div
@@ -48,9 +50,8 @@ export default function CTASection({ onShowPrivacy, onShowTerms, onShowContact }
           </div>
 
           {/* Heading */}
-          <h2 style={{
+          <h2 className="font-display font-medium" style={{
             fontSize: 'clamp(2.2rem, 5vw, 3.25rem)',
-            fontWeight: 800,
             color: '#fff',
             lineHeight: 1.08,
             letterSpacing: '-0.025em',
@@ -77,6 +78,7 @@ export default function CTASection({ onShowPrivacy, onShowTerms, onShowContact }
             transition={{ delay: 0.2, duration: 0.55 }}
             viewport={{ once: true }}
             style={{
+              position: 'relative',
               display: 'flex',
               justifyContent: 'center',
               width: '100%',
@@ -84,11 +86,27 @@ export default function CTASection({ onShowPrivacy, onShowTerms, onShowContact }
               margin: '0 auto',
             }}
           >
+            <div
+              aria-hidden
+              style={{
+                position: 'absolute',
+                left: '50%',
+                top: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: 280,
+                height: 140,
+                background: 'radial-gradient(ellipse at center, rgba(245,197,24,0.35) 0%, rgba(245,197,24,0) 70%)',
+                filter: 'blur(18px)',
+                pointerEvents: 'none',
+              }}
+            />
             <a
               href={PLAY_STORE_URL}
               target="_blank"
               rel="noopener noreferrer"
               style={{
+                position: 'relative',
+                zIndex: 1,
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',

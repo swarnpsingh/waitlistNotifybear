@@ -16,25 +16,25 @@ export default function Navbar() {
   }, [menuOpen]);
 
   return (
-    <header className="w-full px-6 sm:px-10 py-4 fixed top-0 z-50">
-      <div className="max-w-5xl mx-auto flex items-center justify-between">
+    <header className="fixed top-4 left-0 right-0 z-50 px-4 sm:px-6">
+      <div className="mx-auto flex w-full max-w-xl items-center justify-between rounded-full border border-white/10 bg-ink/85 pl-4 pr-2 py-2 shadow-[0_8px_30px_rgba(13,26,52,0.35)] backdrop-blur-xl sm:pl-5 sm:pr-2.5">
         {/* Left: Logo */}
         <Link to="/" className="flex items-center gap-2">
           <img
             src={mascot}
             alt="notifybear mascot"
-            className="w-7 h-7 object-contain"
+            className="w-6 h-6 object-contain"
           />
-          <span className="font-bold text-lg text-white tracking-tight">
+          <span className="font-semibold text-[0.95rem] text-cream tracking-tight">
             notifybear
           </span>
         </Link>
 
         {/* Right: Nav + CTA + mobile toggle */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           <Link
             to="/blog"
-            className="hidden sm:inline-flex items-center px-4 py-2 rounded-full border border-white/25 text-white/80 font-semibold text-xs tracking-[0.12em] uppercase bg-white/10 backdrop-blur-sm hover:bg-white/15 hover:text-white transition"
+            className="hidden sm:inline-flex items-center px-4 py-2 rounded-full text-cream/70 font-semibold text-xs tracking-[0.1em] uppercase transition hover:text-cream"
           >
             Blog
           </Link>
@@ -43,7 +43,7 @@ export default function Navbar() {
             href={PLAY_STORE_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden sm:inline-flex items-center px-5 py-2 rounded-full border border-white/60 text-white font-semibold text-xs tracking-[0.12em] uppercase bg-white/20 backdrop-blur-sm hover:bg-white/30 transition"
+            className="hidden sm:inline-flex items-center px-4 py-2 rounded-full bg-cream text-ink font-semibold text-xs tracking-[0.06em] uppercase transition hover:bg-white"
           >
             Download on Play Store
           </a>
@@ -51,51 +51,51 @@ export default function Navbar() {
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="sm:hidden focus:outline-none p-2 rounded-full bg-white/60 border border-gray-300 text-gray-700"
+            className="sm:hidden focus:outline-none p-2 rounded-full bg-white/10 text-cream"
             aria-label={menuOpen ? "Close menu" : "Open menu"}
           >
-            {menuOpen ? <X size={20} /> : <Menu size={20} />}
+            {menuOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
-
-        {/* Mobile Menu Overlay */}
-        {menuOpen && (
-          <div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm"
-          >
-            <div className="w-full max-w-sm mx-4 bg-white rounded-2xl shadow-xl p-6 space-y-5">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <img src={mascot} alt="notifybear" className="w-7 h-7 object-contain" />
-                  <span className="font-bold text-gray-900">Notifybear</span>
-                </div>
-                <button
-                  onClick={() => setMenuOpen(false)}
-                  className="p-2 rounded-full bg-gray-100 text-gray-700"
-                >
-                  <X size={18} />
-                </button>
-              </div>
-              <Link
-                to="/blog"
-                onClick={() => setMenuOpen(false)}
-                className="w-full inline-flex items-center justify-center px-6 py-3 rounded-full border border-gray-200 text-gray-800 font-semibold tracking-wide text-sm bg-gray-50 hover:bg-gray-100 transition"
-              >
-                Blog
-              </Link>
-              <a
-                href={PLAY_STORE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setMenuOpen(false)}
-                className="w-full inline-flex items-center justify-center px-6 py-3 rounded-full border border-gray-400 text-gray-800 font-semibold tracking-wide text-sm"
-              >
-                Download on Play Store
-              </a>
-            </div>
-          </div>
-        )}
       </div>
+
+      {/* Mobile Menu Overlay */}
+      {menuOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-ink-dark/60 backdrop-blur-sm"
+        >
+          <div className="w-full max-w-sm mx-4 bg-ink rounded-3xl shadow-xl p-6 space-y-5 border border-white/10">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <img src={mascot} alt="notifybear" className="w-7 h-7 object-contain" />
+                <span className="font-semibold text-cream">Notifybear</span>
+              </div>
+              <button
+                onClick={() => setMenuOpen(false)}
+                className="p-2 rounded-full bg-white/10 text-cream"
+              >
+                <X size={18} />
+              </button>
+            </div>
+            <Link
+              to="/blog"
+              onClick={() => setMenuOpen(false)}
+              className="w-full inline-flex items-center justify-center px-6 py-3 rounded-full border border-white/15 text-cream font-semibold tracking-wide text-sm hover:bg-white/5 transition"
+            >
+              Blog
+            </Link>
+            <a
+              href={PLAY_STORE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMenuOpen(false)}
+              className="w-full inline-flex items-center justify-center px-6 py-3 rounded-full bg-cream text-ink font-semibold tracking-wide text-sm"
+            >
+              Download on Play Store
+            </a>
+          </div>
+        </div>
+      )}
     </header>
   );
 }

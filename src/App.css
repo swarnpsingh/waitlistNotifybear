@@ -1,8 +1,3 @@
-/* Set page background, avoid forcing every element's background */
-body{
-  background-color: #09101F;
-}
-
 .cta-main-row {
   display: flex;
   align-items: center;

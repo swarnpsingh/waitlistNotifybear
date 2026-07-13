@@ -7,21 +7,121 @@ html {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  background: #F8F4EA;
+  color: #16294F;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Fraunces', serif;
   -webkit-font-smoothing: antialiased;
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: -0.02em;
 }
 
 button, input, select, textarea {
   font-family: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─── Hexagon-line watermark ───────────────────────── */
+.hex-watermark {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.05) 0px, rgba(255,255,255,0.05) 1px, transparent 1px, transparent 27px),
+    repeating-linear-gradient(60deg, rgba(255,255,255,0.05) 0px, rgba(255,255,255,0.05) 1px, transparent 1px, transparent 27px),
+    repeating-linear-gradient(120deg, rgba(255,255,255,0.05) 0px, rgba(255,255,255,0.05) 1px, transparent 1px, transparent 27px);
+  -webkit-mask-image: radial-gradient(ellipse 90% 90% at 50% 40%, black 40%, transparent 90%);
+  mask-image: radial-gradient(ellipse 90% 90% at 50% 40%, black 40%, transparent 90%);
+}
+
+.hex-watermark-ink {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(22,41,79,0.045) 0px, rgba(22,41,79,0.045) 1px, transparent 1px, transparent 27px),
+    repeating-linear-gradient(60deg, rgba(22,41,79,0.045) 0px, rgba(22,41,79,0.045) 1px, transparent 1px, transparent 27px),
+    repeating-linear-gradient(120deg, rgba(22,41,79,0.045) 0px, rgba(22,41,79,0.045) 1px, transparent 1px, transparent 27px);
+}
+
+/* ─── Signature "product mockup" surface glow ─────── */
+.card-glow-base {
+  position: absolute;
+  left: 50%;
+  bottom: -10%;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 40%;
+  background: radial-gradient(ellipse at center, rgba(245,197,24,0.35) 0%, rgba(245,197,24,0) 72%);
+  filter: blur(24px);
+  pointer-events: none;
+}
+
+/* ─── Buttons ───────────────────────────────────────── */
+.btn-primary-light {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0.85rem 1.75rem;
+  background: #16294F;
+  color: #F8F4EA;
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.01em;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.btn-primary-light:hover {
+  background: #213A69;
+  transform: translateY(-1px);
+}
+
+.btn-primary-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0.85rem 1.75rem;
+  background: #F8F4EA;
+  color: #16294F;
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.01em;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.btn-primary-dark:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0.8rem 1.6rem;
+  border: 1.5px solid currentColor;
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.01em;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.btn-outline:hover {
+  transform: translateY(-1px);
 }
 
 /* ─── Features Section ─────────────────────────────── */
@@ -45,7 +145,6 @@ button, input, select, textarea {
   align-items: center;
   justify-content: center;
   padding: 36px;
-  background: #f7f7f7;
 }
 
 .feature-card-horizontal-text {
@@ -86,7 +185,7 @@ button, input, select, textarea {
   width: 100%;
   max-width: 1100px;
   margin-top: 80px;
-  border-top: 1px solid rgba(255,255,255,0.2);
+  border-top: 1px solid rgba(255,255,255,0.14);
   padding: 28px 0 32px;
   display: flex;
   align-items: center;
@@ -147,6 +246,8 @@ button, input, select, textarea {
   /* Section padding on mobile */
   #features,
   #demo,
+  #filtering,
+  #proof,
   #getting-started,
   #faq,
   #cta {

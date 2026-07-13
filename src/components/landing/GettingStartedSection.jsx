@@ -3,14 +3,9 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 
 function AccountSetupMockup() {
   return (
-    <div style={{
-      background: '#f3f3f3',
-      padding: '36px 32px 28px',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      gap: 0,
-    }}>
+    <div className="relative flex flex-col items-center overflow-hidden bg-ink" style={{ padding: '36px 32px 28px' }}>
+      <div className="hex-watermark" />
+      <div className="card-glow-base" />
       {/* Mock card */}
       <div style={{
         background: '#fff',
@@ -18,10 +13,12 @@ function AccountSetupMockup() {
         padding: '18px 20px 14px',
         width: '100%',
         maxWidth: 300,
-        boxShadow: '0 2px 12px rgba(0,0,0,0.07)',
+        boxShadow: '0 12px 32px rgba(0,0,0,0.28)',
         display: 'flex',
         flexDirection: 'column',
         gap: 12,
+        position: 'relative',
+        zIndex: 1,
       }}>
         {/* Profile row */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '4px 0 8px', borderBottom: '1px solid #f0f0f0' }}>
@@ -30,7 +27,7 @@ function AccountSetupMockup() {
             width: 42,
             height: 42,
             borderRadius: '50%',
-            background: 'linear-gradient(135deg, #6BA0C8 0%, #3a8fbf 100%)',
+            background: 'linear-gradient(135deg, #5C82E0 0%, #2F5FD6 100%)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -137,11 +134,10 @@ function StepCard({ step, index }) {
         marginRight: 28,
         marginTop: 2,
       }}>
-        <div style={{
+        <div className="bg-focus" style={{
           width: 36,
           height: 36,
           borderRadius: '50%',
-          background: '#111',
           color: '#fff',
           display: 'flex',
           alignItems: 'center',
@@ -162,7 +158,7 @@ function StepCard({ step, index }) {
         background: '#fff',
         borderRadius: 24,
         overflow: 'hidden',
-        boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
+        boxShadow: '0 1px 4px rgba(22,41,79,0.08)',
         marginBottom: 8,
       }}>
         {/* Mockup or Image — only when provided */}
@@ -190,16 +186,15 @@ function StepCard({ step, index }) {
         )}
         {/* Text */}
         <div style={{ padding: '24px 28px 28px' }}>
-          <h3 style={{
+          <h3 className="text-ink" style={{
             fontSize: '1.15rem',
-            fontWeight: 700,
-            color: '#111',
+            fontWeight: 600,
             marginBottom: 6,
             letterSpacing: '-0.015em',
           }}>
             {step.title}
           </h3>
-          <p style={{ fontSize: '0.875rem', color: '#888', lineHeight: 1.65 }}>
+          <p style={{ fontSize: '0.875rem', color: 'rgba(22,41,79,0.55)', lineHeight: 1.65 }}>
             {step.description}
           </p>
         </div>
@@ -220,10 +215,8 @@ export default function GettingStartedSection() {
     <section
       ref={sectionRef}
       id="getting-started"
-      style={{
-        background: '#ebebeb',
-        padding: '96px 32px',
-      }}
+      className="bg-cream"
+      style={{ padding: '96px 32px' }}
     >
       <div className="getting-started-grid">
 
@@ -235,10 +228,8 @@ export default function GettingStartedSection() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 style={{
+            <h2 className="text-ink font-display font-medium" style={{
               fontSize: 'clamp(2.4rem, 4vw, 3.5rem)',
-              fontWeight: 800,
-              color: '#111',
               lineHeight: 1.05,
               letterSpacing: '-0.03em',
               marginBottom: 20,
@@ -247,7 +238,7 @@ export default function GettingStartedSection() {
             </h2>
             <p style={{
               fontSize: '0.9rem',
-              color: '#888',
+              color: 'rgba(22,41,79,0.55)',
               lineHeight: 1.7,
               maxWidth: 280,
             }}>
@@ -265,7 +256,7 @@ export default function GettingStartedSection() {
             top: 36,
             bottom: 36,
             width: 2,
-            borderLeft: '2px dashed #ccc',
+            borderLeft: '2px dashed rgba(47,95,214,0.3)',
             zIndex: 0,
           }} />
           {/* Animated fill line */}
@@ -279,10 +270,10 @@ export default function GettingStartedSection() {
             zIndex: 0,
           }}>
             <motion.div
+              className="bg-focus"
               style={{
                 width: '100%',
                 height: lineHeight,
-                background: '#111',
                 originY: 0,
               }}
             />

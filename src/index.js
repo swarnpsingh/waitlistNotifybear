@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
+import { MotionConfig } from 'framer-motion';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -9,9 +10,11 @@ import favicon from './assets/icon-mascot.png';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <MotionConfig reducedMotion="user">
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </MotionConfig>
   </React.StrictMode>
 );
 
