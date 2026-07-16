@@ -68,7 +68,7 @@ export default function CTASection({ onShowPrivacy, onShowTerms, onShowContact }
             maxWidth: 340,
             margin: '0 auto 36px',
           }}>
-            You're one tap away from calmer notifications. Install today and start focusing on what matters.
+            Stop choosing between being interrupted and being in the dark. Install it today and let your phone decide what's worth your attention.
           </p>
 
           {/* CTA form */}
@@ -160,7 +160,7 @@ export default function CTASection({ onShowPrivacy, onShowTerms, onShowContact }
             color: 'rgba(255,255,255,0.55)',
             letterSpacing: '0.01em',
           }}>
-            Free on Android. No signup wall.
+            Free on Android.
           </p>
         </div>
       </motion.div>

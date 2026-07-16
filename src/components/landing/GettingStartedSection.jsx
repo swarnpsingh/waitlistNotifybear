@@ -36,11 +36,11 @@ function AccountSetupMockup() {
             fontWeight: 700,
             flexShrink: 0,
           }}>
-            LM
+            JE
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-            <span style={{ fontSize: '0.875rem', fontWeight: 700, color: '#111', letterSpacing: '-0.01em' }}>Laura Munar</span>
-            <span style={{ fontSize: '0.75rem', color: '#888' }}>lauramunar@gmail.com</span>
+            <span style={{ fontSize: '0.875rem', fontWeight: 700, color: '#111', letterSpacing: '-0.01em' }}>Jane Example</span>
+            <span style={{ fontSize: '0.75rem', color: '#888' }}>jane@example.com</span>
           </div>
         </div>
 
@@ -90,14 +90,14 @@ const steps = [
   {
     number: 1,
     title: 'Download the app',
-    description: 'Open Google Play, install Notifybear, and grant notification access in under a minute.',
+    description: 'Open Google Play and install Notifybear. It takes under a minute.',
     img: null,
     mockup: null,
   },
   {
     number: 2,
     title: 'Set up your account',
-    description: 'Easily create your profile and start managing your notifications.',
+    description: 'Create your account, then grant notification access so Notifybear can start reading and scoring what comes in.',
     img: null,
     mockup: <AccountSetupMockup />,
   },
@@ -242,7 +242,7 @@ export default function GettingStartedSection() {
               lineHeight: 1.7,
               maxWidth: 280,
             }}>
-              Explore the AI designed to declutter your digital life.
+              Install it, and it starts deciding what reaches you. There are no rules to write.
             </p>
           </motion.div>
         </div>

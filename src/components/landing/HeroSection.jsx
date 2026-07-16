@@ -21,7 +21,7 @@ import { PLAY_STORE_URL } from '../../constants/links';
 
 const TRUST_BADGES = [
   { icon: Cpu, label: '100% on-device AI' },
-  { icon: Lock, label: 'No signup wall' },
+  { icon: Lock, label: 'Notification content never leaves your phone' },
 ];
 
 /* Scatter offsets are in px from stage center at a 1240px-wide stage;
@@ -44,6 +44,12 @@ const DIGEST_ITEMS = [
   { id: 'bank', icon: Landmark, iconBg: '#1f7a4d', text: 'Debit of $84.20 flagged as unusual', tag: 'HIGH', done: true },
   { id: 'whatsapp', icon: MessageCircle, iconBg: '#25D366', text: "Mom: Don't forget dinner Sunday", tag: 'MEDIUM', done: false },
 ];
+
+/* Single source of truth for the hero's filtering stat. The calm beat and the
+   digest screen both read from this, and the surfaced count is derived from
+   DIGEST_ITEMS so the number can never disagree with the list beneath it. */
+const FILTERED_COUNT = 41;
+const FILTER_STAT_LINE = `${FILTERED_COUNT} notifications filtered — ${DIGEST_ITEMS.length} needed you.`;
 
 const PHASE_DURATIONS = { storm: 4400, submerge: 1100, calm: 3200, product: 6400 };
 const PHASE_ORDER = ['storm', 'submerge', 'calm', 'product'];
@@ -93,7 +99,7 @@ function DigestScreen({ animated = true }) {
         >
           You're all caught up.
         </h3>
-        <p className="mt-1.5 text-sm text-cream/50">41 notifications filtered — 3 needed you.</p>
+        <p className="mt-1.5 text-sm text-cream/50">{FILTER_STAT_LINE}</p>
 
         <p className="mb-1 mt-5 text-[0.66rem] font-bold uppercase tracking-[0.16em] text-cream/35">
           What mattered
@@ -262,7 +268,7 @@ function HeroStage() {
                   transition={{ delay: 0.8, duration: 0.6 }}
                   className="mt-2 text-sm text-cream/60"
                 >
-                  41 interruptions filtered. Zero felt.
+                  {FILTER_STAT_LINE}
                 </motion.p>
               </motion.div>
             )}
@@ -296,43 +302,25 @@ export default function HeroSection() {
   return (
     <section
       id="home"
-      className="relative flex min-h-screen flex-col justify-center overflow-hidden pb-10 pt-24 lg:pb-12 lg:pt-28"
-      style={{
-        background: `linear-gradient(180deg,
-          #0D1A34 0%,
-          #142549 42%,
-          #1D3A78 64%,
-          #466FC4 78%,
-          #A9BEE8 87%,
-          #E6E6E2 94%,
-          #F8F4EA 100%)`,
-      }}
+      className="relative flex min-h-[88vh] flex-col justify-center overflow-hidden pb-8 pt-24 lg:pt-28"
     >
       {/* Brand hex-line texture, fading out before the section blends into the next */}
       <div
         aria-hidden
-        className="hex-watermark"
+        className="hex-watermark-ink"
         style={{
-          WebkitMaskImage: 'radial-gradient(ellipse 90% 70% at 50% 20%, black 25%, transparent 78%)',
-          maskImage: 'radial-gradient(ellipse 90% 70% at 50% 20%, black 25%, transparent 78%)',
+          WebkitMaskImage: 'radial-gradient(ellipse 80% 60% at 50% 15%, black 20%, transparent 70%)',
+          maskImage: 'radial-gradient(ellipse 80% 60% at 50% 15%, black 20%, transparent 70%)',
         }}
       />
 
-      {/* Soft ambient orbs in brand colors */}
+      {/* Single soft ambient glow in brand yellow, kept out of the copy/product area */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-32 right-[-8%] h-[600px] w-[600px] rounded-full"
+        className="pointer-events-none absolute -top-40 right-[-10%] h-[560px] w-[560px] rounded-full"
         style={{
-          background: 'radial-gradient(circle at center, rgba(245,197,24,0.16) 0%, rgba(245,197,24,0) 65%)',
-          filter: 'blur(40px)',
-        }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute left-[-12%] top-[16%] h-[640px] w-[640px] rounded-full"
-        style={{
-          background: 'radial-gradient(circle at center, rgba(47,95,214,0.3) 0%, rgba(47,95,214,0) 65%)',
-          filter: 'blur(52px)',
+          background: 'radial-gradient(circle at center, rgba(245,197,24,0.18) 0%, rgba(245,197,24,0) 65%)',
+          filter: 'blur(48px)',
         }}
       />
 
@@ -340,47 +328,44 @@ export default function HeroSection() {
         {/* Left: copy */}
         <div className="flex flex-col items-start text-left">
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
             className="mb-6 flex flex-wrap items-center gap-3"
           >
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 py-1.5 pl-1.5 pr-4 backdrop-blur-sm">
+            <div className="inline-flex items-center gap-2 rounded-full border border-ink/15 bg-ink/5 py-1.5 pl-1.5 pr-4">
               <span className="rounded-full bg-bell px-2.5 py-1 text-[0.65rem] font-bold uppercase tracking-[0.08em] text-ink">Live</span>
-              <span className="text-xs font-semibold text-cream">Now on Google Play</span>
+              <span className="text-xs font-semibold text-ink">Now on Google Play</span>
             </div>
-            <div className="inline-flex items-center gap-1.5 text-cream/65">
-              <Star size={13} strokeWidth={2.25} className="text-bell" />
+            <div className="inline-flex items-center gap-1.5 text-ink/55">
+              <Star size={13} strokeWidth={2.25} className="text-bell-dark" />
               <span className="text-xs font-medium">Rated on Google Play</span>
             </div>
           </motion.div>
 
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.12, duration: 0.7 }}
-            className="font-display font-medium leading-[1.02] text-cream"
+            className="font-display font-medium leading-[1.02] text-ink"
             style={{ fontSize: 'clamp(2.5rem, 4.4vw, 4.25rem)', letterSpacing: '-0.035em' }}
           >
-            All your notifications.
+            Not everything
             <br />
-            <em>None of the noise.</em>
+            <em>deserves to reach you.</em>
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.22, duration: 0.7 }}
-            className="mt-5 max-w-[480px] text-base leading-relaxed text-cream/75 sm:text-lg"
+            className="mt-5 max-w-[500px] text-base leading-relaxed text-ink/60 sm:text-lg"
           >
-            Notifybear's on-device AI reads every buzz so you don't have to — and surfaces
-            only the handful that actually matter.
+            Right now you get two options: be interrupted by everything, or silence it all
+            and find out later what you missed. Neither one works when the stakes are real.
+            Notifybear decides what reaches you — and when.
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.32, duration: 0.7 }}
             className="mt-8 flex w-full flex-col items-start gap-3 sm:flex-row"
           >
             <a
@@ -388,14 +373,14 @@ export default function HeroSection() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Download NotifyBear on Google Play"
-              className="btn-primary-dark w-full sm:w-auto"
+              className="btn-primary-light w-full sm:w-auto"
               style={{ minWidth: 210, textAlign: 'center' }}
             >
               Download on Play Store
             </a>
             <a
               href="#demo"
-              className="btn-outline w-full text-cream hover:bg-white/10 sm:w-auto"
+              className="btn-outline w-full text-ink hover:bg-ink/5 sm:w-auto"
               style={{ minWidth: 150, textAlign: 'center' }}
             >
               See how it works
@@ -403,14 +388,13 @@ export default function HeroSection() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.45, duration: 0.7 }}
             className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3"
           >
             {TRUST_BADGES.map(({ icon: Icon, label }) => (
-              <div key={label} className="flex items-center gap-1.5 text-cream/65">
-                <Icon size={14} strokeWidth={2.25} className="text-bell" />
+              <div key={label} className="flex items-center gap-1.5 text-ink/55">
+                <Icon size={14} strokeWidth={2.25} className="text-bell-dark" />
                 <span className="text-xs font-medium tracking-tight">{label}</span>
               </div>
             ))}
@@ -419,12 +403,11 @@ export default function HeroSection() {
 
         {/* Right: the story — buzz → absorb → calm → product */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.35, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="w-full"
         >
-          <div className="relative h-[460px] overflow-hidden sm:h-[520px] lg:h-[600px]">
+          <div className="relative h-[400px] overflow-hidden sm:h-[460px] lg:h-[520px]">
             {reducedMotion ? (
               <div className="relative flex h-full items-center justify-center">
                 <DigestScreen animated={false} />

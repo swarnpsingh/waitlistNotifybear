@@ -9,15 +9,19 @@ const FAQ_CATEGORIES = [
     items: [
       {
         q: 'What is Notifybear?',
-        a: 'Notifybear is an AI notification assistant for Android. It reads every notification you receive, scores it High, Medium, or Low priority, and explains why — so you never have to manually sort through notifications again.',
+        a: "Notifybear decides what deserves to reach you, and when. It reads every notification on your Android phone, scores it High, Medium, or Low based on what you treat as urgent, and explains why — so the interruption you get is one you'd have chosen.",
       },
       {
-        q: 'How is this different from Do Not Disturb or muting apps?',
-        a: 'Do Not Disturb and app muting are all-or-nothing. Notifybear makes a decision for every individual notification based on what actually matters to you, and gets smarter the more you use it.',
+        q: 'How is this different from Do Not Disturb or Focus Mode?',
+        a: "Two ways. Focus Mode follows a rule you wrote in advance; Notifybear learns what matters to you personally and keeps adjusting. And Do Not Disturb just goes silent — Notifybear tells you what happened while you were away instead of leaving you with one undifferentiated pile.",
+      },
+      {
+        q: 'Is Notifybear on iPhone or desktop?',
+        a: 'Not today. Notifybear is Android only, available on Google Play. Desktop and cross-device support is something we want to build, but none of it exists yet.',
       },
       {
         q: 'Does Notifybear require any setup?',
-        a: 'No. Install the app, grant notification access, and it starts working immediately. There are no rules to write or categories to configure.',
+        a: 'Very little. Create an account, grant notification access, and it starts working immediately. There are no rules to write or categories to configure.',
       },
       {
         q: 'Which apps does it work with?',
@@ -62,6 +66,10 @@ const FAQ_CATEGORIES = [
       {
         q: 'Does it work without internet?',
         a: 'Yes. Core scoring and filtering run entirely offline, on your device.',
+      },
+      {
+        q: 'What if I am going into a meeting?',
+        a: "Turn on the focused-moment toggle yourself before you go in. Notifybear holds the non-urgent notifications and gives you a summary of them once you're free. It doesn't detect meetings automatically today — that's a manual switch you control.",
       },
     ],
   },

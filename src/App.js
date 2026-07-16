@@ -2,9 +2,11 @@ import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import './App.css';
 import HeroSection from './components/landing/HeroSection';
 import FeaturesSection from './components/landing/FeaturesSection';
+import WhyThisExistsSection from './components/landing/WhyThisExistsSection';
 import InteractiveDemoSection from './components/landing/InteractiveDemoSection';
+import TodaySection from './components/landing/TodaySection';
 import FilteringSection from './components/landing/FilteringSection';
-import ProofSection from './components/landing/ProofSection';
+import DifferentiationSection from './components/landing/DifferentiationSection';
 import GettingStartedSection from './components/landing/GettingStartedSection';
 import FAQSection from './components/landing/FAQSection';
 import CTASection from './components/landing/CTASection';
@@ -32,11 +34,13 @@ function App() {
 
             <main>
               <HeroSection />
+              <WhyThisExistsSection />
               <InteractiveDemoSection />
-              <ProofSection />
+              <TodaySection />
               <FilteringSection />
               {/* <FeaturesSection /> */}
               <GettingStartedSection />
+              <DifferentiationSection />
               <FAQSection />
               <CTASection
                 onShowPrivacy={() => navigate('/privacy-policy')}
