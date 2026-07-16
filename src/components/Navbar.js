@@ -43,11 +43,7 @@ export default function Navbar() {
               alt="notifybear mascot"
               className="w-6 h-6 object-contain"
             />
-            <span
-              className={`font-semibold text-[0.95rem] tracking-tight transition-colors duration-300 ${
-                scrolled ? "text-cream" : "text-ink"
-              }`}
-            >
+            <span className="font-semibold text-[0.95rem] tracking-tight text-cream">
               notifybear
             </span>
           </Link>
@@ -56,11 +52,7 @@ export default function Navbar() {
           <div className="flex items-center gap-2">
             <Link
               to="/blog"
-              className={`hidden sm:inline-flex items-center px-4 py-2 rounded-full font-semibold text-xs tracking-[0.1em] uppercase transition-colors duration-300 ${
-                scrolled
-                  ? "text-cream/70 hover:text-cream"
-                  : "text-ink/60 hover:text-ink"
-              }`}
+              className="hidden sm:inline-flex items-center px-4 py-2 rounded-full font-semibold text-xs tracking-[0.1em] uppercase text-cream/70 transition-colors duration-300 hover:text-cream"
             >
               Blog
             </Link>
@@ -69,11 +61,7 @@ export default function Navbar() {
               href={PLAY_STORE_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className={`hidden sm:inline-flex items-center px-4 py-2 rounded-full font-semibold text-xs tracking-[0.06em] uppercase transition-colors duration-300 ${
-                scrolled
-                  ? "bg-cream text-ink hover:bg-white"
-                  : "bg-ink text-cream hover:bg-ink-light"
-              }`}
+              className="hidden sm:inline-flex items-center px-4 py-2 rounded-full bg-cream font-semibold text-xs tracking-[0.06em] uppercase text-ink transition-colors duration-300 hover:bg-white"
             >
               Download on Play Store
             </a>
@@ -81,9 +69,7 @@ export default function Navbar() {
             {/* Mobile Menu Toggle */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className={`sm:hidden focus:outline-none p-2 rounded-full transition-colors duration-300 ${
-                scrolled ? "bg-white/10 text-cream" : "bg-ink/10 text-ink"
-              }`}
+              className="sm:hidden focus:outline-none p-2 rounded-full bg-white/10 text-cream transition-colors duration-300"
               aria-label={menuOpen ? "Close menu" : "Open menu"}
             >
               {menuOpen ? <X size={18} /> : <Menu size={18} />}

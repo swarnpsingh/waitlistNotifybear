@@ -251,7 +251,7 @@ function HeroStage() {
                 className="mt-7 text-center"
               >
                 <p
-                  className="font-display font-medium italic text-ink"
+                  className="font-display font-medium italic text-cream"
                   style={{ fontSize: 'clamp(1.35rem, 2.6vw, 1.8rem)', letterSpacing: '-0.02em' }}
                 >
                   Calm, by design.
@@ -260,7 +260,7 @@ function HeroStage() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.8, duration: 0.6 }}
-                  className="mt-2 text-sm text-ink/50"
+                  className="mt-2 text-sm text-cream/60"
                 >
                   41 interruptions filtered. Zero felt.
                 </motion.p>
@@ -298,13 +298,44 @@ export default function HeroSection() {
       id="home"
       className="relative flex min-h-screen flex-col justify-center overflow-hidden pb-10 pt-24 lg:pb-12 lg:pt-28"
       style={{
-        background: `
-          radial-gradient(900px 620px at 88% 8%, rgba(245,197,24,0.16) 0%, rgba(245,197,24,0) 60%),
-          radial-gradient(800px 620px at 4% 92%, rgba(47,95,214,0.1) 0%, rgba(47,95,214,0) 60%),
-          linear-gradient(180deg, #FCFAF4 0%, #F8F4EA 55%, #F2ECDC 100%)
-        `,
+        background: `linear-gradient(180deg,
+          #0D1A34 0%,
+          #142549 42%,
+          #1D3A78 64%,
+          #466FC4 78%,
+          #A9BEE8 87%,
+          #E6E6E2 94%,
+          #F8F4EA 100%)`,
       }}
     >
+      {/* Brand hex-line texture, fading out before the section blends into the next */}
+      <div
+        aria-hidden
+        className="hex-watermark"
+        style={{
+          WebkitMaskImage: 'radial-gradient(ellipse 90% 70% at 50% 20%, black 25%, transparent 78%)',
+          maskImage: 'radial-gradient(ellipse 90% 70% at 50% 20%, black 25%, transparent 78%)',
+        }}
+      />
+
+      {/* Soft ambient orbs in brand colors */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -top-32 right-[-8%] h-[600px] w-[600px] rounded-full"
+        style={{
+          background: 'radial-gradient(circle at center, rgba(245,197,24,0.16) 0%, rgba(245,197,24,0) 65%)',
+          filter: 'blur(40px)',
+        }}
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-[-12%] top-[16%] h-[640px] w-[640px] rounded-full"
+        style={{
+          background: 'radial-gradient(circle at center, rgba(47,95,214,0.3) 0%, rgba(47,95,214,0) 65%)',
+          filter: 'blur(52px)',
+        }}
+      />
+
       <div className="relative z-10 mx-auto grid w-full max-w-[1500px] grid-cols-1 items-center gap-10 px-5 sm:px-8 lg:grid-cols-[0.92fr_1.08fr] lg:gap-12 lg:px-10">
         {/* Left: copy */}
         <div className="flex flex-col items-start text-left">
@@ -314,12 +345,12 @@ export default function HeroSection() {
             transition={{ duration: 0.5 }}
             className="mb-6 flex flex-wrap items-center gap-3"
           >
-            <div className="inline-flex items-center gap-2 rounded-full border border-ink/12 bg-white/60 py-1.5 pl-1.5 pr-4 backdrop-blur-sm">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 py-1.5 pl-1.5 pr-4 backdrop-blur-sm">
               <span className="rounded-full bg-bell px-2.5 py-1 text-[0.65rem] font-bold uppercase tracking-[0.08em] text-ink">Live</span>
-              <span className="text-xs font-semibold text-ink">Now on Google Play</span>
+              <span className="text-xs font-semibold text-cream">Now on Google Play</span>
             </div>
-            <div className="inline-flex items-center gap-1.5 text-ink/55">
-              <Star size={13} strokeWidth={2.25} className="text-bell-dark" />
+            <div className="inline-flex items-center gap-1.5 text-cream/65">
+              <Star size={13} strokeWidth={2.25} className="text-bell" />
               <span className="text-xs font-medium">Rated on Google Play</span>
             </div>
           </motion.div>
@@ -328,7 +359,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.12, duration: 0.7 }}
-            className="font-display font-medium leading-[1.02] text-ink"
+            className="font-display font-medium leading-[1.02] text-cream"
             style={{ fontSize: 'clamp(2.5rem, 4.4vw, 4.25rem)', letterSpacing: '-0.035em' }}
           >
             All your notifications.
@@ -340,7 +371,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.22, duration: 0.7 }}
-            className="mt-5 max-w-[480px] text-base leading-relaxed text-ink/65 sm:text-lg"
+            className="mt-5 max-w-[480px] text-base leading-relaxed text-cream/75 sm:text-lg"
           >
             Notifybear's on-device AI reads every buzz so you don't have to — and surfaces
             only the handful that actually matter.
@@ -357,14 +388,14 @@ export default function HeroSection() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Download NotifyBear on Google Play"
-              className="btn-primary-light w-full sm:w-auto"
+              className="btn-primary-dark w-full sm:w-auto"
               style={{ minWidth: 210, textAlign: 'center' }}
             >
               Download on Play Store
             </a>
             <a
               href="#demo"
-              className="btn-outline w-full text-ink hover:bg-ink/5 sm:w-auto"
+              className="btn-outline w-full text-cream hover:bg-white/10 sm:w-auto"
               style={{ minWidth: 150, textAlign: 'center' }}
             >
               See how it works
@@ -378,8 +409,8 @@ export default function HeroSection() {
             className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3"
           >
             {TRUST_BADGES.map(({ icon: Icon, label }) => (
-              <div key={label} className="flex items-center gap-1.5 text-ink/55">
-                <Icon size={14} strokeWidth={2.25} className="text-bell-dark" />
+              <div key={label} className="flex items-center gap-1.5 text-cream/65">
+                <Icon size={14} strokeWidth={2.25} className="text-bell" />
                 <span className="text-xs font-medium tracking-tight">{label}</span>
               </div>
             ))}
