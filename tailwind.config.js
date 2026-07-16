@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        display: ['"Fraunces"', 'serif'],
+        display: ['"Canela"', '"Fraunces"', 'serif'],
         sans: ['"Manrope"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
       },
       colors: {

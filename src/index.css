@@ -16,7 +16,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Fraunces', serif;
+  font-family: 'Canela', 'Fraunces', serif;
   -webkit-font-smoothing: antialiased;
   font-weight: 500;
   letter-spacing: -0.02em;
@@ -33,6 +33,22 @@ button, input, select, textarea {
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* ─── Hero notification buzz ────────────────────────── */
+@keyframes notif-buzz {
+  0%, 42%, 100% { transform: translate(0, 0) rotate(0deg); }
+  6%  { transform: translate(-1.5px, 1px) rotate(-0.8deg); }
+  12% { transform: translate(1.5px, -1px) rotate(0.8deg); }
+  18% { transform: translate(-1.5px, -1px) rotate(-0.6deg); }
+  24% { transform: translate(1.5px, 1px) rotate(0.6deg); }
+  30% { transform: translate(-1px, 0.5px) rotate(-0.4deg); }
+  36% { transform: translate(1px, -0.5px) rotate(0.3deg); }
+}
+
+.notif-buzz {
+  animation: notif-buzz 1.5s ease-in-out infinite;
+  will-change: transform;
 }
 
 /* ─── Hexagon-line watermark ───────────────────────── */
