@@ -77,7 +77,7 @@ export default function Navbar() {
         <div
           className={`pointer-events-auto mx-auto flex items-center justify-between ${
             scrolled
-              ? "max-w-[860px] rounded-2xl bg-ink/95 px-4 py-2.5 shadow-[0_4px_24px_rgba(13,26,52,0.28),inset_0_-1px_3px_rgba(248,244,234,0.14)] backdrop-blur-xl"
+              ? "max-w-[860px] rounded-2xl bg-ink/95 px-4 py-2.5 shadow-[0_4px_24px_rgba(13,26,52,0.28),inset_0_-1px_3px_rgba(248,244,234,0.14),0_0_0_1px_rgba(245,197,24,0.12)] backdrop-blur-xl"
               : "max-w-[1420px] rounded-2xl bg-transparent px-0 py-2.5"
           }`}
           style={{ transition: "all 0.45s cubic-bezier(0.22, 1, 0.36, 1)" }}

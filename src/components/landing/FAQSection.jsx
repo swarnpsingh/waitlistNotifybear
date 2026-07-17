@@ -8,6 +8,7 @@ const FAQ_CATEGORIES = [
   {
     category: 'About the Product',
     icon: Sparkles,
+    color: 'bg-focus',
     items: [
       {
         q: 'What is Notifybear?',
@@ -34,6 +35,7 @@ const FAQ_CATEGORIES = [
   {
     category: 'Privacy and Data',
     icon: ShieldCheck,
+    color: 'bg-[#1f9d63]',
     items: [
       {
         q: 'Does Notifybear read my messages?',
@@ -56,6 +58,7 @@ const FAQ_CATEGORIES = [
   {
     category: 'Using the App',
     icon: Smartphone,
+    color: 'bg-bell-dark',
     items: [
       {
         q: 'How long does it take for Notifybear to learn my preferences?',
@@ -78,6 +81,7 @@ const FAQ_CATEGORIES = [
   {
     category: 'Pricing',
     icon: Tag,
+    color: 'bg-[#E1306C]',
     items: [
       {
         q: 'Is Notifybear free?',
@@ -92,6 +96,7 @@ const FAQ_CATEGORIES = [
   {
     category: 'Company',
     icon: Users,
+    color: 'bg-ink-light',
     items: [
       {
         q: 'Who built Notifybear?',
@@ -165,7 +170,7 @@ export default function FAQSection() {
     <section id="faq" className="bg-cream py-20 sm:py-24">
       <div className="mx-auto max-w-[1100px] px-5 sm:px-8">
         <SectionHeader
-          index="06"
+          index="07"
           eyebrow="FAQ"
           align="center"
           title="Questions, answered."
@@ -188,7 +193,7 @@ export default function FAQSection() {
                 }`}
               >
                 <div className="flex items-center gap-3 px-6 pb-4 pt-5">
-                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-focus">
+                  <div className={`flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl ${cat.color}`}>
                     <Icon size={19} color="#fff" strokeWidth={2.25} />
                   </div>
                   <h3 className="m-0 text-[1.05rem] font-bold tracking-tight text-ink">

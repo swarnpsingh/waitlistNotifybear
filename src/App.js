@@ -1,9 +1,11 @@
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import HeroSection from './components/landing/HeroSection';
 import AppMarquee from './components/landing/AppMarquee';
+import StatsBand from './components/landing/StatsBand';
 import WhyThisExistsSection from './components/landing/WhyThisExistsSection';
 import FilteringSection from './components/landing/FilteringSection';
 import TodaySection from './components/landing/TodaySection';
+import PersonasSection from './components/landing/PersonasSection';
 import DifferentiationSection from './components/landing/DifferentiationSection';
 import GettingStartedSection from './components/landing/GettingStartedSection';
 import FAQSection from './components/landing/FAQSection';
@@ -31,9 +33,11 @@ function App() {
             <main>
               <HeroSection />
               <AppMarquee />
+              <StatsBand />
               <WhyThisExistsSection />
               <FilteringSection />
               <TodaySection />
+              <PersonasSection />
               <DifferentiationSection />
               <GettingStartedSection />
               <FAQSection />

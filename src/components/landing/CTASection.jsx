@@ -25,6 +25,22 @@ export default function CTASection({ onShowPrivacy, onShowTerms, onShowContact }
       style={{ background: 'linear-gradient(180deg, #2F5FD6 0%, #16294F 62%, #16294F 100%)' }}
     >
       <div className="hex-watermark" />
+      <div
+        aria-hidden
+        className="mesh-blob-2 pointer-events-none absolute -left-20 top-10 h-[320px] w-[320px] rounded-full"
+        style={{
+          background: 'radial-gradient(circle at center, rgba(245,197,24,0.16) 0%, rgba(245,197,24,0) 65%)',
+          filter: 'blur(40px)',
+        }}
+      />
+      <div
+        aria-hidden
+        className="mesh-blob-3 pointer-events-none absolute -right-16 top-1/3 h-[280px] w-[280px] rounded-full"
+        style={{
+          background: 'radial-gradient(circle at center, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0) 65%)',
+          filter: 'blur(36px)',
+        }}
+      />
 
       <Reveal y={28} className="relative w-full max-w-[520px]">
         <div className="mb-6 inline-flex items-center rounded-full border border-white/50 bg-white/20 px-4 py-1.5 backdrop-blur-sm">

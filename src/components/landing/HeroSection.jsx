@@ -13,10 +13,17 @@ import {
 } from 'lucide-react';
 import mascot from '../../assets/icon-mascot.png';
 import { PLAY_STORE_URL } from '../../constants/links';
+import AnimatedCounter from './AnimatedCounter';
 
 const TRUST_BADGES = [
   { icon: Cpu, label: '100% on-device AI' },
   { icon: Lock, label: 'Notification content never leaves your phone' },
+];
+
+const HERO_STATS = [
+  { value: 100, suffix: '%', label: 'runs on-device', color: 'text-bell-dark' },
+  { value: 0, suffix: '', label: 'servers ever see your pings', color: 'text-focus' },
+  { value: 1, suffix: 's', prefix: '<', label: 'to score each notification', color: 'text-ink' },
 ];
 
 const DIGEST_ITEMS = [
@@ -216,15 +223,30 @@ export default function HeroSection() {
         }}
       />
 
-      {/* Single soft ambient glow in brand yellow */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -top-40 right-[-10%] h-[560px] w-[560px] rounded-full"
-        style={{
-          background: 'radial-gradient(circle at center, rgba(245,197,24,0.16) 0%, rgba(245,197,24,0) 65%)',
-          filter: 'blur(48px)',
-        }}
-      />
+      {/* Animated gradient mesh — three drifting brand-color blobs replace the single static glow */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div
+          className="mesh-blob-1 absolute -top-32 right-[-8%] h-[560px] w-[560px] rounded-full"
+          style={{
+            background: 'radial-gradient(circle at center, rgba(245,197,24,0.2) 0%, rgba(245,197,24,0) 65%)',
+            filter: 'blur(50px)',
+          }}
+        />
+        <div
+          className="mesh-blob-2 absolute -left-24 top-1/3 h-[440px] w-[440px] rounded-full"
+          style={{
+            background: 'radial-gradient(circle at center, rgba(47,95,214,0.14) 0%, rgba(47,95,214,0) 65%)',
+            filter: 'blur(50px)',
+          }}
+        />
+        <div
+          className="mesh-blob-3 absolute bottom-[-10%] right-[18%] h-[380px] w-[380px] rounded-full"
+          style={{
+            background: 'radial-gradient(circle at center, rgba(31,157,99,0.12) 0%, rgba(31,157,99,0) 65%)',
+            filter: 'blur(46px)',
+          }}
+        />
+      </div>
 
       <div className="relative z-10 mx-auto grid w-full max-w-[1500px] grid-cols-1 items-center gap-14 px-5 sm:px-8 lg:grid-cols-[1fr_0.95fr] lg:gap-10 lg:px-10">
         {/* Left: copy */}
@@ -283,8 +305,22 @@ export default function HeroSection() {
           </motion.div>
 
           <motion.div
-            {...entrance(0.38)}
-            className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-ink/10 pt-6"
+            {...entrance(0.34)}
+            className="mt-9 flex w-full flex-wrap items-center gap-x-8 gap-y-4 border-t border-ink/10 pt-7"
+          >
+            {HERO_STATS.map(({ value, suffix, prefix, label, color }) => (
+              <div key={label} className="flex flex-col">
+                <span className={`font-display text-2xl font-semibold leading-none ${color}`}>
+                  <AnimatedCounter value={value} suffix={suffix} prefix={prefix} />
+                </span>
+                <span className="mt-1.5 text-[0.7rem] font-medium leading-snug text-ink/45">{label}</span>
+              </div>
+            ))}
+          </motion.div>
+
+          <motion.div
+            {...entrance(0.42)}
+            className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3"
           >
             {TRUST_BADGES.map(({ icon: Icon, label }) => (
               <div key={label} className="flex items-center gap-1.5 text-ink/55">

@@ -44,6 +44,8 @@ const STEPS = [
     title: 'Download the app',
     description: 'Open Google Play and install Notifybear. It takes under a minute.',
     mockup: null,
+    color: '#2F5FD6',
+    glow: 'glow-card-blue',
   },
   {
     number: 2,
@@ -51,6 +53,8 @@ const STEPS = [
     title: 'Set up your account',
     description: 'Create your account, then grant notification access so Notifybear can start reading and scoring what comes in.',
     mockup: <AccountSetupMockup />,
+    color: '#1f9d63',
+    glow: 'glow-card-green',
   },
   {
     number: 3,
@@ -58,6 +62,8 @@ const STEPS = [
     title: 'Tame your notifications',
     description: 'Let Notifybear filter, prioritise and surface what matters most.',
     mockup: null,
+    color: '#D9A80C',
+    glow: 'glow-card-yellow',
   },
 ];
 
@@ -67,17 +73,20 @@ function StepCard({ step, index }) {
     <Reveal delay={index * 0.1} y={36} className="flex w-full items-start">
       {/* Step number bubble on the timeline */}
       <div className="relative z-10 mr-7 mt-0.5 flex flex-shrink-0 flex-col items-center">
-        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-focus text-[0.85rem] font-semibold text-white ring-4 ring-cream">
+        <div
+          className="flex h-9 w-9 items-center justify-center rounded-full text-[0.85rem] font-semibold text-white ring-4 ring-cream"
+          style={{ background: step.color }}
+        >
           {step.number}
         </div>
       </div>
 
       {/* Card */}
-      <div className="mb-2 flex-1 overflow-hidden rounded-3xl bg-white shadow-[0_2px_8px_rgba(22,41,79,0.05),0_10px_28px_rgba(22,41,79,0.06)]">
+      <div className={`glow-card ${step.glow} mb-2 flex-1 overflow-hidden rounded-3xl bg-white shadow-[0_2px_8px_rgba(22,41,79,0.05),0_10px_28px_rgba(22,41,79,0.06)]`}>
         {step.mockup}
         <div className="px-7 pb-7 pt-6">
           <div className="mb-2 flex items-center gap-2.5">
-            <Icon size={16} strokeWidth={2.25} className="text-focus" />
+            <Icon size={16} strokeWidth={2.25} style={{ color: step.color }} />
             <h3 className="text-[1.15rem] font-semibold tracking-tight text-ink">{step.title}</h3>
           </div>
           <p className="text-[0.875rem] leading-relaxed text-ink/55">{step.description}</p>
@@ -101,7 +110,7 @@ export default function GettingStartedSection() {
         {/* Left — sticky heading */}
         <div className="lg:sticky lg:top-32 lg:self-start">
           <SectionHeader
-            index="05"
+            index="06"
             eyebrow="Getting started"
             title={
               <>
