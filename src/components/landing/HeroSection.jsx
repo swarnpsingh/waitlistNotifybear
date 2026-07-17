@@ -1,20 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import React from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 import {
+  ArrowDown,
   Calendar,
   Check,
   Cpu,
-  Instagram,
   Landmark,
-  Linkedin,
   Lock,
   Mail,
   MessageCircle,
-  ShoppingBag,
-  Slack,
   Star,
-  Twitter,
-  Youtube,
 } from 'lucide-react';
 import mascot from '../../assets/icon-mascot.png';
 import { PLAY_STORE_URL } from '../../constants/links';
@@ -24,62 +19,61 @@ const TRUST_BADGES = [
   { icon: Lock, label: 'Notification content never leaves your phone' },
 ];
 
-/* Scatter offsets are in px from stage center at a 1240px-wide stage;
-   they get scaled down on narrower screens. */
-const NOTIFICATIONS = [
-  { id: 'whatsapp', app: 'WhatsApp', icon: MessageCircle, iconBg: '#25D366', text: "Mom: Don't forget dinner on Sunday", time: 'now', x: -520, y: -150, rotate: -6, delay: 0 },
-  { id: 'instagram', app: 'Instagram', icon: Instagram, iconBg: '#E1306C', text: 'ananya_.k liked your story', time: '1m', x: 430, y: -168, rotate: 5, delay: 0.22 },
-  { id: 'gmail', app: 'Gmail', icon: Mail, iconBg: '#EA4335', text: 'Flash sale — 40% off ends tonight', time: 'now', x: -160, y: -188, rotate: -3, delay: 0.44 },
-  { id: 'slack', app: 'Slack', icon: Slack, iconBg: '#611F69', text: '#general: 14 new messages', time: '2m', x: 545, y: 40, rotate: 7, delay: 0.62 },
-  { id: 'linkedin', app: 'LinkedIn', icon: Linkedin, iconBg: '#0A66C2', text: 'You appeared in 9 searches this week', time: '5m', x: -560, y: 62, rotate: 4, delay: 0.8 },
-  { id: 'youtube', app: 'YouTube', icon: Youtube, iconBg: '#FF0000', text: 'New upload from a channel you follow', time: 'now', x: 245, y: -52, rotate: -5, delay: 0.98 },
-  { id: 'twitter', app: 'X', icon: Twitter, iconBg: '#16294F', text: 'You have 3 new followers', time: '8m', x: -310, y: 138, rotate: 6, delay: 1.16 },
-  { id: 'calendar', app: 'Calendar', icon: Calendar, iconBg: '#2F5FD6', text: "Standup in 15 min — you're the host", time: 'now', x: 80, y: 176, rotate: -4, delay: 1.34 },
-  { id: 'bank', app: 'Bank', icon: Landmark, iconBg: '#1f7a4d', text: 'Debit of $84.20 flagged as unusual', time: 'now', x: 470, y: 188, rotate: 3, delay: 1.52 },
-  { id: 'delivery', app: 'Delivery', icon: ShoppingBag, iconBg: '#FC8019', text: 'Your order is out for delivery', time: '3m', x: -55, y: -30, rotate: 2, delay: 1.7 },
-];
-
 const DIGEST_ITEMS = [
   { id: 'calendar', icon: Calendar, iconBg: '#2F5FD6', text: "Standup starts in 15 min — you're the host", tag: 'HIGH', done: true },
   { id: 'bank', icon: Landmark, iconBg: '#1f7a4d', text: 'Debit of $84.20 flagged as unusual', tag: 'HIGH', done: true },
   { id: 'whatsapp', icon: MessageCircle, iconBg: '#25D366', text: "Mom: Don't forget dinner Sunday", tag: 'MEDIUM', done: false },
 ];
 
-/* Single source of truth for the hero's filtering stat. The calm beat and the
-   digest screen both read from this, and the surfaced count is derived from
-   DIGEST_ITEMS so the number can never disagree with the list beneath it. */
 const FILTERED_COUNT = 41;
 const FILTER_STAT_LINE = `${FILTERED_COUNT} notifications filtered — ${DIGEST_ITEMS.length} needed you.`;
 
-const PHASE_DURATIONS = { storm: 4400, submerge: 1100, calm: 3200, product: 6400 };
-const PHASE_ORDER = ['storm', 'submerge', 'calm', 'product'];
-
-function NotificationCard({ app, icon: Icon, iconBg, text, time }) {
-  return (
-    <div className="w-[212px] rounded-2xl bg-white/95 p-3 shadow-[0_14px_36px_rgba(22,41,79,0.16)] ring-1 ring-ink/5 backdrop-blur-sm sm:w-[256px]">
-      <div className="flex items-center gap-2.5">
-        <span
-          className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-[9px]"
-          style={{ background: iconBg }}
-        >
-          <Icon size={15} color="#fff" strokeWidth={2.25} />
-        </span>
-        <div className="min-w-0 flex-1">
-          <div className="flex items-baseline justify-between gap-2">
-            <span className="text-[0.6rem] font-bold uppercase tracking-[0.09em] text-ink/45">{app}</span>
-            <span className="text-[0.6rem] font-medium text-ink/35">{time}</span>
-          </div>
-          <p className="truncate text-[0.78rem] font-medium leading-snug text-ink">{text}</p>
-        </div>
-      </div>
-    </div>
-  );
-}
+/* Small floating chips around the digest: one delivered, one held, one filtered.
+   Together they tell the whole product story without a storm of motion. */
+const FLOATING_CHIPS = [
+  {
+    id: 'delivered',
+    icon: Calendar,
+    iconBg: '#2F5FD6',
+    app: 'Calendar',
+    text: 'Standup in 15 min',
+    verdict: 'Delivered now',
+    verdictClass: 'bg-bell/20 text-bell-dark',
+    position: 'right-[-4%] top-[4%] sm:right-[-6%]',
+    delay: 0.9,
+    floatDelay: '0s',
+  },
+  {
+    id: 'held',
+    icon: MessageCircle,
+    iconBg: '#25D366',
+    app: 'WhatsApp',
+    text: 'Weekend plans? 🎉',
+    verdict: 'Held for later',
+    verdictClass: 'bg-focus/12 text-focus',
+    position: 'left-[-4%] bottom-[16%] sm:left-[-8%]',
+    delay: 1.15,
+    floatDelay: '1.8s',
+  },
+  {
+    id: 'filtered',
+    icon: Mail,
+    iconBg: '#EA4335',
+    app: 'Gmail',
+    text: 'Flash sale — 40% off',
+    verdict: 'Filtered out',
+    verdictClass: 'bg-ink/8 text-ink/45',
+    muted: true,
+    position: 'left-[-2%] top-[10%] sm:left-[-6%]',
+    delay: 1.4,
+    floatDelay: '3.2s',
+  },
+];
 
 function DigestScreen({ animated = true }) {
   return (
     <div
-      className="relative w-[min(400px,82vw)] overflow-hidden rounded-[28px] ring-1 ring-white/15 shadow-[0_30px_80px_rgba(6,13,28,0.55)]"
+      className="relative w-[min(400px,84vw)] overflow-hidden rounded-[28px] ring-1 ring-white/15 shadow-[0_30px_80px_rgba(6,13,28,0.5)]"
       style={{ background: 'linear-gradient(180deg, #22396B 0%, #1B2F5B 100%)' }}
     >
       <div className="card-glow-base" />
@@ -113,7 +107,7 @@ function DigestScreen({ animated = true }) {
                 key={item.id}
                 initial={animated ? { opacity: 0, y: 10 } : false}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.45, delay: 0.55 + i * 0.16, ease: [0.4, 0, 0.2, 1] }}
+                transition={{ duration: 0.45, delay: 0.7 + i * 0.16, ease: [0.4, 0, 0.2, 1] }}
                 className="flex items-center gap-3 border-t border-white/8 py-3 first:border-t-0"
               >
                 <span
@@ -155,184 +149,88 @@ function DigestScreen({ animated = true }) {
   );
 }
 
-function HeroStage() {
-  const [phase, setPhase] = useState('storm');
-  const [cycle, setCycle] = useState(0);
-  const stageRef = useRef(null);
-  const [scale, setScale] = useState({ x: 1, y: 1 });
-
-  useEffect(() => {
-    const update = () => {
-      const w = stageRef.current?.offsetWidth ?? 1240;
-      // Fit the widest scatter offset (±560) plus half a card inside the stage.
-      setScale({
-        x: Math.min(1, Math.max(0.3, (w / 2 - 128) / 560)),
-        y: Math.min(1, Math.max(0.7, w / 1240)),
-      });
-    };
-    update();
-    window.addEventListener('resize', update);
-    return () => window.removeEventListener('resize', update);
-  }, []);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      const next = PHASE_ORDER[(PHASE_ORDER.indexOf(phase) + 1) % PHASE_ORDER.length];
-      if (next === 'storm') setCycle((c) => c + 1);
-      setPhase(next);
-    }, PHASE_DURATIONS[phase]);
-    return () => clearTimeout(timer);
-  }, [phase]);
-
-  const showCards = phase === 'storm' || phase === 'submerge';
-  const showLogo = phase === 'submerge' || phase === 'calm';
-
+function FloatingChip({ chip, reducedMotion }) {
+  const Icon = chip.icon;
   return (
-    <div ref={stageRef} className="relative h-full w-full">
-      {/* Phase 1–2: buzzing notifications that get pulled into the logo */}
-      {showCards &&
-        NOTIFICATIONS.map((n) => (
-          <motion.div
-            key={`${cycle}-${n.id}`}
-            className="absolute left-1/2 top-1/2"
-            style={{ zIndex: 2 }}
-            initial={{ x: n.x * scale.x, y: n.y * scale.y, rotate: n.rotate, scale: 0.4, opacity: 0 }}
-            animate={
-              phase === 'storm'
-                ? {
-                    x: n.x * scale.x,
-                    y: n.y * scale.y,
-                    rotate: n.rotate,
-                    scale: 1,
-                    opacity: 1,
-                    transition: { delay: n.delay, duration: 0.5, ease: [0.18, 0.89, 0.32, 1.15] },
-                  }
-                : {
-                    x: 0,
-                    y: 0,
-                    rotate: 0,
-                    scale: 0.1,
-                    opacity: 0,
-                    transition: { delay: (n.delay % 0.5) * 0.6, duration: 0.55, ease: [0.55, 0, 0.85, 1] },
-                  }
-            }
-          >
-            <div className="-translate-x-1/2 -translate-y-1/2">
-              <div
-                className={phase === 'storm' ? 'notif-buzz' : undefined}
-                style={{ animationDelay: `${(n.delay % 0.7).toFixed(2)}s` }}
-              >
-                <NotificationCard {...n} />
-              </div>
-            </div>
-          </motion.div>
-        ))}
-
-      {/* Phase 2–3: the logo absorbs everything, then a calm line */}
-      <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center">
-      <AnimatePresence>
-        {showLogo && (
-          <motion.div
-            key="logo"
-            className="flex flex-col items-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0, scale: 0.92, transition: { duration: 0.45 } }}
-          >
-            <motion.div
-              initial={{ scale: 0.5 }}
-              animate={{ scale: [0.5, 1.12, 0.97, 1] }}
-              transition={{ duration: 1.1, times: [0, 0.5, 0.8, 1], ease: 'easeOut' }}
-              className="flex h-24 w-24 items-center justify-center rounded-[26px] bg-ink ring-1 ring-white/15"
-              style={{ boxShadow: '0 0 70px 18px rgba(245,197,24,0.3), 0 24px 60px rgba(22,41,79,0.3)' }}
+    <motion.div
+      initial={reducedMotion ? false : { opacity: 0, y: 18, scale: 0.9 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ delay: chip.delay, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      className={`absolute z-20 hidden sm:block ${chip.position}`}
+    >
+      <div className="float-soft" style={{ animationDelay: chip.floatDelay }}>
+        <div
+          className={`w-[200px] rounded-2xl bg-white/95 p-3 shadow-[0_14px_36px_rgba(22,41,79,0.16)] ring-1 ring-ink/5 backdrop-blur-sm ${
+            chip.muted ? 'opacity-60 saturate-50' : ''
+          }`}
+        >
+          <div className="flex items-center gap-2.5">
+            <span
+              className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-[9px]"
+              style={{ background: chip.iconBg }}
             >
-              <img src={mascot} alt="" className="h-14 w-14 object-contain" />
-            </motion.div>
-
-            {phase === 'calm' && (
-              <motion.div
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
-                className="mt-7 text-center"
-              >
-                <p
-                  className="font-display font-medium italic text-cream"
-                  style={{ fontSize: 'clamp(1.35rem, 2.6vw, 1.8rem)', letterSpacing: '-0.02em' }}
-                >
-                  Calm, by design.
-                </p>
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.8, duration: 0.6 }}
-                  className="mt-2 text-sm text-cream/60"
-                >
-                  {FILTER_STAT_LINE}
-                </motion.p>
-              </motion.div>
-            )}
-          </motion.div>
-        )}
-      </AnimatePresence>
-      </div>
-
-      {/* Phase 4: the product screen */}
-      <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center">
-      <AnimatePresence>
-        {phase === 'product' && (
-          <motion.div
-            key="product"
-            initial={{ opacity: 0, y: 48, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1, transition: { delay: 0.3, duration: 0.7, ease: [0.22, 1, 0.36, 1] } }}
-            exit={{ opacity: 0, y: 24, scale: 0.97, transition: { duration: 0.45 } }}
+              <Icon size={15} color="#fff" strokeWidth={2.25} />
+            </span>
+            <div className="min-w-0 flex-1">
+              <span className="text-[0.58rem] font-bold uppercase tracking-[0.09em] text-ink/45">
+                {chip.app}
+              </span>
+              <p className={`truncate text-[0.76rem] font-medium leading-snug text-ink ${chip.muted ? 'line-through decoration-ink/30' : ''}`}>
+                {chip.text}
+              </p>
+            </div>
+          </div>
+          <span
+            className={`mt-2 inline-flex rounded-full px-2 py-0.5 text-[0.56rem] font-bold uppercase tracking-[0.07em] ${chip.verdictClass}`}
           >
-            <DigestScreen />
-          </motion.div>
-        )}
-      </AnimatePresence>
+            {chip.verdict}
+          </span>
+        </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
+const fadeUp = (delay) => ({
+  initial: { opacity: 0, y: 22 },
+  animate: { opacity: 1, y: 0 },
+  transition: { delay, duration: 0.65, ease: [0.22, 1, 0.36, 1] },
+});
+
 export default function HeroSection() {
   const reducedMotion = useReducedMotion();
+  const entrance = (delay) => (reducedMotion ? {} : fadeUp(delay));
 
   return (
     <section
       id="home"
-      className="relative flex min-h-[88vh] flex-col justify-center overflow-hidden pb-8 pt-24 lg:pt-28"
+      className="relative flex min-h-[92vh] flex-col justify-center overflow-hidden pb-16 pt-28 lg:pt-32"
     >
-      {/* Brand hex-line texture, fading out before the section blends into the next */}
+      {/* Brand hex-line texture, fading toward the fold */}
       <div
         aria-hidden
         className="hex-watermark-ink"
         style={{
-          WebkitMaskImage: 'radial-gradient(ellipse 80% 60% at 50% 15%, black 20%, transparent 70%)',
-          maskImage: 'radial-gradient(ellipse 80% 60% at 50% 15%, black 20%, transparent 70%)',
+          WebkitMaskImage: 'radial-gradient(ellipse 80% 60% at 50% 12%, black 20%, transparent 70%)',
+          maskImage: 'radial-gradient(ellipse 80% 60% at 50% 12%, black 20%, transparent 70%)',
         }}
       />
 
-      {/* Single soft ambient glow in brand yellow, kept out of the copy/product area */}
+      {/* Single soft ambient glow in brand yellow */}
       <div
         aria-hidden
         className="pointer-events-none absolute -top-40 right-[-10%] h-[560px] w-[560px] rounded-full"
         style={{
-          background: 'radial-gradient(circle at center, rgba(245,197,24,0.18) 0%, rgba(245,197,24,0) 65%)',
+          background: 'radial-gradient(circle at center, rgba(245,197,24,0.16) 0%, rgba(245,197,24,0) 65%)',
           filter: 'blur(48px)',
         }}
       />
 
-      <div className="relative z-10 mx-auto grid w-full max-w-[1500px] grid-cols-1 items-center gap-10 px-5 sm:px-8 lg:grid-cols-[0.92fr_1.08fr] lg:gap-12 lg:px-10">
+      <div className="relative z-10 mx-auto grid w-full max-w-[1500px] grid-cols-1 items-center gap-14 px-5 sm:px-8 lg:grid-cols-[1fr_0.95fr] lg:gap-10 lg:px-10">
         {/* Left: copy */}
         <div className="flex flex-col items-start text-left">
-          <motion.div
-            initial={false}
-            animate={{ opacity: 1, y: 0 }}
-            className="mb-6 flex flex-wrap items-center gap-3"
-          >
-            <div className="inline-flex items-center gap-2 rounded-full border border-ink/15 bg-ink/5 py-1.5 pl-1.5 pr-4">
+          <motion.div {...entrance(0)} className="mb-7 flex flex-wrap items-center gap-3">
+            <div className="inline-flex items-center gap-2 rounded-full border border-ink/15 bg-white/60 py-1.5 pl-1.5 pr-4 backdrop-blur-sm">
               <span className="rounded-full bg-bell px-2.5 py-1 text-[0.65rem] font-bold uppercase tracking-[0.08em] text-ink">Live</span>
               <span className="text-xs font-semibold text-ink">Now on Google Play</span>
             </div>
@@ -343,20 +241,18 @@ export default function HeroSection() {
           </motion.div>
 
           <motion.h1
-            initial={false}
-            animate={{ opacity: 1, y: 0 }}
+            {...entrance(0.08)}
             className="font-display font-medium leading-[1.02] text-ink"
-            style={{ fontSize: 'clamp(2.5rem, 4.4vw, 4.25rem)', letterSpacing: '-0.035em' }}
+            style={{ fontSize: 'clamp(2.6rem, 4.6vw, 4.4rem)', letterSpacing: '-0.035em' }}
           >
             Not everything
             <br />
-            <em>deserves to reach you.</em>
+            <em className="text-focus">deserves to reach you.</em>
           </motion.h1>
 
           <motion.p
-            initial={false}
-            animate={{ opacity: 1, y: 0 }}
-            className="mt-5 max-w-[500px] text-base leading-relaxed text-ink/60 sm:text-lg"
+            {...entrance(0.18)}
+            className="mt-6 max-w-[500px] text-base leading-relaxed text-ink/60 sm:text-lg"
           >
             Right now you get two options: be interrupted by everything, or silence it all
             and find out later what you missed. Neither one works when the stakes are real.
@@ -364,33 +260,31 @@ export default function HeroSection() {
           </motion.p>
 
           <motion.div
-            initial={false}
-            animate={{ opacity: 1, y: 0 }}
-            className="mt-8 flex w-full flex-col items-start gap-3 sm:flex-row"
+            {...entrance(0.28)}
+            className="mt-9 flex w-full flex-col items-start gap-3 sm:flex-row"
           >
             <a
               href={PLAY_STORE_URL}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Download NotifyBear on Google Play"
-              className="btn-primary-light w-full sm:w-auto"
-              style={{ minWidth: 210, textAlign: 'center' }}
+              className="btn-primary-light w-full text-center sm:w-auto"
+              style={{ minWidth: 210 }}
             >
               Download on Play Store
             </a>
             <a
-              href="#demo"
-              className="btn-outline w-full text-ink hover:bg-ink/5 sm:w-auto"
-              style={{ minWidth: 150, textAlign: 'center' }}
+              href="#why"
+              className="btn-outline w-full text-center text-ink hover:bg-ink/5 sm:w-auto"
+              style={{ minWidth: 150 }}
             >
               See how it works
             </a>
           </motion.div>
 
           <motion.div
-            initial={false}
-            animate={{ opacity: 1, y: 0 }}
-            className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3"
+            {...entrance(0.38)}
+            className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-ink/10 pt-6"
           >
             {TRUST_BADGES.map(({ icon: Icon, label }) => (
               <div key={label} className="flex items-center gap-1.5 text-ink/55">
@@ -401,23 +295,39 @@ export default function HeroSection() {
           </motion.div>
         </div>
 
-        {/* Right: the story — buzz → absorb → calm → product */}
+        {/* Right: calm digest with the three verdicts floating around it */}
         <motion.div
-          initial={false}
+          initial={reducedMotion ? false : { opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
-          className="w-full"
+          transition={{ delay: 0.35, duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+          className="relative mx-auto w-full max-w-[520px]"
         >
-          <div className="relative h-[400px] overflow-hidden sm:h-[460px] lg:h-[520px]">
-            {reducedMotion ? (
-              <div className="relative flex h-full items-center justify-center">
-                <DigestScreen animated={false} />
-              </div>
-            ) : (
-              <HeroStage />
-            )}
+          <div className="relative flex items-center justify-center py-8">
+            {FLOATING_CHIPS.map((chip) => (
+              <FloatingChip key={chip.id} chip={chip} reducedMotion={reducedMotion} />
+            ))}
+            <DigestScreen animated={!reducedMotion} />
           </div>
         </motion.div>
       </div>
+
+      {/* Scroll cue */}
+      <motion.a
+        href="#why"
+        aria-label="Scroll to learn more"
+        initial={reducedMotion ? false : { opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.6, duration: 0.8 }}
+        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-ink/35 transition-colors hover:text-ink/60 lg:flex"
+      >
+        <span className="text-[0.62rem] font-bold uppercase tracking-[0.22em]">Scroll</span>
+        <motion.span
+          animate={reducedMotion ? {} : { y: [0, 5, 0] }}
+          transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <ArrowDown size={14} strokeWidth={2} />
+        </motion.span>
+      </motion.a>
     </section>
   );
 }

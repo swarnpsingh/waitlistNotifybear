@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Sparkles, ShieldCheck, Smartphone, Tag, Users } from 'lucide-react';
+import Reveal from './Reveal';
+import SectionHeader from './SectionHeader';
 
 const FAQ_CATEGORIES = [
   {
@@ -111,34 +113,20 @@ function FAQItem({ item, isOpen, onToggle }) {
   const isMailto = item.a.startsWith('mailto:');
 
   return (
-    <div style={{ borderTop: '1px solid rgba(22,41,79,0.08)' }}>
+    <div className="border-t border-ink/8">
       <button
         type="button"
         onClick={onToggle}
         aria-expanded={isOpen}
-        style={{
-          width: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: 16,
-          padding: '16px 24px',
-          background: isOpen ? 'rgba(47,95,214,0.06)' : 'none',
-          borderLeft: isOpen ? '3px solid #2F5FD6' : '3px solid transparent',
-          border: 'none',
-          borderTop: 'none',
-          cursor: 'pointer',
-          textAlign: 'left',
-          transition: 'background 0.25s',
-        }}
+        className={`flex w-full items-center justify-between gap-4 px-6 py-4 text-left transition-colors duration-200 ${
+          isOpen ? 'border-l-[3px] border-l-focus bg-focus/6' : 'border-l-[3px] border-l-transparent'
+        }`}
       >
-        <span style={{ fontSize: '0.875rem', fontWeight: 600, color: '#16294F', letterSpacing: '-0.01em', paddingLeft: isOpen ? 9 : 12 }}>
-          {item.q}
-        </span>
+        <span className="text-[0.875rem] font-semibold tracking-tight text-ink">{item.q}</span>
         <motion.span
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ duration: 0.3 }}
-          style={{ flexShrink: 0, display: 'flex', color: isOpen ? '#D9A80C' : 'rgba(22,41,79,0.35)' }}
+          className={`flex flex-shrink-0 ${isOpen ? 'text-bell-dark' : 'text-ink/35'}`}
         >
           <ChevronDown size={16} />
         </motion.span>
@@ -150,11 +138,11 @@ function FAQItem({ item, isOpen, onToggle }) {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
-            style={{ overflow: 'hidden', background: 'rgba(47,95,214,0.06)' }}
+            className="overflow-hidden bg-focus/6"
           >
-            <p style={{ margin: 0, padding: '0 24px 18px 36px', fontSize: '0.825rem', color: 'rgba(22,41,79,0.6)', lineHeight: 1.7 }}>
+            <p className="m-0 px-6 pb-5 pl-9 text-[0.825rem] leading-relaxed text-ink/60">
               {isMailto ? (
-                <a href={item.a} style={{ color: '#2F5FD6', fontWeight: 600, textDecoration: 'none' }}>
+                <a href={item.a} className="font-semibold text-focus no-underline">
                   {item.a.replace('mailto:', '')}
                 </a>
               ) : (
@@ -174,59 +162,36 @@ export default function FAQSection() {
   const toggle = (id) => setOpenId((current) => (current === id ? null : id));
 
   return (
-    <section id="faq" className="bg-cream" style={{ padding: '96px 32px' }}>
-      <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.65 }}
-          viewport={{ once: true }}
-          style={{ textAlign: 'center', marginBottom: 56 }}
-        >
-          <h2 className="font-display font-medium text-ink" style={{ fontSize: 'clamp(2.2rem, 4vw, 3.25rem)', lineHeight: 1.1, marginBottom: 16, letterSpacing: '-0.02em' }}>
-            Questions, answered.
-          </h2>
-          <p style={{ fontSize: '0.95rem', color: 'rgba(22,41,79,0.55)', maxWidth: 420, margin: '0 auto', lineHeight: 1.6 }}>
-            Everything you need to know about how Notifybear works and handles your data.
-          </p>
-        </motion.div>
+    <section id="faq" className="bg-cream py-20 sm:py-24">
+      <div className="mx-auto max-w-[1100px] px-5 sm:px-8">
+        <SectionHeader
+          index="06"
+          eyebrow="FAQ"
+          align="center"
+          title="Questions, answered."
+          sub="Everything you need to know about how Notifybear works and handles your data."
+          className="mb-14"
+        />
 
-        <div className="faq-bento-grid">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
           {FAQ_CATEGORIES.map((cat, catIdx) => {
             const Icon = cat.icon;
-            const isLastOdd = catIdx === FAQ_CATEGORIES.length - 1 && FAQ_CATEGORIES.length % 2 === 1;
+            const isLastOdd =
+              catIdx === FAQ_CATEGORIES.length - 1 && FAQ_CATEGORIES.length % 2 === 1;
             return (
-              <motion.div
+              <Reveal
                 key={cat.category}
-                initial={{ opacity: 0, y: 28 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: (catIdx % 2) * 0.08 }}
-                viewport={{ once: true, margin: '-60px' }}
-                style={{
-                  background: '#fff',
-                  borderRadius: 24,
-                  overflow: 'hidden',
-                  boxShadow: '0 2px 8px rgba(22,41,79,0.04), 0 12px 32px rgba(22,41,79,0.06)',
-                  gridColumn: isLastOdd ? '1 / -1' : undefined,
-                }}
+                delay={(catIdx % 2) * 0.08}
+                y={28}
+                className={`overflow-hidden rounded-3xl bg-white shadow-[0_2px_8px_rgba(22,41,79,0.04),0_12px_32px_rgba(22,41,79,0.06)] ${
+                  isLastOdd ? 'md:col-span-2' : ''
+                }`}
               >
-                {/* Category header */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '22px 24px 18px' }}>
-                  <div
-                    className="bg-focus"
-                    style={{
-                      width: 40,
-                      height: 40,
-                      borderRadius: 12,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      flexShrink: 0,
-                    }}
-                  >
+                <div className="flex items-center gap-3 px-6 pb-4 pt-5">
+                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-focus">
                     <Icon size={19} color="#fff" strokeWidth={2.25} />
                   </div>
-                  <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: '#16294F', letterSpacing: '-0.01em', margin: 0 }}>
+                  <h3 className="m-0 text-[1.05rem] font-bold tracking-tight text-ink">
                     {cat.category}
                   </h3>
                 </div>
@@ -242,7 +207,7 @@ export default function FAQSection() {
                     />
                   );
                 })}
-              </motion.div>
+              </Reveal>
             );
           })}
         </div>

@@ -1,11 +1,9 @@
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
-import './App.css';
 import HeroSection from './components/landing/HeroSection';
-import FeaturesSection from './components/landing/FeaturesSection';
+import AppMarquee from './components/landing/AppMarquee';
 import WhyThisExistsSection from './components/landing/WhyThisExistsSection';
-import InteractiveDemoSection from './components/landing/InteractiveDemoSection';
-import TodaySection from './components/landing/TodaySection';
 import FilteringSection from './components/landing/FilteringSection';
+import TodaySection from './components/landing/TodaySection';
 import DifferentiationSection from './components/landing/DifferentiationSection';
 import GettingStartedSection from './components/landing/GettingStartedSection';
 import FAQSection from './components/landing/FAQSection';
@@ -18,8 +16,6 @@ import DeleteAccountPage from './components/landing/DeleteAccountPage';
 import ContactPage from './components/landing/ContactPage';
 import BlogIndex from './components/blog/BlogIndex';
 import BlogPost from './components/blog/BlogPost';
-// import TestimonialSection from './components/landing/TestimonialSection';
-// import MobileScreen from './components/MobileScreen';
 
 function App() {
   const navigate = useNavigate();
@@ -34,13 +30,12 @@ function App() {
 
             <main>
               <HeroSection />
+              <AppMarquee />
               <WhyThisExistsSection />
-              <InteractiveDemoSection />
-              <TodaySection />
               <FilteringSection />
-              {/* <FeaturesSection /> */}
-              <GettingStartedSection />
+              <TodaySection />
               <DifferentiationSection />
+              <GettingStartedSection />
               <FAQSection />
               <CTASection
                 onShowPrivacy={() => navigate('/privacy-policy')}
@@ -75,6 +70,5 @@ function App() {
     </Routes>
   );
 }
-
 
 export default App;

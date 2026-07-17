@@ -16,14 +16,7 @@ export default function FloatingCTA() {
       const viewport = window.innerHeight;
       const pastHero = scrollY > viewport * 0.8;
       const nearFooter = scrollY + viewport > docHeight - 480;
-      // Stay out of the way while the interactive demo (which has its own CTA) is on screen
-      const demo = document.getElementById('demo');
-      let demoOnScreen = false;
-      if (demo) {
-        const rect = demo.getBoundingClientRect();
-        demoOnScreen = rect.top < viewport * 0.85 && rect.bottom > viewport * 0.3;
-      }
-      setVisible(pastHero && !nearFooter && !demoOnScreen);
+      setVisible(pastHero && !nearFooter);
       ticking = false;
     };
 

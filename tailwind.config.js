@@ -28,6 +28,12 @@ module.exports = {
           dark: "#F0E9D8",
         },
       },
+      opacity: {
+        6: "0.06",
+        8: "0.08",
+        12: "0.12",
+        16: "0.16",
+      },
       boxShadow: {
         glow: "0 0 120px 40px rgba(245, 197, 24, 0.18)",
       },

@@ -1,84 +1,35 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { Download, ShieldCheck, Sparkles } from 'lucide-react';
+import Reveal from './Reveal';
+import SectionHeader from './SectionHeader';
+import { PLAY_STORE_URL } from '../../constants/links';
 
 function AccountSetupMockup() {
   return (
-    <div className="relative flex flex-col items-center overflow-hidden bg-ink" style={{ padding: '36px 32px 28px' }}>
+    <div className="relative flex flex-col items-center overflow-hidden bg-ink px-8 pb-7 pt-9">
       <div className="hex-watermark" />
       <div className="card-glow-base" />
-      {/* Mock card */}
-      <div style={{
-        background: '#fff',
-        borderRadius: 20,
-        padding: '18px 20px 14px',
-        width: '100%',
-        maxWidth: 300,
-        boxShadow: '0 12px 32px rgba(0,0,0,0.28)',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 12,
-        position: 'relative',
-        zIndex: 1,
-      }}>
-        {/* Profile row */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '4px 0 8px', borderBottom: '1px solid #f0f0f0' }}>
-          {/* Avatar */}
-          <div style={{
-            width: 42,
-            height: 42,
-            borderRadius: '50%',
-            background: 'linear-gradient(135deg, #5C82E0 0%, #2F5FD6 100%)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: '#fff',
-            fontSize: '0.85rem',
-            fontWeight: 700,
-            flexShrink: 0,
-          }}>
+      <div className="relative z-10 flex w-full max-w-[300px] flex-col gap-3 rounded-[20px] bg-white p-5 shadow-[0_12px_32px_rgba(0,0,0,0.28)]">
+        <div className="flex items-center gap-3 border-b border-ink/5 pb-3">
+          <div
+            className="flex h-[42px] w-[42px] flex-shrink-0 items-center justify-center rounded-full text-[0.85rem] font-bold text-white"
+            style={{ background: 'linear-gradient(135deg, #5C82E0 0%, #2F5FD6 100%)' }}
+          >
             JE
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-            <span style={{ fontSize: '0.875rem', fontWeight: 700, color: '#111', letterSpacing: '-0.01em' }}>Jane Example</span>
-            <span style={{ fontSize: '0.75rem', color: '#888' }}>jane@example.com</span>
+          <div className="flex flex-col gap-0.5">
+            <span className="text-[0.875rem] font-bold tracking-tight text-[#111]">Jane Example</span>
+            <span className="text-xs text-[#888]">jane@example.com</span>
           </div>
         </div>
-
-        {/* Option rows */}
-        {[
-          {
-            icon: (
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-                <circle cx="9" cy="7" r="4"/>
-                <line x1="19" y1="8" x2="19" y2="14"/>
-                <line x1="22" y1="11" x2="16" y2="11"/>
-              </svg>
-            ),
-            label: 'Username',
-          },
-          {
-            icon: (
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="3" y="3" width="18" height="18" rx="3"/>
-                <path d="M8 12h8M8 8h8M8 16h4"/>
-              </svg>
-            ),
-            label: 'Password',
-          },
-        ].map(({ icon, label }) => (
-          <div key={label} style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 10,
-            padding: '10px 14px',
-            borderRadius: 12,
-            border: '1px solid #ebebeb',
-            background: '#fafafa',
-            cursor: 'default',
-          }}>
-            <span style={{ display: 'flex', alignItems: 'center' }}>{icon}</span>
-            <span style={{ fontSize: '0.85rem', fontWeight: 500, color: '#333' }}>{label}</span>
+        {['Username', 'Password'].map((label) => (
+          <div
+            key={label}
+            className="flex items-center gap-2.5 rounded-xl border border-[#ebebeb] bg-[#fafafa] px-3.5 py-2.5"
+          >
+            <span className="h-2 w-2 rounded-full bg-focus/40" aria-hidden />
+            <span className="text-[0.85rem] font-medium text-[#333]">{label}</span>
           </div>
         ))}
       </div>
@@ -86,120 +37,53 @@ function AccountSetupMockup() {
   );
 }
 
-const steps = [
+const STEPS = [
   {
     number: 1,
+    icon: Download,
     title: 'Download the app',
     description: 'Open Google Play and install Notifybear. It takes under a minute.',
-    img: null,
     mockup: null,
   },
   {
     number: 2,
+    icon: ShieldCheck,
     title: 'Set up your account',
     description: 'Create your account, then grant notification access so Notifybear can start reading and scoring what comes in.',
-    img: null,
     mockup: <AccountSetupMockup />,
   },
   {
     number: 3,
+    icon: Sparkles,
     title: 'Tame your notifications',
     description: 'Let Notifybear filter, prioritise and surface what matters most.',
-    img: null,
     mockup: null,
   },
 ];
 
 function StepCard({ step, index }) {
+  const Icon = step.icon;
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 36 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.55, delay: index * 0.1 }}
-      viewport={{ once: true, margin: '-80px' }}
-      style={{
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'flex-start',
-        gap: 0,
-        width: '100%',
-      }}
-    >
-      {/* Step number bubble + line connector */}
-      <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        flexShrink: 0,
-        marginRight: 28,
-        marginTop: 2,
-      }}>
-        <div className="bg-focus" style={{
-          width: 36,
-          height: 36,
-          borderRadius: '50%',
-          color: '#fff',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: '0.85rem',
-          fontWeight: 600,
-          flexShrink: 0,
-          zIndex: 1,
-          position: 'relative',
-        }}>
+    <Reveal delay={index * 0.1} y={36} className="flex w-full items-start">
+      {/* Step number bubble on the timeline */}
+      <div className="relative z-10 mr-7 mt-0.5 flex flex-shrink-0 flex-col items-center">
+        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-focus text-[0.85rem] font-semibold text-white ring-4 ring-cream">
           {step.number}
         </div>
       </div>
 
       {/* Card */}
-      <div style={{
-        flex: 1,
-        background: '#fff',
-        borderRadius: 24,
-        overflow: 'hidden',
-        boxShadow: '0 1px 4px rgba(22,41,79,0.08)',
-        marginBottom: 8,
-      }}>
-        {/* Mockup or Image — only when provided */}
-        {step.mockup && step.mockup}
-        {step.img && (
-        <div style={{
-          background: '#f3f3f3',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '36px 48px 24px',
-          minHeight: 220,
-        }}>
-          <img
-            src={step.img}
-            alt={step.title}
-            style={{
-              maxHeight: 200,
-              width: 'auto',
-              objectFit: 'contain',
-              filter: 'drop-shadow(0 6px 20px rgba(0,0,0,0.10))',
-            }}
-          />
-        </div>
-        )}
-        {/* Text */}
-        <div style={{ padding: '24px 28px 28px' }}>
-          <h3 className="text-ink" style={{
-            fontSize: '1.15rem',
-            fontWeight: 600,
-            marginBottom: 6,
-            letterSpacing: '-0.015em',
-          }}>
-            {step.title}
-          </h3>
-          <p style={{ fontSize: '0.875rem', color: 'rgba(22,41,79,0.55)', lineHeight: 1.65 }}>
-            {step.description}
-          </p>
+      <div className="mb-2 flex-1 overflow-hidden rounded-3xl bg-white shadow-[0_2px_8px_rgba(22,41,79,0.05),0_10px_28px_rgba(22,41,79,0.06)]">
+        {step.mockup}
+        <div className="px-7 pb-7 pt-6">
+          <div className="mb-2 flex items-center gap-2.5">
+            <Icon size={16} strokeWidth={2.25} className="text-focus" />
+            <h3 className="text-[1.15rem] font-semibold tracking-tight text-ink">{step.title}</h3>
+          </div>
+          <p className="text-[0.875rem] leading-relaxed text-ink/55">{step.description}</p>
         </div>
       </div>
-    </motion.div>
+    </Reveal>
   );
 }
 
@@ -212,80 +96,48 @@ export default function GettingStartedSection() {
   const lineHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
 
   return (
-    <section
-      ref={sectionRef}
-      id="getting-started"
-      className="bg-cream"
-      style={{ padding: '96px 32px' }}
-    >
-      <div className="getting-started-grid">
-
+    <section ref={sectionRef} id="getting-started" className="bg-cream py-20 sm:py-24">
+      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-5 sm:px-8 lg:grid-cols-[minmax(280px,340px)_1fr] lg:gap-16">
         {/* Left — sticky heading */}
-        <div className="getting-started-sticky">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-ink font-display font-medium" style={{
-              fontSize: 'clamp(2.4rem, 4vw, 3.5rem)',
-              lineHeight: 1.05,
-              letterSpacing: '-0.03em',
-              marginBottom: 20,
-            }}>
-              Get started in 3<br />simple steps.
-            </h2>
-            <p style={{
-              fontSize: '0.9rem',
-              color: 'rgba(22,41,79,0.55)',
-              lineHeight: 1.7,
-              maxWidth: 280,
-            }}>
-              Install it, and it starts deciding what reaches you. There are no rules to write.
-            </p>
-          </motion.div>
+        <div className="lg:sticky lg:top-32 lg:self-start">
+          <SectionHeader
+            index="05"
+            eyebrow="Getting started"
+            title={
+              <>
+                Get started in 3<br />simple steps.
+              </>
+            }
+            sub="Install it, and it starts deciding what reaches you. There are no rules to write."
+          />
+          <Reveal delay={0.15} y={12} className="mt-8 hidden lg:block">
+            <a
+              href={PLAY_STORE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-outline text-ink hover:bg-ink/5"
+            >
+              Get the app
+            </a>
+          </Reveal>
         </div>
 
-        {/* Right — timeline steps */}
-        <div style={{ position: 'relative' }}>
-          {/* Dashed background line */}
-          <div style={{
-            position: 'absolute',
-            left: 17,
-            top: 36,
-            bottom: 36,
-            width: 2,
-            borderLeft: '2px dashed rgba(47,95,214,0.3)',
-            zIndex: 0,
-          }} />
-          {/* Animated fill line */}
-          <div style={{
-            position: 'absolute',
-            left: 17,
-            top: 36,
-            bottom: 36,
-            width: 2,
-            overflow: 'hidden',
-            zIndex: 0,
-          }}>
-            <motion.div
-              className="bg-focus"
-              style={{
-                width: '100%',
-                height: lineHeight,
-                originY: 0,
-              }}
-            />
+        {/* Right — timeline steps with scroll-driven progress line */}
+        <div className="relative">
+          <div
+            aria-hidden
+            className="absolute bottom-9 left-[17px] top-9 w-0.5 border-l-2 border-dashed border-focus/30"
+          />
+          <div aria-hidden className="absolute bottom-9 left-[17px] top-9 w-0.5 overflow-hidden">
+            <motion.div className="w-full bg-focus" style={{ height: lineHeight, originY: 0 }} />
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 24, position: 'relative', zIndex: 1 }}>
-            {steps.map((step, i) => (
+          <div className="relative z-10 flex flex-col gap-6">
+            {STEPS.map((step, i) => (
               <StepCard key={step.number} step={step} index={i} />
             ))}
           </div>
         </div>
-
       </div>
     </section>
   );
