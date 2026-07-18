@@ -1,57 +1,21 @@
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
-import HeroSection from './components/landing/HeroSection';
-import AppMarquee from './components/landing/AppMarquee';
-import StatsBand from './components/landing/StatsBand';
-import WhyThisExistsSection from './components/landing/WhyThisExistsSection';
-import FilteringSection from './components/landing/FilteringSection';
-import TodaySection from './components/landing/TodaySection';
-import PersonasSection from './components/landing/PersonasSection';
-import DifferentiationSection from './components/landing/DifferentiationSection';
-import GettingStartedSection from './components/landing/GettingStartedSection';
-import FAQSection from './components/landing/FAQSection';
-import CTASection from './components/landing/CTASection';
+import LandingV3 from './components/landingV3/LandingV3';
 import Navbar from './components/Navbar';
-import FloatingCTA from './components/FloatingCTA';
 import PrivacyPolicyPage from './components/landing/PrivacyPolicyPage';
 import TermsOfServicePage from './components/landing/TermsOfServicePage';
 import DeleteAccountPage from './components/landing/DeleteAccountPage';
 import ContactPage from './components/landing/ContactPage';
 import BlogIndex from './components/blog/BlogIndex';
 import BlogPost from './components/blog/BlogPost';
+import IntegrationHeroBrand from './components/landing/IntegrationHeroBrand';
+import HeroV2 from './components/landingV2/Hero';
 
 function App() {
   const navigate = useNavigate();
 
   return (
     <Routes>
-      <Route
-        path="/"
-        element={
-          <div className="bg-cream min-h-screen">
-            <Navbar />
-
-            <main>
-              <HeroSection />
-              <AppMarquee />
-              <StatsBand />
-              <WhyThisExistsSection />
-              <FilteringSection />
-              <TodaySection />
-              <PersonasSection />
-              <DifferentiationSection />
-              <GettingStartedSection />
-              <FAQSection />
-              <CTASection
-                onShowPrivacy={() => navigate('/privacy-policy')}
-                onShowTerms={() => navigate('/terms-of-service')}
-                onShowContact={() => navigate('/contact')}
-              />
-            </main>
-
-            <FloatingCTA />
-          </div>
-        }
-      />
+      <Route path="/" element={<LandingV3 />} />
       <Route
         path="/privacy-policy"
         element={<PrivacyPolicyPage onBack={() => navigate('/')} />}
@@ -70,6 +34,25 @@ function App() {
       />
       <Route path="/blog" element={<BlogIndex />} />
       <Route path="/blog/:slug" element={<BlogPost />} />
+      {/* TEMP preview of ported 21st IntegrationHero — remove after review */}
+      <Route
+        path="/preview-hero"
+        element={
+          <div className="bg-cream min-h-screen">
+            <Navbar />
+            <IntegrationHeroBrand />
+          </div>
+        }
+      />
+      {/* Redesign preview — dark hero → light body (WIP) */}
+      <Route
+        path="/v2"
+        element={
+          <div className="min-h-screen bg-night-deep">
+            <HeroV2 />
+          </div>
+        }
+      />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

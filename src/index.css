@@ -39,6 +39,119 @@ button, input, select, textarea {
   }
 }
 
+/* ═══════════════════════════════════════════════════════
+   V3 — dark ink surfaces
+   Dark surfaces are ink blue; the only ambience is the primary blue.
+   ═══════════════════════════════════════════════════════ */
+.hero-night {
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 110%, rgba(47, 95, 214, 0.22), transparent 65%),
+    radial-gradient(ellipse 45% 40% at 50% -8%, rgba(47, 95, 214, 0.10), transparent 60%),
+    linear-gradient(180deg, #05070D 0%, #0A0F1C 100%);
+}
+.ink-card {
+  background:
+    radial-gradient(ellipse 55% 60% at 12% 110%, rgba(47, 95, 214, 0.30), transparent 62%),
+    linear-gradient(180deg, #16294F 0%, #0D1A34 100%);
+}
+.dot-grid-dark {
+  background-image: radial-gradient(circle at center, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 28px 28px;
+  -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 45%, black 30%, transparent 78%);
+  mask-image: radial-gradient(ellipse 75% 70% at 50% 45%, black 30%, transparent 78%);
+}
+
+/* ═══════════════════════════════════════════════════════
+   Redesign — Aurora "gatekeeper" hero scene
+   (adapted from 21st.dev Aurora Section hero, re-themed)
+   ═══════════════════════════════════════════════════════ */
+.scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 8%, rgba(245, 197, 24, 0.10), transparent 60%),
+    linear-gradient(180deg, #070B14 0%, #0B1220 55%, #070B14 100%);
+  perspective: 640px;
+}
+
+/* Perspective grid floor */
+.scene .floor {
+  position: absolute;
+  left: -50%;
+  right: -50%;
+  bottom: -10%;
+  height: 62%;
+  transform: rotateX(72deg);
+  transform-origin: bottom center;
+  background-image:
+    linear-gradient(to right, rgba(148, 176, 255, 0.14) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(148, 176, 255, 0.14) 1px, transparent 1px);
+  background-size: 48px 48px;
+  -webkit-mask-image: linear-gradient(to top, #000 0%, transparent 82%);
+  mask-image: linear-gradient(to top, #000 0%, transparent 82%);
+}
+
+/* Central light column — the "gate" */
+.scene .main-column {
+  position: absolute;
+  left: 50%;
+  top: -6%;
+  transform: translateX(-50%);
+  width: clamp(220px, 34vw, 460px);
+  height: 92%;
+  background: radial-gradient(
+    ellipse 50% 60% at 50% 40%,
+    rgba(245, 197, 24, 0.22) 0%,
+    rgba(245, 197, 24, 0.08) 34%,
+    transparent 72%
+  );
+  filter: blur(6px);
+  pointer-events: none;
+}
+
+.scene .light-stream-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Rising data beams (incoming notifications) */
+.scene .light-beam {
+  position: absolute;
+  bottom: 32%;
+  height: 22vh;
+  border-radius: 999px;
+  background: linear-gradient(to top, rgba(245, 197, 24, 0), rgba(245, 197, 24, 0.9));
+  opacity: 0;
+  animation-name: beam-rise, beam-fade, beam-glow;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1), ease-in-out, ease-in-out;
+  animation-iteration-count: infinite;
+  will-change: transform, opacity;
+}
+.scene .light-beam--cool {
+  background: linear-gradient(to top, rgba(92, 130, 224, 0), rgba(140, 170, 240, 0.9));
+}
+
+@keyframes beam-rise {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-58vh); }
+}
+@keyframes beam-fade {
+  0% { opacity: 0; }
+  18% { opacity: 0.85; }
+  75% { opacity: 0.5; }
+  100% { opacity: 0; }
+}
+@keyframes beam-glow {
+  0%, 100% { filter: blur(0.4px); }
+  50% { filter: blur(1.4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene .light-beam { animation: none; opacity: 0.4; }
+}
+
 /* ─── Hexagon-line watermark (dark sections) ───────── */
 .hex-watermark {
   position: absolute;
@@ -174,6 +287,23 @@ button, input, select, textarea {
 }
 .core-ring-delay {
   animation-delay: 1.3s;
+}
+
+/* ─── IntegrationHero (ported from 21st.dev id 5611, re-themed) ─ */
+@keyframes hero-scroll-left {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes hero-scroll-right {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+.hero-scroll-left  { animation: hero-scroll-left 32s linear infinite; }
+.hero-scroll-right { animation: hero-scroll-right 32s linear infinite; }
+
+.dot-grid-ink {
+  background-image: radial-gradient(circle at center, rgba(22,41,79,0.06) 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 
 /* ─── Animated gradient mesh (hero backdrop) ───────── */
